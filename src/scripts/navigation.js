@@ -1,3 +1,4 @@
+import { withBase } from '../utils/paths';
 import services from '../data/services.json';
 import industries from '../data/industries.json';
 const $ = s => document.querySelector(s);
@@ -21,8 +22,8 @@ function openMenu(next,button){
   if(key===next){closeMenu();return;}
   key=next;opener=button;const m=menus[next];
   $('#menu-title').textContent=m.title;$('#menu-copy').textContent=m.copy;
-  $('#menu-links').replaceChildren(...m.links.map(([label,href])=>{const a=document.createElement('a');a.href=href;a.append(document.createTextNode(label));const arrow=document.createElement('span');arrow.textContent='→';a.append(arrow);return a}));
-  $('#menu-feature-link').href=m.feature[1];$('#menu-feature-link').textContent=m.feature[0];
+  $('#menu-links').replaceChildren(...m.links.map(([label,href])=>{const a=document.createElement('a');a.href=withBase(href);a.append(document.createTextNode(label));const arrow=document.createElement('span');arrow.textContent='→';a.append(arrow);return a}));
+  $('#menu-feature-link').href=withBase(m.feature[1]);$('#menu-feature-link').textContent=m.feature[0];
   $('#mega').hidden=false;document.body.classList.add('menu-open');document.body.style.overflow='hidden';
   $('main').inert=true;$('footer').inert=true;
   buttons.forEach(b=>b.setAttribute('aria-expanded',String(b===button)));$('.mega-close').focus();

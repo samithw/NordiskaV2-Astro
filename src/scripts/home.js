@@ -1,5 +1,6 @@
-const industryRoutes=['/industries/water-wastewater/','/industries/solid-waste/','/industries/bioenergy/','/industries/green-hydrogen/','/industries/solar-energy/'];
-const serviceRoutes=['/services/go-to-market-strategy/','/services/partner-search/','/services/market-activation/','/services/','/services/application-consultancy/','/services/on-site-training/','/services/aftersales-services/','/services/market-entry-strategy/'];
+import { withBase } from '../utils/paths';
+const industryRoutes=['/industries/water-wastewater/','/industries/solid-waste/','/industries/bioenergy/','/industries/green-hydrogen/','/industries/solar-energy/'].map(withBase);
+const serviceRoutes=['/services/go-to-market-strategy/','/services/partner-search/','/services/market-activation/','/services/','/services/application-consultancy/','/services/on-site-training/','/services/aftersales-services/','/services/market-entry-strategy/'].map(withBase);
 
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const photos={
@@ -69,10 +70,10 @@ function service(i){window.location.assign(serviceRoutes[i])}
 
 
 const countries=['Finland','Malaysia','India','Vietnam','Philippines','UAE'];
-$('#location-grid').innerHTML=countries.map((c,i)=>'<a class="location-link" href="/locations/#'+c.toLowerCase()+'"><span><small>'+['EUROPE','SOUTHEAST ASIA','SOUTH ASIA','SOUTHEAST ASIA','SOUTHEAST ASIA','MIDDLE EAST'][i]+'</small>Nordiska '+c+'</span><span class="arrow">→</span></a>').join('');
+$('#location-grid').innerHTML=countries.map((c,i)=>'<a class="location-link" href="'+withBase('/locations/')+'#'+c.toLowerCase()+'"><span><small>'+['EUROPE','SOUTHEAST ASIA','SOUTH ASIA','SOUTHEAST ASIA','SOUTHEAST ASIA','MIDDLE EAST'][i]+'</small>Nordiska '+c+'</span><span class="arrow">→</span></a>').join('');
 function selectCountry(country){const descriptions={Finland:'Nordic expertise and an international perspective, from Nordiska Finland.',Malaysia:'Local insight and partner access across Southeast Asia, from Nordiska Malaysia.',India:'Market understanding and commercial connections across South Asia, from Nordiska India.',Vietnam:'Local relationships and execution for growth in Vietnam.',Philippines:'Partner development and market support in the Philippines.',UAE:'A regional bridge to customers and partners across the Middle East.'};$('#location-detail').textContent=descriptions[country];$$('.map-pin').forEach(b=>{const active=b.dataset.country===country;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))})}
 $$('.map-pin').forEach(b=>b.addEventListener('click',()=>selectCountry(b.dataset.country)));
-$$('[data-contact]').forEach(b=>b.onclick=()=>window.location.assign('/contact/'));
+$$('[data-contact]').forEach(b=>b.onclick=()=>window.location.assign(withBase('/contact/')));
 let slide=0,baseSlide=0,orbitPosition=0,zoom=0,frame=0,opening=false,lastFrame=0;
 const orbitCards=$$('.deck-card'), hero=$('.hero'),track=$('#hero-track');
 const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
@@ -84,7 +85,7 @@ function setSlide(i){
  const s=heroSlides[slide],detail=heroDetails[slide];
  $('#hero-headline').innerHTML=s.title;$('#hero-description').textContent=s.copy;
  $('#deck-title').textContent=detail[0];$('#deck-description').textContent=detail[1];
- $('#story-link').innerHTML=detail[2]+' <span>↗</span>';$('#story-link').href=slide===0?serviceRoutes[7]:(s.service===null?'/industries/':serviceRoutes[s.service]);
+ $('#story-link').innerHTML=detail[2]+' <span>↗</span>';$('#story-link').href=slide===0?serviceRoutes[7]:(s.service===null?withBase('/industries/'):serviceRoutes[s.service]);
  const relevant=heroServiceGroups[slide];
  $('#hero-service-cards').innerHTML=relevant.map(i=>serviceCard(i,true)).join('');
  $('#hero-service-cards').classList.toggle('single',relevant.length===1);

@@ -1,7 +1,8 @@
 ---
+import { withBase } from '../../utils/paths';
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import IndustryGallery from '../../components/IndustryGallery.astro';
 import CTA from '../../components/CTA.astro';
 ---
-<Base title="Industries we serve"><main id="top"><PageHero eyebrow="Industries we serve" title="Specialized expertise for a sustainable future." copy="We partner with innovative SMEs and established global leaders to build direct, high-value relationships across the cleantech ecosystem. Every technology and market is unique. Our approach is tailored to yours." photo="water" action="Discuss your technology" href="/contact/"/><IndustryGallery/><CTA/></main></Base>
+<Base title="Industries we serve"><main id="top"><PageHero eyebrow="Industries we serve" title="Specialized expertise for a sustainable future." copy="We partner with innovative SMEs and established global leaders to build direct, high-value relationships across the cleantech ecosystem. Every technology and market is unique. Our approach is tailored to yours." photo="water" action="Discuss your technology" href={withBase('/contact/')}/><IndustryGallery/><CTA/></main></Base>

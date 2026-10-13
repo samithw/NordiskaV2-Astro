@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../../utils/paths';
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import CTA from '../../components/CTA.astro';
@@ -7,7 +8,7 @@ import industries from '../../data/industries.json';
 export function getStaticPaths(){return industries.map(industry=>({params:{slug:industry.slug},props:{industry}}))}
 const {industry:i}=Astro.props;
 ---
-<Base title={i.name} description={i.benefit}><main id="top"><PageHero eyebrow={i.name} title={i.benefit} copy="Specialist knowledge, market insight and practical business development for sustainable technology." photo={i.photo} parent={{label:'Industries',href:'/industries/'}} href={`/contact/?industry=${i.slug}`} action="Discuss your technology"/>
+<Base title={i.name} description={i.benefit}><main id="top"><PageHero eyebrow={i.name} title={i.benefit} copy="Specialist knowledge, market insight and practical business development for sustainable technology." photo={i.photo} parent={{label:'Industries',href:'/industries/'}} href={withBase(`/contact/?industry=${i.slug}`)} action="Discuss your technology"/>
 <section class="content"><div class="wrap editorial-grid"><div><div class="eyebrow">Industry expertise</div><h2>Where innovation meets its market.</h2><div class="rule"></div></div><div class="editorial-copy">{i.body.map(p=><p>{p}</p>)}</div></div></section>
 <section class="content section-soft"><div class="wrap editorial-grid"><div><div class="eyebrow">Technology & application</div><h2>Fit for the opportunity.</h2><ul class="detail-list">{i.applications.map(a=><li>{a}</li>)}</ul></div><div><div class="eyebrow">Market connections</div><h2>The people who move projects forward.</h2><ul class="detail-list">{i.buyers.map(b=><li>{b}</li>)}</ul></div></div></section>
-<section class="content"><div class="wrap"><div class="section-head"><div class="eyebrow">Our support</div><h2>A route from insight to action.</h2></div><ServiceCards slugs={i.related}/><div class="section-links"><a class="link" href="/locations/">Explore our global presence<span>↗</span></a><a class="link" href={`/contact/?industry=${i.slug}&goal=technology`}>Grow your technology business<span>↗</span></a><a class="link" href={`/contact/?industry=${i.slug}&goal=project`}>Discuss a project requirement<span>↗</span></a></div></div></section><CTA href={`/contact/?industry=${i.slug}`}/></main></Base>
+<section class="content"><div class="wrap"><div class="section-head"><div class="eyebrow">Our support</div><h2>A route from insight to action.</h2></div><ServiceCards slugs={i.related}/><div class="section-links"><a class="link" href={withBase('/locations/')}>Explore our global presence<span>↗</span></a><a class="link" href={withBase(`/contact/?industry=${i.slug}&goal=technology`)}>Grow your technology business<span>↗</span></a><a class="link" href={withBase(`/contact/?industry=${i.slug}&goal=project`)}>Discuss a project requirement<span>↗</span></a></div></div></section><CTA href={withBase(`/contact/?industry=${i.slug}`)}/></main></Base>

@@ -1,10 +1,11 @@
 ---
+import { withBase } from '../../utils/paths';
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import ServiceCards from '../../components/ServiceCards.astro';
 import CTA from '../../components/CTA.astro';
 import services from '../../data/services.json';
 ---
-<Base title="What we do"><main id="top"><PageHero eyebrow="What we do" title="Expertise for your next stage of growth." copy="We help ambitious companies expand internationally with clarity and confidence. From research-driven market entry strategies to hands-on go-to-market execution, we turn global ambitions into actionable growth plans." photo="strategy" action="Talk to our team" href="/contact/"/>
+<Base title="What we do"><main id="top"><PageHero eyebrow="What we do" title="Expertise for your next stage of growth." copy="We help ambitious companies expand internationally with clarity and confidence. From research-driven market entry strategies to hands-on go-to-market execution, we turn global ambitions into actionable growth plans." photo="strategy" action="Talk to our team" href={withBase('/contact/')}/>
 <section class="content"><div class="wrap editorial-grid"><div><div class="eyebrow">Our approach</div><h2>Turn customer strategy into measurable growth.</h2><div class="rule"></div></div><div class="editorial-copy"><p>Sustainable growth starts with a deep understanding of your customer. We connect strategic goals with tangible business outcomes, combining market insight, value-based positioning and a clear understanding of willingness to pay.</p><p>Business development connects every part of our offer. From planning your entry to building relationships and supporting local teams, we bring strategy and execution together around your next step.</p></div></div></section>
 <section class="content section-soft"><div class="wrap">{['Plan','Connect','Grow & support'].map(group=><div class="service-overview-group"><div class="eyebrow">Our expertise</div><h3>{group}</h3><ServiceCards slugs={services.filter(s=>s.group===group).map(s=>s.slug)}/></div>)}</div></section><CTA/></main></Base>

@@ -1,7 +1,8 @@
 ---
+import { withBase } from '../utils/paths';
 import services from '../data/services.json';
 import photos from '../data/photos.json';
 const { slugs } = Astro.props;
 const selected = slugs ? slugs.map((slug: string) => services.find(s => s.slug === slug)).filter(Boolean) : services;
 ---
-<div class="related-grid">{selected.map((s: typeof services[number]) => <a class="service-card" href={`/services/${s.slug}/`}><img src={photos[s.photo as keyof typeof photos]} alt="" loading="lazy"/><span class="card-copy"><small>{s.group}</small><h3>{s.name}</h3><span class="arrow">→</span></span></a>)}</div>
+<div class="related-grid">{selected.map((s: typeof services[number]) => <a class="service-card" href={withBase(`/services/${s.slug}/`)}><img src={photos[s.photo as keyof typeof photos]} alt="" loading="lazy"/><span class="card-copy"><small>{s.group}</small><h3>{s.name}</h3><span class="arrow">→</span></span></a>)}</div>
