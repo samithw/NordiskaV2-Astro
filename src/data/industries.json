@@ -1,0 +1,146 @@
+[
+  {
+    "slug": "water-wastewater",
+    "name": "Water & wastewater",
+    "benefit": "Connect advanced technology with real-world demand.",
+    "body": [
+      "Nordiska Solutions Finland supports water and wastewater technology providers in building strong, strategic partnerships across international markets. We connect innovative solution providers with qualified EPC contractors, end-users, engineering consultants, and project developers actively seeking advanced and reliable technologies.",
+      "Our process and application specialists carefully assess technical requirements, project specifications, and performance expectations to ensure the best possible alignment between solution providers and project needs. We focus on practical compatibility — matching the right technology to the right application.",
+      "In addition, we offer advisory support during the technology selection phase, helping stakeholders evaluate options, compare solutions, and unlock the most efficient and commercially viable pathways forward.",
+      "Our goal is simple: to create high-value connections that maximize benefits for all parties involved.",
+      "Whether you are seeking a new partner for your water and wastewater solutions, or looking for a trusted technology provider for your upcoming projects, we are ready to support you.",
+      "For further information, please contact one of our experts."
+    ],
+    "applications": [
+      "Water treatment",
+      "Wastewater treatment",
+      "Process and application requirements",
+      "Technology selection"
+    ],
+    "buyers": [
+      "End users",
+      "EPC contractors",
+      "Engineering consultants",
+      "Project developers"
+    ],
+    "related": [
+      "application-consultancy",
+      "partner-search",
+      "market-entry-strategy"
+    ],
+    "photo": "water"
+  },
+  {
+    "slug": "solid-waste",
+    "name": "Solid waste",
+    "benefit": "Turn waste streams into sustainable value.",
+    "body": [
+      "For Technology Providers:Expand your recycling or reuse solutions into high-growth markets.",
+      "For Project Developers & Operators:Access trusted technology partners for your waste infrastructure projects.",
+      "Nordiska Solutions operates at the center—connecting solid waste innovators with opportunity across Asia-Pacific and the Middle East. Advanced sorting. Material recovery. Waste-to-value. We match proven technologies with qualified buyers, EPC contractors, environmental agencies, and investors.",
+      "Our approach combines market intelligence, partner identification, and hands-on business development to ensure your solutions reach the right stakeholders — including EPC contractors, environmental agencies, private operators, and investors.",
+      "We understand that every waste stream, regulatory framework, and market condition is different. That is why we tailor our strategy to your specific technology, application, and growth objectives — ensuring both environmental and commercial success.",
+      "If you are looking to expand your recycling or reuse solutions into new markets, or seeking trusted technology partners for your projects, Nordiska Solutions is ready to connect you to the right opportunities.",
+      "Circular economy leadership starts here.Expand your impact. Multiply your markets.Partner with Nordiska Solutions."
+    ],
+    "applications": [
+      "Recycling and reuse",
+      "Advanced sorting",
+      "Material recovery",
+      "Waste-to-value"
+    ],
+    "buyers": [
+      "Private operators",
+      "EPC contractors",
+      "Environmental agencies",
+      "Project developers"
+    ],
+    "related": [
+      "partner-search",
+      "market-entry-strategy",
+      "market-activation"
+    ],
+    "photo": "waste"
+  },
+  {
+    "slug": "bioenergy",
+    "name": "Bioenergy",
+    "benefit": "Bring bioenergy innovation to new markets.",
+    "body": [
+      "Nordiska Solutions supports bioenergy technology providers in connecting with project developers, utilities, EPC contractors and industrial customers across international markets.",
+      "From biomass-to-energy to biogas applications, we combine technical understanding with commercial execution. Market insight, partner development and practical local support help align your technology with relevant demand.",
+      "We work with your team to understand market conditions, regulatory requirements and the stakeholders involved in project decisions. Together, we shape a route to suitable partners and sustainable commercial growth."
+    ],
+    "applications": [
+      "Biomass-to-energy",
+      "Biogas solutions",
+      "Industrial energy applications",
+      "Project collaboration"
+    ],
+    "buyers": [
+      "Project developers",
+      "Utilities",
+      "EPC contractors",
+      "Industrial customers"
+    ],
+    "related": [
+      "partner-search",
+      "market-entry-strategy"
+    ],
+    "photo": "bio"
+  },
+  {
+    "slug": "green-hydrogen",
+    "name": "Green hydrogen",
+    "benefit": "Find your place in the low-carbon transition.",
+    "body": [
+      "Green hydrogen technologies need a clear commercial route as well as a strong technical proposition. Nordiska helps innovators assess market readiness and connect with relevant project stakeholders.",
+      "We support conversations around production, storage and application technologies, with the technical scope defined alongside your specialists. Our work connects market strategy, application fit and partner development.",
+      "By evaluating local conditions, regulatory frameworks and value-chain relationships, we help you focus your international development on opportunities that fit your technology and resources."
+    ],
+    "applications": [
+      "Production technologies",
+      "Storage and applications",
+      "Market readiness",
+      "Value-chain partnerships"
+    ],
+    "buyers": [
+      "Project developers",
+      "Utilities",
+      "EPC contractors",
+      "Industrial off-takers"
+    ],
+    "related": [
+      "market-entry-strategy",
+      "application-consultancy"
+    ],
+    "photo": "hydrogen"
+  },
+  {
+    "slug": "solar-energy",
+    "name": "Solar energy",
+    "benefit": "Build new opportunities for solar technology.",
+    "body": [
+      "Nordiska supports solar technology companies in developing international customer relationships and commercial channels. We help connect a differentiated technical offer with buyers and partners in relevant markets.",
+      "From understanding customer needs to identifying distributors and project collaborators, our work brings market insight and practical business development together.",
+      "We agree target applications and markets with your team, then support partner search, customer development and channel activation around your commercial priorities."
+    ],
+    "applications": [
+      "Technology positioning",
+      "Customer development",
+      "Partner channels",
+      "International sales"
+    ],
+    "buyers": [
+      "Distributors",
+      "Project developers",
+      "EPC contractors",
+      "Commercial customers"
+    ],
+    "related": [
+      "partner-search",
+      "channel-sales-support"
+    ],
+    "photo": "solar"
+  }
+]

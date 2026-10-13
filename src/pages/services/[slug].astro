@@ -1,0 +1,19 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import CTA from '../../components/CTA.astro';
+import ServiceCards from '../../components/ServiceCards.astro';
+import services from '../../data/services.json';
+import industries from '../../data/industries.json';
+export function getStaticPaths(){return services.map(service=>({params:{slug:service.slug},props:{service}}))}
+const {service:s}=Astro.props;
+const enquiry=`/contact/?service=${s.slug}`;
+const sectors=industries.filter(i=>i.related.includes(s.slug));
+---
+<Base title={s.name} description={s.benefit}><main id="top">
+<PageHero eyebrow={s.name} title={s.benefit} copy={s.audience} photo={s.photo} parent={{label:'What we do',href:'/services/'}} action="Discuss your opportunity" href={enquiry}/>
+<section class="content"><div class="wrap editorial-grid"><div><div class="eyebrow">Who we help</div><h2>Expertise for your next step.</h2><div class="rule"></div><p>{s.audience}</p></div><div class="editorial-copy">{s.body.map(p=><p>{p}</p>)}</div></div></section>
+<section class="content section-soft"><div class="wrap editorial-grid"><div><div class="eyebrow">What is included</div><h2>Practical support.<br/>A clear purpose.</h2></div><ul class="detail-list">{s.includes.map(item=><li>{item}</li>)}</ul></div></section>
+<section class="content"><div class="wrap"><div class="section-head"><div class="eyebrow">How it works</div><h2>From understanding to action.</h2></div><div class="steps">{s.steps.map((step,i)=><div class="step"><span>0{i+1}</span><h3>{['Understand','Plan','Move forward'][i]}</h3><p>{step}</p></div>)}</div></div></section>
+<section class="content section-soft"><div class="wrap"><div class="section-head"><div class="eyebrow">Related expertise</div><h2>Build on your next move.</h2></div><ServiceCards slugs={s.related}/><div class="section-links">{sectors.map(i=><a class="link" href={`/industries/${i.slug}/`}>{i.name}<span>↗</span></a>)}<a class="link" href="/locations/">Explore our global presence<span>↗</span></a></div></div></section>
+<CTA href={enquiry}/></main></Base>

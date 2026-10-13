@@ -1,0 +1,4 @@
+---
+const { title = 'Your next market starts with a conversation.', copy = 'Share your technology, your ambition and the opportunity ahead. Let’s explore how we can help you grow.', href = '/contact/', action = 'Talk to our team' } = Astro.props;
+---
+<section class="cta"><div class="wrap"><div><h2>{title}</h2><p>{copy}</p></div><a class="btn" href={href}>{action}<span class="arrow">→</span></a></div></section>
