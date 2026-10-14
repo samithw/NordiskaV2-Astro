@@ -51,7 +51,6 @@ const services=[
 ['On-site training','Give your local teams the confidence to succeed.','Practical training helps partners, customers and local teams build product understanding, application knowledge, sales readiness and technical capability.','Product knowledge|Partner readiness|Technical capability','people'],
 ['Aftersales services','Keep building beyond the first sale.','Ongoing local support strengthens customer relationships, supports partners and maintains market confidence as you build a lasting presence.','Local support|Customer relationships|Market continuity','office']];
 function serviceCard(i,heroCard=false){const s=services[i];return '<a class="service-card" href="'+serviceRoutes[i]+'" data-service="'+i+'"><img '+(heroCard?'':'loading="lazy" ')+'src="'+photos[s[4]]+'" alt=""><span class="card-copy"><small>Our expertise</small><h3>'+s[0]+'</h3><span class="arrow">→</span></span></a>'}
-$('#service-grid').innerHTML=services.map((_,i)=>serviceCard(i)).join('');
 const heroServiceGroups=[[0,1],[1],[2,3],[3],[0,3]];
 const sectors=[
 ['Water & wastewater','Making the right connections for better water solutions.','We help water technology providers connect with end users, EPC contractors and engineering partners. Technical understanding aligns the right technology with real project requirements.','water'],
