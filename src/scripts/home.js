@@ -68,10 +68,6 @@ $$('[data-sector]').forEach((b,i)=>{b.onclick=()=>selectSector(i);b.onkeydown=e=
 function service(i){window.location.assign(serviceRoutes[i])}
 
 
-const countries=['Finland','Malaysia','India','Vietnam','Philippines','UAE'];
-$('#location-grid').innerHTML=countries.map((c,i)=>'<a class="location-link" href="'+withBase('/locations/')+'#'+c.toLowerCase()+'"><span><small>'+['EUROPE','SOUTHEAST ASIA','SOUTH ASIA','SOUTHEAST ASIA','SOUTHEAST ASIA','MIDDLE EAST'][i]+'</small>Nordiska '+c+'</span><span class="arrow">→</span></a>').join('');
-function selectCountry(country){const descriptions={Finland:'Nordic expertise and an international perspective, from Nordiska Finland.',Malaysia:'Local insight and partner access across Southeast Asia, from Nordiska Malaysia.',India:'Market understanding and commercial connections across South Asia, from Nordiska India.',Vietnam:'Local relationships and execution for growth in Vietnam.',Philippines:'Partner development and market support in the Philippines.',UAE:'A regional bridge to customers and partners across the Middle East.'};$('#location-detail').textContent=descriptions[country];$$('.map-pin').forEach(b=>{const active=b.dataset.country===country;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))})}
-$$('.map-pin').forEach(b=>b.addEventListener('click',()=>selectCountry(b.dataset.country)));
 $$('[data-contact]').forEach(b=>b.onclick=()=>window.location.assign(withBase('/contact/')));
 let slide=0,baseSlide=0,orbitPosition=0,zoom=0,frame=0,opening=false,lastFrame=0;
 const orbitCards=$$('.deck-card'), hero=$('.hero'),track=$('#hero-track');

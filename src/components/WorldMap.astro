@@ -1,14 +1,5 @@
 ---
-// Country-level markers, aligned to the boundaries in the source map image.
-// These indicate Nordiska's national presence, rather than street addresses.
-const places = [
-  { name: 'Finland', x: 56.2, y: 12.0 },
-  { name: 'Malaysia', x: 76.3, y: 47.5 },
-  { name: 'India', x: 70.0, y: 37.0 },
-  { name: 'Vietnam', x: 77.3, y: 41.0 },
-  { name: 'Philippines', x: 81.5, y: 42.0 },
-  { name: 'UAE', x: 63.2, y: 35.0 },
-];
+import { mapPlaces as places } from '../data/locations';
 const origin = places[0];
 ---
 <div class="world-network" aria-label="Interactive map of Nordiska locations">
