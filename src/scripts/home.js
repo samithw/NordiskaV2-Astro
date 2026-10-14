@@ -110,7 +110,14 @@ function renderOrbit(now){
  const h=hero.clientHeight,w=hero.clientWidth,top=parseFloat(getComputedStyle(hero).top)||0;
  const travel=Math.max(1,track.offsetHeight-h-top);
  const p=clamp((scrollY-track.offsetTop)/travel),zoomEnd=.20;
- const targetPosition=baseSlide+Math.max(0,(p-zoomEnd)/(1-zoomEnd))*(heroSlides.length-1);
+ // Match the hero's angular speed at its exit, then ease it to zero through
+ // the Advantage section. This stays tied to scroll, including in reverse.
+ const slowdownDistance=positioning?Math.max(1,h+positioning.offsetHeight*.85):1;
+ const afterHero=Math.max(0,scrollY-track.offsetTop-travel);
+ const slowdownProgress=positioning?clamp(afterHero/slowdownDistance):0;
+ const exitSpeed=(heroSlides.length-1)/((1-zoomEnd)*travel);
+ const continuation=exitSpeed*slowdownDistance/3*(1-Math.pow(1-slowdownProgress,3));
+ const targetPosition=baseSlide+Math.max(0,(p-zoomEnd)/(1-zoomEnd))*(heroSlides.length-1)+continuation;
  const dt=Math.min(40,now-(lastFrame||now-16));lastFrame=now;
  const ease=1-Math.exp(-dt/(opening?135:85));
  orbitPosition+=(targetPosition-orbitPosition)*ease;
