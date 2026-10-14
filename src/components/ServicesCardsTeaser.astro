@@ -16,7 +16,7 @@ import ServiceCard from './ServiceCard.astro';
         <article class="process-chapter" aria-labelledby={`process-title-${index}`}>
           <div class="process-heading">
             <span class="process-number" aria-hidden="true">0{index + 1}</span>
-            <div><span class="process-label">{theme.label}</span><h3 id={`process-title-${index}`}>{theme.title}</h3></div>
+            <div><span class="process-label">{theme.step}</span><h3 id={`process-title-${index}`}>{theme.title}</h3></div>
             <p>{theme.copy}</p>
           </div>
           <div class="process-cards">

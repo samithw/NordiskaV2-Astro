@@ -28,7 +28,7 @@ import { serviceThemes as themes } from '../data/serviceThemes';
           <article class:list={['service-chapter', { active: i === 0 }]} data-chapter={i}>
             <div class="chapter-heading">
               <span class="chapter-number" aria-hidden="true">0{i + 1}</span>
-              <h3><button type="button" data-theme={i} data-caption={theme.label} aria-pressed={i === 0}>{theme.title}<span aria-hidden="true">↗</span></button></h3>
+              <div class="chapter-title"><span class="chapter-step">{theme.step}</span><h3><button type="button" data-theme={i} data-caption={theme.label} aria-pressed={i === 0}>{theme.title}<span aria-hidden="true">↗</span></button></h3></div>
             </div>
             <div class="chapter-body">
               <p>{theme.copy}</p>
@@ -66,14 +66,15 @@ import { serviceThemes as themes } from '../data/serviceThemes';
   .perspective-arrow { display:block; font-size:28px; margin-top:24px; color:var(--accent); }
   .service-chapter { border-top:1px solid var(--line); padding:30px 0 32px; }
   .service-chapter:first-child { padding-top:24px; }
-  .chapter-heading { display:grid; grid-template-columns:42px 1fr; gap:14px; align-items:start; }
-  .chapter-number { font-size:11px; font-weight:800; letter-spacing:.06em; padding-top:10px; color:var(--muted); transition:color .2s; }
+  .chapter-heading { display:grid; grid-template-columns:48px 1fr; gap:18px; align-items:start; }
+  .chapter-number { display:grid; place-items:center; width:46px; height:46px; border:1px solid #adc8e0; border-radius:50%; color:var(--brand); font-size:14px; font-weight:800; letter-spacing:-.03em; line-height:1; }
+  .chapter-step { display:block; font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--brand); margin-bottom:10px; }
   .chapter-heading h3 { margin:0; font-size:clamp(23px,2.5vw,35px); line-height:1.15; letter-spacing:-.045em; }
   .chapter-heading button { display:flex; align-items:start; justify-content:space-between; gap:18px; width:100%; padding:0; border:0; background:none; color:var(--ink); font:inherit; letter-spacing:inherit; line-height:inherit; text-align:left; cursor:pointer; transition:color .2s; }
   .chapter-heading button > span { color:var(--brand); font-size:22px; font-weight:400; padding-top:3px; transition:transform .2s; }
   .service-chapter.active .chapter-number,.service-chapter.active button { color:var(--brand); }
   .chapter-heading button:hover > span { transform:translate(3px,-3px); }
-  .chapter-body { padding-left:56px; }
+  .chapter-body { padding-left:66px; }
   .chapter-body > p { font-size:14px; color:var(--muted); line-height:1.8; margin:17px 0 18px; max-width:490px; }
   .chapter-body ul { list-style:none; display:flex; flex-wrap:wrap; column-gap:22px; row-gap:10px; padding:0; margin:0; }
   .chapter-body li { margin:0; }
@@ -88,11 +89,15 @@ import { serviceThemes as themes } from '../data/serviceThemes';
   .all-services:hover span { background:var(--brand); color:white; }
   @media(max-width:900px) {
     .services-editorial { grid-template-columns:.75fr 1.25fr; gap:5%; }
-    .chapter-heading { grid-template-columns:28px 1fr; gap:10px; }
-    .chapter-body { padding-left:38px; }
+    .chapter-heading { grid-template-columns:40px 1fr; gap:14px; }
+    .chapter-number { width:38px; height:38px; }
+    .chapter-body { padding-left:54px; }
     .perspective-caption { left:24px; right:24px; }
   }
   @media(max-width:640px) {
+    .chapter-heading { grid-template-columns:36px 1fr; gap:15px; }
+    .chapter-number { width:34px; height:34px; font-size:12px; }
+    .chapter-body { padding-left:51px; }
     .services-teaser { padding:60px 0; scroll-margin-top:95px; }
     .services-intro { display:block; margin-bottom:32px; }
     .services-intro > p { font-size:15px; margin-top:22px; }
@@ -103,7 +108,8 @@ import { serviceThemes as themes } from '../data/serviceThemes';
     .perspective-count { margin-bottom:15px; }
     .perspective-label { font-size:27px; max-width:75%; }
     .perspective-arrow { position:absolute; right:0; bottom:0; margin:0; }
-    .chapter-heading h3 { font-size:27px; }
+    .chapter-step { display:block; font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--brand); margin-bottom:10px; }
+  .chapter-heading h3 { font-size:27px; }
     .chapter-body a { font-size:12px; }
     .chapter-body ul { display:block; }
     .chapter-body li + li { margin-top:12px; }
