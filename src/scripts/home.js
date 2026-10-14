@@ -76,6 +76,7 @@ $$('.map-pin').forEach(b=>b.addEventListener('click',()=>selectCountry(b.dataset
 $$('[data-contact]').forEach(b=>b.onclick=()=>window.location.assign(withBase('/contact/')));
 let slide=0,baseSlide=0,orbitPosition=0,zoom=0,frame=0,opening=false,lastFrame=0;
 const orbitCards=$$('.deck-card'), hero=$('.hero'),track=$('#hero-track');
+const orbitEchoes=$$('.orbit-echo'),positioning=$('.positioning');
 const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
 const desktopOrbit=()=>innerWidth>760&&!matchMedia('(prefers-reduced-motion: reduce)').matches;
 function setSlide(i){
@@ -108,6 +109,7 @@ function renderOrbit(now){
  frame=0;
  if(!desktopOrbit()){
   orbitCards.forEach(b=>{b.removeAttribute('style');b.tabIndex=0});
+  orbitEchoes.forEach(b=>b.removeAttribute('style'));
   $('.hero-value').inert=false;$('.hero-value').style.visibility='visible';
   hero.style.removeProperty('--story-opacity');return;
  }
@@ -136,6 +138,7 @@ function renderOrbit(now){
  $('.deck-story').inert=storyOpacity<.5;
  $('.deck-story').style.visibility=storyOpacity===0?'hidden':'visible';
  $('.hero-deck').style.pointerEvents='auto';
+ const continuationOffset=positioning?hero.getBoundingClientRect().top-positioning.getBoundingClientRect().top:0;
  orbitCards.forEach((b,i)=>{
   const n=heroSlides.length,delta=((i-orbitPosition+n/2)%n+n)%n-n/2;
   const angle=delta*step;
@@ -148,6 +151,12 @@ function renderOrbit(now){
   const rotation=angle*180/Math.PI*zoom;
   b.style.left=left+'px';b.style.top=cy+'px';b.style.width=width+'px';b.style.height=height+'px';
   b.style.setProperty('--orbit-tilt',rotation+'deg');
+  const echo=orbitEchoes[i];
+  if(echo){
+   echo.style.left=left+'px';echo.style.top=(continuationOffset+cy)+'px';
+   echo.style.width=width+'px';echo.style.height=height+'px';
+   echo.style.setProperty('--echo-tilt',rotation+'deg');
+  }
   b.style.setProperty('--slogan-size',(selected?(Math.min(w*.056,90)*(1-zoom)+Math.min(w*.038,61)*zoom):Math.min(w*.038,61))+'px');
   b.style.setProperty('--slogan-max',(selected?(w*.43*(1-zoom)+cardW*.80*zoom):cardW*.80)+'px');
   b.style.setProperty('--slogan-inset',(selected?(w*.05*(1-zoom)+cardW*.065*zoom):cardW*.065)+'px');
