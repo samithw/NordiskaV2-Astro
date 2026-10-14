@@ -1,0 +1,65 @@
+---
+import { withBase } from '../utils/paths';
+const strengths = [
+  ['Experienced perspective', 'Over 25 years of technical and international business experience.'],
+  ['Close collaboration', 'Working alongside your team and the partners representing your technology.'],
+  ['Shared purpose', 'Helping sustainable innovation create value for businesses, people and the planet.'],
+];
+---
+<section class="who-teaser" id="about" aria-labelledby="who-title">
+  <div class="wrap who-layout">
+    <figure class="who-photo">
+      <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=85" width="1200" height="1500" loading="lazy" alt="Colleagues sharing ideas during a working meeting" />
+      <figcaption>Understanding the technology. Connecting the people.</figcaption>
+    </figure>
+    <div class="who-copy">
+      <div class="eyebrow">Who we are</div>
+      <h2 id="who-title">Technical understanding.<br /><span>A commercial mindset.</span></h2>
+      <div class="who-introduction">
+        <p>Nordiska Solutions brings together experience in cleantech, water, wastewater and process technologies with practical knowledge of international business.</p>
+        <p>We work closely with innovators and their local partners, understanding the technology, the people and the commercial realities behind every opportunity.</p>
+      </div>
+      <dl class="who-strengths">
+        {strengths.map(([title, copy]) => <div><dt>{title}</dt><dd>{copy}</dd></div>)}
+      </dl>
+      <a class="who-link" href={withBase('/about/')}>Get to know Nordiska <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+</section>
+<style>
+  .who-teaser { padding:95px 0 85px; background:var(--paper); scroll-margin-top:130px; }
+  .who-layout { display:grid; grid-template-columns:.9fr 1.1fr; gap:8%; align-items:start; }
+  .who-photo { margin:0; padding-top:5px; }
+  .who-photo img { display:block; width:100%; height:620px; object-fit:cover; object-position:45% center; border-radius:0 65px 0 0; filter:saturate(.75); }
+  .who-photo figcaption { font-size:10px; line-height:1.7; color:var(--muted); margin-top:16px; }
+  .who-copy .eyebrow { color:var(--brand); margin-bottom:24px; }
+  .who-copy h2 { font-size:clamp(34px,3.3vw,48px); line-height:1.12; letter-spacing:-.05em; margin:0 0 27px; }
+  .who-copy h2 span { color:var(--brand); }
+  .who-introduction p { font-size:15px; line-height:1.85; color:var(--muted); margin:0 0 15px; max-width:550px; }
+  .who-strengths { margin:30px 0 28px; }
+  .who-strengths > div { display:grid; grid-template-columns:.85fr 1.3fr; gap:22px; border-top:1px solid var(--line); padding:20px 0; }
+  .who-strengths dt { font-size:14px; font-weight:800; line-height:1.5; color:var(--ink); letter-spacing:-.015em; }
+  .who-strengths dd { font-size:13px; line-height:1.75; color:var(--muted); margin:0; }
+  .who-link { display:inline-flex; align-items:center; gap:26px; color:var(--brand); font-size:13px; font-weight:800; text-decoration:none; }
+  .who-link span { display:grid; place-items:center; width:42px; height:42px; border:1px solid #adc8e0; border-radius:50%; font-size:22px; transition:background .2s,color .2s; }
+  .who-link:hover span { background:var(--brand); color:white; }
+  .who-link:focus-visible { outline:2px solid var(--brand); outline-offset:7px; }
+  @media(max-width:1000px) {
+    .who-layout { gap:6%; }
+    .who-photo img { height:600px; }
+    .who-strengths > div { grid-template-columns:1fr; gap:7px; padding:17px 0; }
+  }
+  @media(max-width:760px) {
+    .who-teaser { padding:60px 0; scroll-margin-top:95px; }
+    .who-layout { grid-template-columns:1fr; gap:32px; }
+    .who-photo { padding:0; }
+    .who-photo img { height:330px; border-radius:0 50px 0 0; object-position:center 42%; }
+    .who-photo figcaption { margin-top:12px; }
+    .who-copy .eyebrow { margin-bottom:20px; }
+    .who-copy h2 { font-size:clamp(30px,8vw,38px); margin-bottom:22px; }
+    .who-strengths { margin-top:25px; }
+    .who-strengths > div { grid-template-columns:.9fr 1.2fr; gap:18px; padding:20px 0; }
+  }
+  @media(max-width:380px) { .who-strengths > div { grid-template-columns:1fr; gap:6px; } }
+  @media(prefers-reduced-motion:reduce) { .who-link span { transition:none; } }
+</style>
