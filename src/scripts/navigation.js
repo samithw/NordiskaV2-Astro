@@ -9,7 +9,7 @@ const menus = {
   services: {title:'What we do',copy:'From research-driven market entry strategies to hands-on execution, we turn global ambitions into actionable growth plans.',links:[['All services','/services/'],...services.map(s=>[s.name,`/services/${s.slug}/`])],feature:['Explore market entry →','/services/market-entry-strategy/']},
   industries: {title:'Industries we serve',copy:'Specialized expertise for a sustainable future. We connect cleantech innovators with the markets, partners and projects that need them.',links:[['All industries','/industries/'],...industries.map(s=>[s.name,`/industries/${s.slug}/`])],feature:['Explore water & wastewater →','/industries/water-wastewater/']},
   locations: {title:'Our locations',copy:'International perspective, connected to local market knowledge. Explore our network across Europe, Asia and the Middle East.',links:[['Our global presence','/locations/'],...countries.map(c=>[`Nordiska ${c}`,`/locations/#${c.toLowerCase()}`])],feature:['Discuss your target market →','/contact/']},
-  mobile: {title:'Explore Nordiska',copy:'Connecting technology with global opportunity.',links:[['Who we are','/about/'],['What we do','/services/'],['Industries we serve','/industries/'],['Our locations','/locations/'],['Contact us','/contact/']],feature:['Explore our presence →','/locations/']}
+  mobile: {title:'Explore Nordiska',copy:'Connecting technology with global opportunity.',links:[['Home','/'],['Who we are','/about/'],['What we do','/services/'],['Industries we serve','/industries/'],['Our locations','/locations/'],['Contact us','/contact/']],feature:['Explore our presence →','/locations/']}
 };
 let opener = null, key = null;
 function closeMenu(){

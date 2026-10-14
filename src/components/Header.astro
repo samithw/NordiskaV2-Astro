@@ -1,4 +1,10 @@
 ---
 import { withBase } from '../utils/paths';
 ---
-<header><div class="wrap header-inner"><div class="utility"><a href={withBase('/contact/')}>Contact us</a><a href={withBase('/locations/')}>Our global presence</a><span>Global / EN</span></div><a class="brand" href={withBase('/')} aria-label="Nordiska Solutions home"><img src={withBase('/nordiska-logo.png')} alt="Nordiska Solutions"></a><nav class="nav" aria-label="Main navigation"><button data-menu="about" aria-expanded="false">Who We Are</button><button data-menu="services" aria-expanded="false">What We Do</button><button data-menu="industries" aria-expanded="false">Industries We Serve</button><button data-menu="locations" aria-expanded="false">Our Locations</button></nav><button class="mobile-menu" data-menu="mobile" aria-expanded="false">Menu ☰</button></div></header>
+<header><div class="wrap header-inner"><div class="utility"><a href={withBase('/contact/')}>Contact us</a><a href={withBase('/locations/')}>Our global presence</a><span>Global / EN</span></div><a class="brand" href={withBase('/')} aria-label="Nordiska Solutions home"><img src={withBase('/nordiska-logo.png')} alt="Nordiska Solutions"></a><nav class="nav" aria-label="Main navigation"><a class="nav-home" href={withBase('/')} aria-current={Astro.url.pathname === withBase('/') ? 'page' : undefined}>Home</a><button data-menu="about" aria-expanded="false">Who We Are</button><button data-menu="services" aria-expanded="false">What We Do</button><button data-menu="industries" aria-expanded="false">Industries We Serve</button><button data-menu="locations" aria-expanded="false">Our Locations</button></nav><button class="mobile-menu" data-menu="mobile" aria-expanded="false">Menu ☰</button></div></header>
+<style>
+  .nav-home { display:block; padding:18px 0; border-bottom:4px solid transparent; font-size:14px; font-weight:800; white-space:nowrap; color:inherit; text-decoration:none; }
+  .nav-home:hover { color:var(--brand); }
+  :global(body.menu-open) .nav-home:hover { color:var(--accent); }
+  @media(max-width:1050px) { .nav-home { font-size:12px; } }
+</style>
