@@ -1,0 +1,16 @@
+---
+import { withBase } from '../utils/paths';
+import { servicePhotos } from '../data/servicePhotos';
+import type services from '../data/services.json';
+interface Props {
+  service: typeof services[number];
+  loading?: 'lazy' | 'eager';
+  heading?: 'h3' | 'h4';
+}
+const { service, loading = 'lazy', heading: Heading = 'h3' } = Astro.props;
+const photo = servicePhotos[service.slug];
+---
+<a class="service-card" href={withBase(`/services/${service.slug}/`)}>
+  <img src={photo} alt="" loading={loading} />
+  <span class="card-copy"><small>Our expertise</small><Heading>{service.name}</Heading><span class="arrow" aria-hidden="true">→</span></span>
+</a>

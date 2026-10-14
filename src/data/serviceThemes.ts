@@ -1,0 +1,6 @@
+import photos from './photos.json';
+export const serviceThemes = [
+  { title: 'Enter the right market.', label: 'Clarity before the first move', copy: 'Know where your technology belongs. Turn market insight into a focused entry plan, with the positioning and channels to give it a strong start.', photo: photos.strategy, alt: 'Business analysis and market planning', slugs: ['market-entry-strategy', 'go-to-market-strategy'] },
+  { title: 'Build commercial momentum.', label: 'Connections that move you forward', copy: 'Get closer to the people who matter. Develop the right partnerships, activate your market presence and turn promising conversations into sales opportunities.', photo: photos.sales, alt: 'Business team planning commercial opportunities', slugs: ['partner-search', 'channel-sales-support', 'market-activation'] },
+  { title: 'Make growth work on the ground.', label: 'Expertise that stays alongside you', copy: 'Give your technology the support it needs in the real world. Help local teams understand its application, build confidence and support customers beyond the first sale.', photo: photos.office, alt: 'Professional workplace for local business support', slugs: ['application-consultancy', 'on-site-training', 'aftersales-services'] },
+];

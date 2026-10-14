@@ -37,21 +37,18 @@ const heroDetails=[
 ['Good ideas deserve to go further.','From water and waste to clean energy, we connect technology providers with commercial opportunities. Technical understanding helps align your solution with project requirements and the right stakeholders.','Discover our industries','#industries']
 ];
 $('.deck-pagination').insertAdjacentHTML('beforebegin','<a class="story-link" id="story-link" href="#services">Explore our expertise <span>↗</span></a>');
-$('.hero-deck').insertAdjacentHTML('afterbegin','<aside class="hero-value" aria-label="Relevant Nordiska services"><div class="value-label" id="value-label">Expertise for your next move</div><div class="hero-service-cards" id="hero-service-cards"></div><button class="value-secondary" data-contact>Discuss your opportunity ↗</button><div class="value-sectors" id="value-sectors"></div></aside>');
 $('.hero-images').innerHTML=heroSlides.map((s,i)=>`<img data-photo="${s.photo}" alt="${s.alt}"${i===0?' class="active"':''}>`).join('');
 $('.deck-cards').innerHTML=heroSlides.map((s,i)=>`<button class="deck-card" data-slide="${i}" aria-pressed="${i===0}" aria-label="Show ${s.short} full screen"><img data-photo="${s.photo}" alt=""><span class="deck-index">NORDISKA — ${s.label}</span><strong>${s.short}</strong><span class="deck-arrow">↗</span><span class="card-scroll">SCROLL TO EXPLORE YOUR NEXT OPPORTUNITY ↓</span></button>`).join('');
 $('.deck-pagination').innerHTML=heroSlides.map((s,i)=>`<button class="deck-dot${i===0?' active':''}" data-slide="${i}" aria-label="Show story ${i+1}: ${s.short}" aria-pressed="${i===0}">${String(i+1).padStart(2,'0')}</button>`).join('');
 $$('[data-photo]').forEach(img=>img.src=photos[img.dataset.photo]);
-const services=[
-['Go-to-market strategy','A clear route into your next market.','Market evaluation, competitive positioning and practical entry roadmaps help you make informed decisions and build a commercially viable route to growth.','Market evaluation|Positioning|Entry models|Channel strategy','strategy'],
-['Partner & customer search','The right relationships open new possibilities.','We identify and evaluate distributors, agents, customers, EPC contractors, project developers and strategic partners. The aim is to build relationships that generate sustainable business.','Partner identification|Customer development|Channel relationships','people'],
-['Sales & marketing','Turn market presence into commercial momentum.','We support international sales development, visibility, communication and lead development so your technology earns attention and creates commercial opportunities.','Sales development|Market positioning|Lead development','sales'],
-['Business development','Put your international growth strategy into action.','Hands-on support for opportunities, partnerships and sales channels. We connect technology providers, local teams and market stakeholders to turn opportunity into commercial activity.','Local execution|Sales channels|Opportunity development','city'],
-['Application consultancy','Connect technology with the right application.','Technical and application understanding helps us assess project requirements and solution compatibility in complex cleantech and industrial markets.','Technical requirements|Application fit|Project needs','office'],
-['On-site training','Give your local teams the confidence to succeed.','Practical training helps partners, customers and local teams build product understanding, application knowledge, sales readiness and technical capability.','Product knowledge|Partner readiness|Technical capability','people'],
-['Aftersales services','Keep building beyond the first sale.','Ongoing local support strengthens customer relationships, supports partners and maintains market confidence as you build a lasting presence.','Local support|Customer relationships|Market continuity','office']];
-function serviceCard(i,heroCard=false){const s=services[i];return '<a class="service-card" href="'+serviceRoutes[i]+'" data-service="'+i+'"><img '+(heroCard?'':'loading="lazy" ')+'src="'+photos[s[4]]+'" alt=""><span class="card-copy"><small>Our expertise</small><h3>'+s[0]+'</h3><span class="arrow">→</span></span></a>'}
-const heroServiceGroups=[[0,1],[1],[2,3],[3],[0,3]];
+const heroServiceGroups=[
+ ['go-to-market-strategy','partner-search'],
+ ['partner-search'],
+ ['market-activation','channel-sales-support'],
+ ['channel-sales-support'],
+ ['go-to-market-strategy','channel-sales-support']
+];
+const heroCardTemplates=/** @type {HTMLTemplateElement} */ ($('#hero-service-templates'));
 const sectors=[
 ['Water & wastewater','Making the right connections for better water solutions.','We help water technology providers connect with end users, EPC contractors and engineering partners. Technical understanding aligns the right technology with real project requirements.','water'],
 ['Solid waste','Create commercial value from resource recovery.','We support companies in recycling, reuse, material recovery and waste-to-value applications, connecting them with buyers, operators, contractors and project opportunities.','waste'],
@@ -65,7 +62,6 @@ function selectSector(i){sectorIndex=i;const s=sectors[i];$$('[data-sector]').fo
 $$('[data-sector]').forEach((b,i)=>{b.onclick=()=>selectSector(i);b.onkeydown=e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const n=e.key==='Home'?0:e.key==='End'?4:(i+(e.key==='ArrowRight'?1:4))%5;selectSector(n);$$('[data-sector]')[n].focus()}});selectSector(0);
 
 
-function service(i){window.location.assign(serviceRoutes[i])}
 
 
 $$('[data-contact]').forEach(b=>b.onclick=()=>window.location.assign(withBase('/contact/')));
@@ -83,7 +79,10 @@ function setSlide(i){
  $('#deck-title').textContent=detail[0];$('#deck-description').textContent=detail[1];
  $('#story-link').innerHTML=detail[2]+' <span>↗</span>';$('#story-link').href=slide===0?serviceRoutes[7]:(s.service===null?withBase('/industries/'):serviceRoutes[s.service]);
  const relevant=heroServiceGroups[slide];
- $('#hero-service-cards').innerHTML=relevant.map(i=>serviceCard(i,true)).join('');
+ $('#hero-service-cards').replaceChildren(...relevant.map(slug=>{
+  const source=heroCardTemplates.content.querySelector(`[data-hero-service="${slug}"] .service-card`);
+  return source.cloneNode(true);
+ }));
  $('#hero-service-cards').classList.toggle('single',relevant.length===1);
  
  

@@ -1,0 +1,16 @@
+---
+import services from '../data/services.json';
+import ServiceCard from './ServiceCard.astro';
+const initial = ['go-to-market-strategy', 'partner-search'];
+---
+<aside class="hero-value" aria-label="Relevant Nordiska services">
+  <div class="value-label" id="value-label">Expertise for your next move</div>
+  <div class="hero-service-cards" id="hero-service-cards">
+    {initial.map(slug => <ServiceCard service={services.find(service => service.slug === slug)!} loading="eager" />)}
+  </div>
+  <button class="value-secondary" data-contact>Discuss your opportunity ↗</button>
+  <div class="value-sectors" id="value-sectors"></div>
+</aside>
+<template id="hero-service-templates">
+  {services.map(service => <div data-hero-service={service.slug}><ServiceCard service={service} loading="eager" /></div>)}
+</template>
