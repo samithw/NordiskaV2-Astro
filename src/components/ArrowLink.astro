@@ -1,0 +1,7 @@
+---
+import { arrowLinkMarkup } from './links/arrowLink';
+import '../styles/arrow-link.css';
+interface Props { href: string; label: string; }
+const { href, label } = Astro.props;
+---
+<Fragment set:html={arrowLinkMarkup(label, href)} />

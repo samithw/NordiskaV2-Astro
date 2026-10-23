@@ -1,0 +1,7 @@
+.nordiska-arrow-link{display:inline-flex;align-items:center;justify-content:flex-start;gap:26px;width:max-content;max-width:100%;padding:0;border:0;color:#2856a3;text-decoration:none;font:700 16px/1.4 Manrope,sans-serif;letter-spacing:-.015em}
+.nordiska-arrow-circle{display:grid;place-items:center;flex:0 0 auto;width:52px;height:52px;border:1px solid #adc8e0;border-radius:50%;transition:background .22s,color .22s,border-color .22s}
+.nordiska-arrow-circle svg{display:block;width:36px;height:36px;transition:transform .22s}
+.nordiska-arrow-link:hover .nordiska-arrow-circle{background:#2856a3;border-color:#2856a3;color:white}
+.nordiska-arrow-link:hover svg{transform:translate(2px,-2px)}
+.nordiska-arrow-link:focus-visible{outline:2px solid #2856a3;outline-offset:7px}
+@media(prefers-reduced-motion:reduce){.nordiska-arrow-circle,.nordiska-arrow-circle svg{transition:none}}
