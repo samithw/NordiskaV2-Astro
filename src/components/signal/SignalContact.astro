@@ -1,0 +1,9 @@
+---
+import { withBase } from '../../utils/paths';
+import SignalLink from './SignalLink.astro';
+---
+<section class="signal-contact signal-section" aria-labelledby="signal-contact-title"><div class="wrap">
+ <div class="eyebrow">Let’s move forward</div>
+ <h2 id="signal-contact-title">Your next market starts <br />with a <span>conversation.</span></h2>
+ <div class="signal-contact-bottom"><p>Share your technology, your ambition and the opportunity ahead. Let’s explore how we can help you grow.</p><SignalLink href={withBase('/contact/')} label="Talk to our team" inverse /></div>
+</div></section>
