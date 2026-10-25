@@ -1,0 +1,19 @@
+---
+import { withBase } from '../../utils/paths';
+import services from '../../data/services.json';
+import { serviceThemes } from '../../data/serviceThemes';
+import SignalLink from '../signal/SignalLink.astro';
+---
+<section class="signal-services signal-section" id="services" aria-labelledby="signal-services-title">
+ <div class="wrap">
+  <div class="signal-section-intro"><div><div class="eyebrow">What we do</div><h2 id="signal-services-title">From your first decision<br /><span>to ongoing support.</span></h2></div><p>Choose the support you need: market and launch planning, commercial development, or technical services for your local teams and customers.</p></div>
+  <div class="signal-service-groups">
+   {serviceThemes.map(theme => <article class="signal-service-group">
+    <figure class="signal-service-photo"><img class="signal-photo" src={theme.photo} alt={theme.alt} loading="lazy" width="640" height="480" /></figure>
+    <div class="signal-service-copy"><div class="eyebrow">{theme.step}</div><h3>{theme.title}</h3><p>{theme.copy}</p></div>
+    <ul class="signal-service-links" aria-label={`${theme.step} services`}>{theme.slugs.map(slug => { const service = services.find(s => s.slug === slug)!; return <li><a href={withBase(`/services/${slug}/`)}><span>{service.name}</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12" stroke="currentColor" stroke-width="1.2" /></svg></a></li>; })}</ul>
+   </article>)}
+  </div>
+  <div class="signal-services-close"><p>Explore the scope of each service.</p><SignalLink href={withBase('/services/')} label="Explore all services" /></div>
+ </div>
+</section>
