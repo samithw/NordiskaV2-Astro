@@ -171,8 +171,8 @@ explorer.render=function(now){
   const inset=mix(w*.045,cw*.05,zoom);
   const preferredHeadline=mix(Math.min(w*(mobile?.14:.074),125),Math.min(w*(mobile?.075:.032),48),zoom);
   const headlineSpace=mobile?cardWidth-inset*2:mix(Math.max(1,contextual.offsetLeft-inset-32),cardWidth-inset*2,zoom);
-  card.style.setProperty('--headline',Math.min(preferredHeadline,headlineSpace*100/headlineWidths[i])+'px');
-  card.style.setProperty('--inset',mix(w*.045,cw*.05,zoom)+'px');card.style.setProperty('--bottom',mix(h*(mobile?.45:.21),ch*.11,zoom)+'px');
+  card.style.setProperty('--headline',Math.min(preferredHeadline,headlineSpace*100/Math.max(...headlineWidths))+'px');
+  card.style.setProperty('--inset',mix(w*.045,cw*.05,zoom)+'px');card.style.setProperty('--bottom',mix((mobile?Math.max(h*.45,h-contextual.offsetTop+24):h*.21),ch*.11,zoom)+'px');
   card.querySelector('.card-top').style.top=mix(mobile?100:112,ch*.09,zoom)+'px';card.classList.toggle('full',zoom<.65);card.style.zIndex=selected?'3':'2';
   const echo=orbitEchoes[i];
   if(echo){
@@ -197,25 +197,22 @@ refinements.textContent=arrowLinkStyles+`
 .card-caption h2{max-width:none}
 .card-caption .headline>span{display:block;white-space:nowrap}
 .teaser{display:none!important}
-.contextual-links{position:absolute;z-index:6;right:4%;bottom:17%;width:32%;display:grid;grid-template-columns:repeat(2,minmax(0,180px));justify-content:end;align-items:stretch;gap:24px;opacity:var(--intro,1)}
+.contextual-links{--context-card-width:min(180px,calc((32cqw - 24px)/2));--context-gap:24px;position:absolute;z-index:6;right:4%;bottom:17%;width:32%;display:grid;grid-template-columns:repeat(2,var(--context-card-width));justify-content:end;align-items:stretch;gap:24px;opacity:var(--intro,1)}
 .context-card{display:flex;flex-direction:column;min-width:0;text-align:left;color:#2856a3;text-decoration:none;background:#eaf0f7;border:1px solid #bdcee2;box-shadow:0 4px 16px #102b5318;transition:border-color .2s,box-shadow .2s}
 .context-card:only-child{grid-column:2}
 .context-card small{display:block;margin-bottom:10px;font:9px/1.5 'IBM Plex Mono',monospace;letter-spacing:.1em}
-.context-photo{display:block;width:100%;flex-shrink:0;overflow:hidden;aspect-ratio:4/3}
+.context-photo{display:block;width:100%;flex-shrink:0;overflow:hidden;aspect-ratio:4/3;max-height:12svh}
 .context-photo img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s,filter .35s}
-.context-caption{display:flex;align-items:start;justify-content:space-between;gap:10px;flex:1;padding:14px 12px;margin:0;background:#eaf0f7;transition:background .2s;font:500 18px/1.25 Manrope,sans-serif;letter-spacing:-.035em}
+.context-caption{display:flex;align-items:start;justify-content:space-between;gap:10px;flex:1;padding:14px 12px;margin:0;background:#eaf0f7;transition:background .2s;font:500 clamp(12px,calc(var(--context-card-width) * .1),18px)/1.25 Manrope,sans-serif;overflow-wrap:anywhere;letter-spacing:-.035em}
 .context-caption>span{flex-shrink:0;font-size:22px;line-height:1;transition:transform .25s}
 .context-card:hover{border-color:#8baecf;box-shadow:0 6px 20px #102b532b}
 .context-card:hover .context-caption{background:#dce9f5}
 .context-card:hover img{transform:scale(1.045);filter:brightness(1.08)}
 .context-card:hover .context-caption>span{transform:translate(3px,-3px)}
 .context-card:focus-visible{outline:2px solid #fff;outline-offset:4px;box-shadow:0 0 0 7px #2856a3}
-/* Reuse the service card sizing; only the five-card arrangement differs. */
-.contextual-links.industries-links{width:min(92%,588px);grid-template-columns:repeat(6,minmax(0,78px));gap:24px;bottom:15%}
-.industries-links .context-card{grid-column:span 2}
-.industries-links .context-card:nth-child(1){grid-column:3 / span 2}
-.industries-links .context-card:nth-child(2){grid-column:5 / span 2}
-@container(max-width:700px){.contextual-links{bottom:17%;width:76%;grid-template-columns:repeat(2,minmax(0,135px));gap:16px}.context-caption{font-size:12px;padding:10px;gap:6px}.context-caption>span{font-size:18px}.context-card small{font-size:7px;margin-bottom:6px}.contextual-links.industries-links{bottom:12%;width:92%;grid-template-columns:repeat(6,minmax(0,59.5px));gap:16px}.panel-signal .nordiska-arrow-link{font-size:14px;gap:22px}.panel-signal .nordiska-arrow-circle{width:42px;height:42px}}
+/* All contextual links share one two-column grid, including industries. */
+@container(max-width:700px){.contextual-links{--context-card-width:min(135px,calc((92cqw - 32px)/3));--context-gap:16px;bottom:17%;width:76%;grid-template-columns:repeat(2,var(--context-card-width));gap:var(--context-gap)}.context-caption{font-size:12px;padding:10px;gap:6px}.context-caption>span{font-size:18px}.context-card small{font-size:7px;margin-bottom:6px}.panel-signal .nordiska-arrow-link{font-size:14px;gap:22px}.panel-signal .nordiska-arrow-circle{width:42px;height:42px}}
+@container(max-width:700px){.contextual-links.industries-links{width:calc(3 * var(--context-card-width) + 2 * var(--context-gap));grid-template-columns:repeat(3,var(--context-card-width))}}
 @media(prefers-reduced-motion:reduce){.context-card,.context-caption,.context-photo img,.context-caption>span{transition:none}}
 `;
 shadow.append(refinements);
