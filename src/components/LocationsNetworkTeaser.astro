@@ -1,0 +1,24 @@
+---
+import PresenceMap from './PresenceMap.astro';
+import SignalLink from './signal/SignalLink.astro';
+import { withBase } from '../utils/paths';
+---
+<section class="network-preview-teaser" id="locations" aria-labelledby="network-preview-title"><div class="wrap network-preview-layout">
+ <div class="network-preview-intro"><div class="eyebrow">Our global presence</div><h2 id="network-preview-title">Nordic roots.<br /><span>Local connections.</span></h2><p>Across Europe, Asia and the Middle East, we bring you closer to the people and opportunities in your next market.</p></div>
+ <div class="network-preview-map"><PresenceMap targetPath="/preview/locations-network/" compact /></div>
+ <div class="network-preview-link"><SignalLink href={withBase('/preview/locations-network/')} label="Explore our locations" /></div>
+</div></section>
+<style>
+ .network-preview-teaser{background:#eaf0f7;padding:65px 0;scroll-margin-top:100px}
+ .network-preview-layout{display:grid;grid-template-columns:.85fr 1.65fr;column-gap:5%;align-items:center}
+ .network-preview-intro{align-self:end;padding-top:20px}
+ .network-preview-intro .eyebrow{color:var(--brand);font-size:10px;font-weight:600;letter-spacing:.09em;margin-bottom:24px}
+ .network-preview-intro h2{font-size:clamp(34px,3.5vw,50px);font-weight:500;line-height:1.12;letter-spacing:-.055em;margin:0 0 24px}
+ .network-preview-intro h2 span{color:var(--brand)}
+ .network-preview-intro p{max-width:320px;font-size:14px;line-height:1.85;color:#58708c;margin:0}
+ .network-preview-map{grid-column:2;grid-row:1 / span 2;min-width:0}
+ .network-preview-link{align-self:start;margin-top:28px;padding-bottom:20px}
+ .network-preview-link :global(.signal-section-link){font-size:13px;gap:18px}
+ @media(max-width:1000px){.network-preview-layout{grid-template-columns:1fr 1.45fr;column-gap:3%}.network-preview-intro h2{font-size:38px}.network-preview-intro .eyebrow{margin-bottom:20px}}
+ @media(max-width:760px){.network-preview-teaser{padding:55px 0 40px;scroll-margin-top:85px}.network-preview-layout{grid-template-columns:1fr}.network-preview-intro{padding-top:0}.network-preview-intro p{max-width:440px}.network-preview-map{grid-column:1;grid-row:2;margin-top:28px}.network-preview-link{grid-row:3;margin-top:24px;padding-bottom:0}}
+</style>

@@ -1,9 +1,31 @@
 ---
 import { withBase } from '../utils/paths';
 import Base from '../layouts/Base.astro';
+import GlobalContact from '../components/GlobalContact.astro';
 import PageHero from '../components/PageHero.astro';
 import services from '../data/services.json';
 import industries from '../data/industries.json';
 ---
 <Base title="Contact"><main id="top"><PageHero eyebrow="Connect with Nordiska" title="Tell us about your next move." copy="Share your technology, your ambition and the opportunity ahead. Let’s explore how we can help you grow." photo="people"/>
+
+<section class="contact-welcome" aria-labelledby="contact-welcome-title"><div class="wrap contact-welcome-layout">
+ <div class="contact-welcome-copy"><div class="eyebrow">Start a conversation</div><h2 id="contact-welcome-title">Let’s talk about<br /><span>what’s possible.</span></h2><p>Whether you’re exploring a new market, looking for the right partners or working through a technical challenge, we’re ready to listen. Tell us where you are today and what you want to achieve.</p><p>You don’t need a finished plan to get in touch. An early idea or a question is a good place to start. Call or email our global team, and we can explore the next step together.</p></div>
+ <div class="contact-welcome-details"><GlobalContact /></div>
+</div></section>
 <section class="content"><div class="wrap contact-grid"><div><div class="eyebrow">Your next opportunity</div><h2>A conversation with purpose.</h2><div class="rule"></div><p>Help us understand your business, your target market and the kind of support you need. You can change any interests carried forward from another page.</p><a class="link" href={withBase('/locations/')}>Explore our global presence<span>→</span></a></div><form class="contact-form" id="enquiry-form"><div class="form-row"><label>Your name<input name="name" autocomplete="name" required maxlength="200"/></label><label>Company<input name="company" autocomplete="organization" required maxlength="200"/></label></div><label>Work email<input type="email" name="email" autocomplete="email" required maxlength="254"/></label><div class="form-row"><label>Service<select name="service"><option value="">Not sure yet</option>{services.map(s=><option value={s.slug}>{s.name}</option>)}</select></label><label>Industry<select name="industry"><option value="">Select an industry</option>{industries.map(s=><option value={s.slug}>{s.name}</option>)}</select></label></div><div class="form-row"><label>Location<select name="location"><option value="">Not sure yet</option>{['Finland','Malaysia','India','Vietnam','Philippines','UAE'].map(c=><option>{c}</option>)}</select></label><label>Target market<input name="market" maxlength="200" placeholder="Where would you like to grow?"/></label></div><label>Your technology or project<input name="technology" maxlength="300"/></label><label>Your opportunity<textarea name="message" required maxlength="5000"></textarea></label><label class="check-label"><input type="checkbox" name="privacy" required/><span>I have read the <a href={withBase('/privacy/')}>privacy information</a>.</span></label><button class="btn" type="submit">Prepare enquiry<span class="arrow">→</span></button><p class="form-note">Prepare a copy of your enquiry to download. Online submission will be available once Nordiska’s enquiry channel is connected.</p><p id="enquiry-status" class="status" role="status" hidden></p></form></div></section></main><script>import '../scripts/contact.js';</script></Base>
+
+<style>
+ .contact-welcome{padding:80px 0;background:var(--paper);border-bottom:1px solid var(--line)}
+ .contact-welcome-layout{display:grid;grid-template-columns:1.2fr .8fr;gap:10%;align-items:center}
+ .contact-welcome-copy .eyebrow{font-size:10px;font-weight:600;letter-spacing:.09em;color:var(--brand);margin-bottom:24px}
+ .contact-welcome h2{font-size:clamp(36px,4vw,58px);font-weight:500;line-height:1.1;letter-spacing:-.055em;margin:0 0 28px}
+ .contact-welcome h2 span{color:var(--brand)}
+ .contact-welcome-copy p{max-width:610px;font-size:15px;line-height:1.85;color:var(--muted);margin:0 0 18px}
+ .contact-welcome-copy p:last-child{margin-bottom:0}
+ .contact-welcome-details{border-left:1px solid var(--line);padding:24px 0 24px 45px;min-width:0}
+ .contact-welcome-details :global(.global-contact){margin:0;padding:0;border:0}
+ .contact-welcome-details :global(.global-contact-label){margin-bottom:22px}
+ .contact-welcome-details :global(.global-contact-name){font-size:22px;margin-bottom:18px}
+ .contact-welcome-details :global(.global-contact a){font-size:clamp(17px,1.65vw,24px);line-height:1.7;margin:10px 0}
+ @media(max-width:760px){.contact-welcome{padding:55px 0}.contact-welcome-layout{grid-template-columns:1fr;gap:32px}.contact-welcome-copy p{font-size:14px}.contact-welcome-details{border-left:0;border-top:1px solid var(--line);padding:28px 0 0}.contact-welcome-details :global(.global-contact a){font-size:19px}}
+</style>

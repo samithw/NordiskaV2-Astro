@@ -7,7 +7,7 @@ import SignalServices from '../../../components/signal-story/Services.astro';
 import SignalAbout from '../../../components/signal-story/About.astro';
 import SignalContact from '../../../components/signal-story/Contact.astro';
 import '../../../styles/signal-content.css';
-import LocationsTeaser from '../../../components/LocationsTeaser.astro';
+import LocationsNetworkTeaser from '../../../components/LocationsNetworkTeaser.astro';
 ---
 <Base noindex title="Signal content preview">
   <main id="top">
@@ -18,7 +18,7 @@ import LocationsTeaser from '../../../components/LocationsTeaser.astro';
     <SignalServices />
     <IndustryGallery />
     <SignalAbout />
-    <LocationsTeaser />
+    <LocationsNetworkTeaser />
     <SignalContact />
   </main>
   <nav class="signal-compare" aria-label="Compare hero previews"><span>Content preview</span><a href={withBase('/preview/signal/')}>Current Signal ↗</a><a href={withBase('/')}>Original homepage ↗</a></nav>
