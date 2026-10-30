@@ -1,0 +1,54 @@
+.industries-explorer-preview{background:#f8fafd;color:#17385d}
+.industries-explorer-preview .page-hero{background:#eaf0f7;padding-bottom:65px}
+.industries-explorer-preview .page-hero h1{font-size:clamp(44px,5vw,76px);font-weight:500;letter-spacing:-.06em}
+.industries-explorer-preview .page-hero-image{height:380px;overflow:hidden}
+.industries-explorer-preview .page-hero-image img{filter:saturate(.65)}
+.industries-explorer-preview .page-hero-image:after{display:none}
+.industries-explorer-preview .eyebrow{font-size:10px;font-weight:600;letter-spacing:.09em;color:var(--brand)}
+.sector-explorer{padding:90px 0 100px;scroll-margin-top:210px}
+.explorer-intro{display:grid;grid-template-columns:1.3fr 1fr;gap:12%;align-items:end;margin-bottom:65px}
+.explorer-intro h2{font-size:clamp(36px,4vw,58px);font-weight:500;line-height:1.1;letter-spacing:-.055em;margin:24px 0 0}
+.explorer-intro h2 span{color:var(--brand)}
+.explorer-intro>p{max-width:410px;font-size:15px;line-height:1.85;color:#58708c;margin:0 0 3px}
+/* Expanded sector chapters: every industry remains visible. */
+.explorer-jump{position:sticky;top:116px;z-index:25;border-block:1px solid #d7e2ee;background:#fbfcfef2;backdrop-filter:blur(12px)}
+.explorer-jump>.wrap{display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}
+.explorer-jump a{display:flex;align-items:center;gap:10px;padding:22px 14px;min-height:72px;border-right:1px solid #d7e2ee;font-size:12px;line-height:1.4;font-weight:500;color:#37597c}
+.explorer-jump a:first-child{border-left:1px solid #d7e2ee}
+.explorer-jump a:hover{background:#eaf1f8;color:var(--brand)}
+.explorer-jump a>span:first-child{font-size:9px;color:var(--brand)}
+.explorer-jump a>span:last-child{margin-left:auto;font-size:20px}
+.explorer-panel{display:grid;grid-template-columns:1fr 1fr;gap:8%;align-items:start;border-top:1px solid #bdcee2;padding:65px 0 80px;scroll-margin-top:205px}
+.explorer-panel:last-child{padding-bottom:0}
+.explorer-panel-reverse .explorer-visual{grid-column:2;grid-row:1}
+.explorer-panel-reverse .explorer-panel-copy{grid-column:1;grid-row:1}
+.explorer-visual{position:sticky;top:225px;min-width:0}
+.explorer-visual h2{font-size:clamp(35px,4vw,58px);font-weight:500;letter-spacing:-.055em;line-height:1.1;margin:20px 0 30px}
+.explorer-photo{position:relative;height:360px;overflow:hidden;margin:0;background:#dce7f0;color:white}
+.explorer-photo:after{position:absolute;content:'';inset:0;background:linear-gradient(180deg,#112f5020,transparent 35%,#09244bb0)}
+.explorer-photo img{height:100%;width:100%;object-fit:cover;filter:saturate(.65)}
+.explorer-photo figcaption{position:absolute;z-index:1;inset:auto 30px 28px;display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:13px}
+.explorer-photo figcaption>span:first-child{font-size:10px;letter-spacing:.09em;text-transform:uppercase}
+.explorer-photo-number{position:absolute;top:12px;right:25px;z-index:1;font-size:clamp(70px,8vw,120px);font-weight:500;line-height:1;letter-spacing:-.07em;color:#ffffffa0}
+.explorer-panel-copy{padding:5px 0 0;min-width:0}
+.explorer-panel-copy h3{font-size:clamp(29px,3vw,43px);font-weight:500;letter-spacing:-.05em;line-height:1.15;max-width:620px;margin:18px 0 20px}
+.explorer-summary{font-size:15px;line-height:1.85;color:#58708c;max-width:650px;margin:0}
+.explorer-details{display:grid;grid-template-columns:1.2fr 1fr;gap:35px;border-top:1px solid #d9e3ed;padding-top:26px;margin-top:30px}
+.explorer-panel h4{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--brand);margin:0 0 18px}
+.explorer-panel ul{list-style:none;padding:0;margin:0}
+.explorer-applications{display:flex;flex-wrap:wrap;gap:8px}
+.explorer-applications li{border:1px solid #d4e0ed;background:#f0f5fa;padding:7px 10px;font-size:11px;line-height:1.5;color:#37597c}
+.explorer-buyers li{font-size:13px;line-height:1.6;color:#58708c;margin-bottom:7px}
+.explorer-support{border-top:1px solid #d9e3ed;margin-top:28px;padding-top:26px}
+.explorer-support ul{display:grid;grid-template-columns:1fr}
+.explorer-support a{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:12px 0;border-bottom:1px solid #e1e8f0;font-size:12px;line-height:1.6;color:var(--brand)}
+.explorer-support a span{font-size:20px}
+.explorer-support a:hover{text-decoration:underline;text-underline-offset:4px}
+.explorer-panel-bottom{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:32px}
+.explorer-discuss{font-size:12px;color:#58708c;text-underline-offset:4px}
+.explorer-discuss:hover{text-decoration:underline}
+.explorer-jump a:focus-visible,.explorer-panel a:focus-visible{outline:2px solid var(--brand);outline-offset:4px}
+.explorer-compare{display:flex;justify-content:center;align-items:center;gap:24px;flex-wrap:wrap;padding:20px 22px;background:#eaf0f7;font-size:11px;color:var(--brand)}
+.explorer-compare>span{color:#58708c}
+@media(max-width:1100px){.explorer-panel{gap:5%}.explorer-details{grid-template-columns:1fr;gap:24px}.explorer-photo{height:330px}.explorer-jump a{padding:18px 10px;gap:7px;font-size:11px}.explorer-jump a>span:last-child{display:none}}
+@media(max-width:760px){.industries-explorer-preview .page-hero-image{height:260px}.explorer-jump{top:80px}.explorer-jump>.wrap{padding-inline:0;grid-template-columns:repeat(3,minmax(0,1fr))}.explorer-jump a{min-height:48px;padding:10px;font-size:10px;border-bottom:1px solid #d7e2ee}.explorer-jump a:nth-child(4){grid-column:1/3}.sector-explorer{padding:55px 0 65px;scroll-margin-top:195px}.explorer-intro{grid-template-columns:1fr;gap:24px;margin-bottom:35px}.explorer-intro>p{max-width:none;font-size:14px}.explorer-panel{grid-template-columns:1fr;gap:30px;padding:38px 0 50px;scroll-margin-top:195px}.explorer-visual{position:static}.explorer-panel-reverse .explorer-visual,.explorer-panel-reverse .explorer-panel-copy{grid-column:auto;grid-row:auto}.explorer-visual h2{font-size:39px;margin:18px 0 24px}.explorer-photo{height:260px}.explorer-photo figcaption{inset:auto 20px 20px}.explorer-panel-copy{padding:0}.explorer-panel-copy h3{font-size:32px}.explorer-summary{font-size:14px}.explorer-panel-bottom{align-items:start;flex-direction:column}.explorer-compare{gap:14px;font-size:10px}}

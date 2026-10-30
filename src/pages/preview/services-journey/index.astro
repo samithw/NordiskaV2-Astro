@@ -1,0 +1,52 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PageHero from '../../../components/PageHero.astro';
+import SignalContact from '../../../components/signal-story/Contact.astro';
+import { withBase } from '../../../utils/paths';
+import services from '../../../data/services.json';
+import { servicePhotos } from '../../../data/servicePhotos';
+import '../../../styles/services-journey.css';
+import '../../../styles/signal-content.css';
+const stages = [
+ { id:'plan', name:'Find your route', phase:'Market insight & strategy', title:'Start with a clearer direction.', copy:'Before you commit to a new market, understand the opportunity. We help you assess where your technology fits and build a practical plan for taking it there.', outcome:'A clearer market choice and an actionable entry plan.', services:[
+  ['market-entry-strategy','When you are evaluating a new market.','Assess demand, competition and the routes available to your business.'],
+  ['go-to-market-strategy','When you are preparing to launch.','Define positioning, channels, resources and priorities for your chosen market.'],
+ ]},
+ { id:'grow', name:'Build your presence', phase:'Partners, visibility & sales', title:'Put the right relationships in motion.', copy:'A plan becomes useful when people act on it. Find suitable partners, build credibility with buyers and help local channels develop real commercial opportunities.', outcome:'A connected market presence with coordinated commercial activity.', services:[
+  ['partner-search','When you need the right representation.','Identify and evaluate distributors, agents and project partners.'],
+  ['market-activation','When you need to reach your audience.','Build visibility through targeted communication, events and buyer engagement.'],
+  ['channel-sales-support','When appointed partners are ready to sell.','Align teams, activate opportunities and follow through on agreed sales plans.'],
+ ]},
+ { id:'support', name:'Support delivery', phase:'Applications, people & continuity', title:'Stay connected beyond the first opportunity.', copy:'Commercial progress needs practical follow-through. Connect your technology with application needs, prepare the people representing it and maintain communication after the sale.', outcome:'Better-prepared teams and continuity across customer relationships.', services:[
+  ['application-consultancy','When technical fit needs a closer look.','Review application requirements with your team and the relevant specialists.'],
+  ['on-site-training','When local teams need preparation.','Build product and application understanding around the roles people perform.'],
+  ['aftersales-services','When customers need ongoing coordination.','Keep communication and follow-up connected across providers, partners and customers.'],
+ ]},
+];
+---
+<Base noindex title="Services journey preview">
+ <main id="top" class="services-journey-preview">
+  <PageHero eyebrow="What we do" title="Expertise for your next stage of growth." copy="We help ambitious companies expand internationally with clarity and confidence. From research-driven market entry strategies to hands-on go-to-market execution, we turn global ambitions into actionable growth plans." photo="sales" action="Explore the journey" href="#journey" />
+  <nav class="journey-nav" aria-label="Explore the stages of international growth"><div class="wrap">
+   {stages.map((stage,i)=><a href={`#${stage.id}`} data-stage-link={stage.id}><span>0{i+1}</span>{stage.name}<span class="journey-nav-arrow" aria-hidden="true">↘</span></a>)}
+  </div></nav>
+  <section id="journey" class="journey-intro wrap" aria-labelledby="journey-title">
+   <div><div class="eyebrow">A connected approach</div><h2 id="journey-title">One ambition.<br /><span>Support at every stage.</span></h2></div>
+   <div><p class="journey-lead">Start where you need us.</p><p>Choose support for one stage or work with us across the journey. This is a typical route: services can overlap, and technical discussions may begin long before market entry.</p><span class="journey-scroll-note">Follow the path to explore our services <span aria-hidden="true">↓</span></span></div>
+  </section>
+  <div class="journey-route wrap">
+   <svg class="journey-path" aria-hidden="true" preserveAspectRatio="none"><path class="journey-path-base"/><path class="journey-path-progress"/></svg>
+   {stages.map((stage,i)=><section id={stage.id} class:list={['journey-stage',{'journey-stage-reverse':i===1}]} aria-labelledby={`${stage.id}-title`}>
+    <div class="journey-stop" aria-hidden="true"><span>0{i+1}</span></div>
+    <div class="journey-stage-intro"><div class="eyebrow">0{i+1} / {stage.name}</div><h2 id={`${stage.id}-title`}>{stage.title}</h2><p>{stage.copy}</p><div class="journey-outcome"><span class="eyebrow">What we work towards</span><p>{stage.outcome}</p></div><span class="journey-phase">{stage.phase}</span></div>
+    <div class:list={['journey-service-grid',{'journey-service-grid-three':stage.services.length===3}]}>
+     {stage.services.map(([slug,when,copy],j)=>{const service=services.find(s=>s.slug===slug)!;return <a class="journey-service-card" href={withBase(`/services/${slug}/`)}><figure><img src={servicePhotos[slug]} alt="" loading="lazy" width="650" height="450"/><span class="journey-service-number">0{i+1}.{j+1}</span><span class="journey-service-arrow" aria-hidden="true">↗</span></figure><div class="journey-service-copy"><h3>{service.name}</h3><p class="journey-service-when">{when}</p><p>{copy}</p><span class="journey-service-more">Explore this service <span aria-hidden="true">↗</span></span></div></a>})}
+    </div>
+   </section>)}
+   <div class="journey-end"><span aria-hidden="true">↗</span><p>Your next step starts with your priorities.</p></div>
+  </div>
+  <div class="signal-preview"><SignalContact title="Not sure" accent="where to start?" copy="Tell us about your technology, your target market and where you need support. We can explore the right starting point together." action="Find your starting point" /></div>
+ </main>
+ <nav class="journey-compare" aria-label="Compare Services pages"><span>Journey preview</span><a href={withBase('/services/')}>Current Services page ↗</a></nav>
+ <script>import '../../../scripts/services-journey.js';</script>
+</Base>
