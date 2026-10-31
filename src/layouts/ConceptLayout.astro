@@ -8,9 +8,9 @@ import '../styles/main/pages.css';
 import '../styles/main/service-cards.css';
 import '../styles/main/signal-content.css';
 import '../styles/concepts.css';
-const { title, showHeader = true, photography = false } = Astro.props;
+const { title, photography = false, imageOverlay = false } = Astro.props;
 ---
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="robots" content="noindex, nofollow"/><title>{title} | Nordiska Solutions</title><link rel="icon" href={withBase('/favicon.svg')}/><link rel="preconnect" href="https://images.unsplash.com"/><link rel="preconnect" href="https://fonts.googleapis.com"/></head><body class:list={['signal-preview','home-concept',{'hero-preview':photography}]}>
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="robots" content="noindex, nofollow"/><title>{title} | Nordiska Solutions</title><link rel="icon" href={withBase('/favicon.svg')}/><link rel="preconnect" href="https://images.unsplash.com"/><link rel="preconnect" href="https://fonts.googleapis.com"/></head><body class:list={['signal-preview','home-concept',{'hero-preview':photography,'concept-image-overlay':imageOverlay}]} data-image-cover={imageOverlay || undefined}>
 <svg width="0" height="0" aria-hidden="true" style="position:absolute;pointer-events:none"><defs><filter id="brand-blue" color-interpolation-filters="sRGB"><feFlood flood-color="#2856a3"/><feComposite in2="SourceAlpha" operator="in"/></filter></defs></svg>
-<a class="skip" href="#top">Skip to content</a>{showHeader && <Header/>}<slot/><Footer/><Menu/>
+<a class="skip" href="#top">Skip to content</a><Header/><slot/><Footer/><Menu/>
 </body></html>

@@ -49,7 +49,7 @@ Main service cards share `components/main/JourneyServiceCard.astro`, `styles/mai
 
 The concept catalogue is `src/data/homeConcepts.ts`. Client-facing names and URLs are:
 
-The client gallery and Previous/Next navigation show only Original Design, Immersive Photography, The Nordiska Story and Cleantech Growth, numbered 01–04. Visibility is controlled by each catalogue entry's `visible` flag. Service Explorer, Expertise in Motion and Brand Highlights remain available by direct URL for internal reference.
+The client gallery and Previous/Next navigation show Original Design, Immersive Photography, Expertise in Motion, The Nordiska Story and Cleantech Growth, numbered 01–05. Visibility is controlled by each catalogue entry's `visible` flag. Service Explorer and Brand Highlights remain available by direct URL for internal reference.
 
 | Name | URL | Former URL |
 | --- | --- | --- |
@@ -64,3 +64,5 @@ The client gallery and Previous/Next navigation show only Original Design, Immer
 Original Design reuses the original opening and Advantage treatment above the current shared homepage content. It is distinct from the full preserved Classic site. Classic files are unchanged.
 
 Update shared homepage content in `components/main/HomeContent.astro` and its imported main components. Concept-specific legacy hero scripts intentionally do not rewrite the shared industry section. The gallery uses actual captured hero screenshots in `public/concepts/`. Concept pages carry noindex metadata.
+
+All concepts use the current main Header and its full-screen menus. Expertise in Motion retains its orbit image-card animation and fullscreen selection; Immersive Photography retains its expanding photographic cards. Their hero geometry accounts for the shared header height.

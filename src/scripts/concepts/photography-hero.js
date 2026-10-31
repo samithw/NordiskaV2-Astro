@@ -1,4 +1,5 @@
 import { withBase } from '../../utils/paths';
+import { syncImageHeader } from './image-header';
 const serviceRoutes=['/services/go-to-market-strategy/','/services/partner-search/','/services/market-activation/','/services/','/services/application-consultancy/','/services/on-site-training/','/services/aftersales-services/','/services/market-entry-strategy/'].map(withBase);
 
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
@@ -98,6 +99,7 @@ function renderOrbit(now){
   document.body.classList.toggle('hero-preview-cover',hero.getBoundingClientRect().top>=-80);
   $('.hero-fullscreen-copy').inert=false;
   $('.hero-fullscreen-copy').style.visibility='visible';
+  syncImageHeader($('.hero-images'));
   return;
  }
  const h=hero.clientHeight,w=hero.clientWidth,top=parseFloat(getComputedStyle(hero).top)||0;
@@ -170,6 +172,7 @@ function renderOrbit(now){
   b.style.visibility=visible?'visible':'hidden';b.style.pointerEvents=visible?'auto':'none';
   b.tabIndex=visible&&(zoom>.85||selected)?0:-1;
  });
+ syncImageHeader(orbitCards[slide]);
  if(Math.abs(targetPosition-orbitPosition)>.0005||Math.abs(targetZoom-zoom)>.0005||opening)requestOrbit();
 }
 addEventListener('scroll',requestOrbit,{passive:true});addEventListener('resize',requestOrbit);

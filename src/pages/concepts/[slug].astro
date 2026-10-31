@@ -13,9 +13,8 @@ export function getStaticPaths(){return homeConcepts.map(concept=>({params:{slug
 interface Props { concept: HomeConcept; }
 const { concept } = Astro.props;
 const traditional = ['original','photography','signal'].includes(concept.hero);
-const showHeader = !['signal','story'].includes(concept.hero);
 ---
-<Layout title={`${concept.name} — Homepage concept`} {showHeader} photography={concept.hero==='photography'}>
+<Layout title={`${concept.name} — Homepage concept`} photography={concept.hero==='photography'} imageOverlay={['story','photography'].includes(concept.hero)}>
  <main id="top">
   {concept.hero==='original' ? <OriginalHero/> : concept.hero==='photography' ? <PhotographyHero/> : <OrbitHero variant={concept.hero}/>}
   <div id="our-approach" class="concept-advantage">{traditional ? <OriginalAdvantage/> : <CurrentAdvantage/>}</div>

@@ -24,40 +24,15 @@ adaptation.textContent=`
 @container(max-width:700px){:host .panel-signal .panel-copy{display:block;font-size:14px;line-height:1.7;margin:12px 0}:host .panel-signal .panel-action{position:static}}
 `;
 shadow.append(adaptation);
-const links=[['Home','/'],['Who We Are','/about/'],['What We Do','/services/'],['Industries We Serve','/industries/'],['Our Locations','/locations/'],['Contact us','/contact/']];
-const linkMarkup=links.map(([label,url])=>`<a href="${withBase(url)}">${label}</a>`).join('');
-// Keep navigation outside the clipped, sticky orbit stage so it persists below it.
-const headerHost=document.createElement('div');
-headerHost.className='signal-fixed-header';
-const headerShadow=headerHost.attachShadow({mode:'open'});
-const headerStyles=document.createElement('style');
-headerStyles.textContent=`
-:host{position:fixed;inset:0 0 auto;z-index:60;display:block;font-family:Manrope,sans-serif}
-*{box-sizing:border-box}
-.topbar{position:relative;isolation:isolate;height:80px;color:white;background:transparent;border-bottom:1px solid transparent;transition:background .2s,color .2s,border-color .2s}
-.topbar::before{content:'';position:absolute;inset:0 0 -40px;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(16,43,83,.32) 0%,rgba(16,43,83,.18) 65%,rgba(16,43,83,0) 100%);transition:opacity .2s}
-.nav-inner{height:100%;width:100%;max-width:1440px;margin:0 auto;padding:0 var(--pad,clamp(22px,5vw,90px));display:flex;align-items:center;justify-content:space-between;gap:24px}
-a{color:inherit;text-decoration:none;touch-action:manipulation}
-.brand{display:block;flex:none}.brand img{display:block;width:106px;height:55px;object-fit:contain;filter:brightness(0) invert(1)}
-.site-nav{display:flex;align-items:center;gap:clamp(16px,2.5vw,38px);font-size:12px;font-weight:500;text-shadow:0 1px 5px rgba(16,43,83,.24)}
-.site-nav a:hover{text-decoration:underline;text-underline-offset:5px}
-a:focus-visible,summary:focus-visible{outline:2px solid currentColor;outline-offset:5px}
-.mobile-links{display:none}
-.topbar[data-expanded]{color:#2856a3;background:#eaf0f7;border-bottom-color:#bdcee2}
-.topbar[data-expanded]::before{opacity:0}
-.topbar[data-expanded] .site-nav{text-shadow:none}
-.topbar[data-expanded] .brand img{filter:brightness(0) saturate(100%) invert(29%) sepia(35%) saturate(1747%) hue-rotate(185deg) brightness(95%) contrast(91%)}
-@media(max-width:850px){.site-nav{gap:14px;font-size:10px}}
-@media(max-width:700px){.topbar{height:65px}.site-nav{display:none}.brand img{width:96px;height:48px}.mobile-links{display:block;font-size:12px}.mobile-links summary{cursor:pointer;touch-action:manipulation}.mobile-links nav{position:absolute;top:65px;left:0;right:0;display:grid;background:#eaf0f7;color:#2856a3;border-bottom:1px solid #bdcee2;padding:12px var(--pad,22px);max-height:calc(100svh - 65px);overflow-y:auto}.mobile-links nav a{padding:12px 0;font-size:13px}}
-@media(prefers-reduced-motion:reduce){.topbar,.topbar::before{transition:none}}
-`;
-const fixedHeader=shadow.querySelector('.topbar');
-fixedHeader.innerHTML=`<div class="nav-inner"><a class="brand" href="${withBase('/')}" aria-label="Nordiska Solutions home"><img src="${withBase('/nordiska-logo.png')}" alt="Nordiska Solutions"></a><nav class="site-nav" aria-label="Main navigation">${linkMarkup}</nav><details class="mobile-links"><summary>Menu ☰</summary><nav aria-label="Mobile navigation">${linkMarkup}</nav></details></div>`;
-headerShadow.append(headerStyles,fixedHeader);
-document.body.prepend(headerHost);
-const mobileMenu=headerShadow.querySelector('.mobile-links');
-mobileMenu.addEventListener('click',event=>{if(event.target.closest('a'))mobileMenu.open=false});
-mobileMenu.addEventListener('keydown',event=>{if(event.key==='Escape'){mobileMenu.open=false;mobileMenu.querySelector('summary').focus()}});
+// All concepts use the current main site's shared navigation.
+shadow.querySelector('.topbar').remove();
+const pageHeader=document.querySelector('header');
+const syncHeaderHeight=()=>{
+ explorer.style.setProperty('--sticky-top',pageHeader.offsetHeight+'px');
+ explorer.request();
+};
+new ResizeObserver(syncHeaderHeight).observe(pageHeader);
+syncHeaderHeight();
 
 // Nordiska interaction layer: keep the supplied Signal presentation and add
 // the original homepage's click-to-full-screen behavior and contextual links.
@@ -90,7 +65,7 @@ explorer.select=i=>{
  const count=explorer.items.length;
  explorer._base=Math.round(explorer.position+((i-explorer.position+count/2)%count+count)%count-count/2);
  explorer._opening=true;
- window.scrollTo({top:explorer.getBoundingClientRect().top+scrollY,behavior:'instant'});
+ window.scrollTo({top:explorer.getBoundingClientRect().top+scrollY-(parseFloat(getComputedStyle(explorer.stage).top)||0),behavior:'instant'});
  explorer.request();
 };
 explorer.cards.forEach((card,i)=>{card.onclick=()=>explorer.select(i);card.setAttribute('aria-label',`View ${items[i].name} full screen`)});
@@ -114,7 +89,8 @@ const mix=(a,b,t)=>a+(b-a)*t;
 explorer.render=function(now){
  this.frame=0;
  const w=this.stage.clientWidth,h=this.stage.clientHeight,mobile=w<=700;
- const travel=Math.max(1,this.track.offsetHeight-h),p=clamp(-this.track.getBoundingClientRect().top/travel);
+ const stickyTop=parseFloat(getComputedStyle(this.stage).top)||0;
+ const travel=Math.max(1,this.track.offsetHeight-h),p=clamp((stickyTop-this.track.getBoundingClientRect().top)/travel);
  // Same exit-speed easing as the original homepage's renderOrbit.
  const desktopOrbit=w>760&&!this.reduce.matches;
  const slowdownDistance=positioning?Math.max(1,h+positioning.offsetHeight*.85):1;
@@ -136,7 +112,6 @@ explorer.render=function(now){
  const zoom=this.zoom,details=clamp((zoom-.6)/.38),intro=clamp(1-zoom*2.5);
  this.stage.style.setProperty('--details',details);this.stage.style.setProperty('--intro',intro);this.stage.style.setProperty('--bar',zoom);this.stage.style.setProperty('--progress',(p*100)+'%');
  this.stage.toggleAttribute('data-expanded',zoom>.12);
- fixedHeader.toggleAttribute('data-expanded',zoom>.12||this.track.getBoundingClientRect().bottom<=h);
  this.left.classList.toggle('ready',details>.01);this.left.inert=details<.7;
  this.nav.classList.toggle('ready',details>.01);this.nav.inert=details<.7;
  for(const selector of ['.intro-meta','.teaser']){this.q(selector).inert=intro<.5;this.q(selector).style.visibility=intro===0?'hidden':'visible'}
