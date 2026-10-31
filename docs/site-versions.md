@@ -39,3 +39,7 @@ Promoted pages have no preview comparison bars or preview noindex flag. Classic 
 Both versions are built and deployed together by the existing workflow. Local URLs start at `/`; GitHub Pages adds `/nordiska2/` to both versions, giving `/nordiska2/` and `/nordiska2/classic/`.
 
 Keep the two URL helpers separate: main and preview code use `paths.ts`; Classic code uses `classicPaths.ts`. Preserve Classic styles and components when continuing work on the main version.
+
+Classic is frozen: modify its pages, components, scripts, styles or layout only when the user explicitly requests a Classic change.
+
+Main service cards share `components/main/JourneyServiceCard.astro`, `styles/main/journey-service-card.css` and `data/main/serviceJourney.ts` across the Services overview and related-service sections. The main homepage's shadow-root header binds to the main navigation controller; its category buttons open the same full-screen menu as other main pages.

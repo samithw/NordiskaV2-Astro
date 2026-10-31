@@ -2,7 +2,7 @@ import { withBase } from '../../utils/paths';
 import services from '../../data/services.json';
 import industries from '../../data/industries.json';
 const $ = s => document.querySelector(s);
-const buttons = [...document.querySelectorAll('[data-menu]')];
+const buttons = [];
 const countries = ['Finland','Malaysia','India','Vietnam','Philippines','UAE'];
 const menus = {
   about: {title:'Who we are',copy:'We take Nordic cleantech global. Nordiska Solutions turns regional innovation into international commercial impact.',links:[['About Nordiska','/about/'],['Our story','/about/#our-story'],['How we work','/about/#approach'],['Our values','/about/#values']],feature:['Explore our expertise →','/services/']},
@@ -17,6 +17,7 @@ function closeMenu(){
   $('#mega').hidden=true; document.body.classList.remove('menu-open');document.body.style.overflow='';
   $('main').inert=false;$('footer').inert=false;
   buttons.forEach(b=>b.setAttribute('aria-expanded','false'));key=null;opener?.focus();
+  document.dispatchEvent(new CustomEvent('nordiska:menu-change',{detail:{open:false}}));
 }
 function openMenu(next,button){
   if(key===next){closeMenu();return;}
@@ -27,15 +28,23 @@ function openMenu(next,button){
   $('#mega').hidden=false;document.body.classList.add('menu-open');document.body.style.overflow='hidden';
   $('main').inert=true;$('footer').inert=true;
   buttons.forEach(b=>b.setAttribute('aria-expanded',String(b===button)));$('.mega-close').focus();
+  document.dispatchEvent(new CustomEvent('nordiska:menu-change',{detail:{open:true}}));
 }
-buttons.forEach(b=>b.addEventListener('click',()=>openMenu(b.dataset.menu,b)));
+export function bindMenuButtons(root=document){
+  root.querySelectorAll('[data-menu]').forEach(button=>{
+    if(buttons.includes(button))return;
+    buttons.push(button);
+    button.addEventListener('click',()=>openMenu(button.dataset.menu,button));
+  });
+}
+bindMenuButtons();
 $('.mega-close').addEventListener('click',closeMenu);
 $('#mega').addEventListener('click',e=>{if(e.target.closest('a'))closeMenu()});
 document.addEventListener('keydown',e=>{
   if($('#mega').hidden)return;
   if(e.key==='Escape')closeMenu();
   if(e.key==='Tab'){
-    const items=[...document.querySelectorAll('header a,header button,#mega a,#mega button')].filter(el=>el.getClientRects().length);
+    const items=[...document.querySelectorAll('#mega a,#mega button')].filter(el=>el.getClientRects().length);
     const first=items[0],last=items.at(-1);
     if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
   }

@@ -1,0 +1,20 @@
+---
+import { withBase } from '../../utils/paths';
+import { servicePhotos } from '../../data/servicePhotos';
+import { serviceJourneyCopy } from '../../data/main/serviceJourney';
+import type services from '../../data/services.json';
+import '../../styles/main/journey-service-card.css';
+interface Props {
+ service: typeof services[number];
+ when?: string;
+ copy?: string;
+ number?: string;
+ loading?: 'lazy' | 'eager';
+ heading?: 'h3' | 'h4';
+}
+const { service, when = serviceJourneyCopy[service.slug].when, copy = serviceJourneyCopy[service.slug].copy, number, loading = 'lazy', heading: Heading = 'h3' } = Astro.props;
+---
+<a class="journey-service-card" href={withBase(`/services/${service.slug}/`)}>
+ <figure><img src={servicePhotos[service.slug]} alt="" loading={loading} width="650" height="450"/>{number && <span class="journey-service-number">{number}</span>}<span class="journey-service-arrow" aria-hidden="true">↗</span></figure>
+ <div class="journey-service-copy"><Heading>{service.name}</Heading><p class="journey-service-when">{when}</p><p>{copy}</p><span class="journey-service-more">Explore this service <span aria-hidden="true">↗</span></span></div>
+</a>
