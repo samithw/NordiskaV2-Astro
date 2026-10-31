@@ -1,16 +1,6 @@
-import { withBase } from '../utils/paths';
-import photos from '../data/photos.json';
+import { nordiskaStory as items } from '../data/nordiskaStory';
 import { arrowLinkMarkup } from '../components/links/arrowLink';
 import arrowLinkStyles from '../styles/arrow-link.css?inline';
-const image = n => withBase(`/vendor/signal-orbit/assets/signal-0${n}.jpg`);
-// Four chapters of one story, with one destination beyond the hero.
-const storyAction={cta:'Discover our approach',url:'#our-approach'};
-const items = [
- {name:'The beginning', category:'Nordic innovation', headline:'Nordic innovation.\nWider horizons.', editorialImage:photos.solar, description:'Nordic cleantech has something valuable to offer the world. We work with the innovators behind it, helping them look beyond their home markets and consider where their technology could go next.', summary:'Better water, smarter resource use, cleaner energy. Good ideas begin with a purpose. Their next chapter can begin beyond home.', panelHeading:'Every international journey starts with an idea worth sharing.', tag:'NORDIC INNOVATION', ...storyAction},
- {name:'The possibility', category:'International opportunity', headline:'A new market.\nA new possibility.', editorialImage:photos.city, description:'The next chapter starts with understanding a different market: its customers, its expectations and the needs your technology can meet. Together, we turn a broad ambition into a clearer direction.', summary:'Across borders, new needs create new possibilities. Understanding where your technology fits gives ambition a direction.', panelHeading:'Find where your idea can become a meaningful opportunity.', tag:'INTERNATIONAL OPPORTUNITY', ...storyAction},
- {name:'The connection', category:'People behind progress', headline:'The right people.\nA shared ambition.', editorialImage:image(2), description:'Opportunity becomes tangible through people. We bring technology providers closer to customers, local partners and project stakeholders, helping shared understanding become the foundation for working together.', summary:'Markets are made of people. The right conversations connect technical possibility with the people who can help move it forward.', panelHeading:'Bring the right people together around a shared ambition.', tag:'HUMAN CONNECTIONS', ...storyAction},
- {name:'The next chapter', category:'Practical progress', headline:'Good ideas.\nLasting progress.', editorialImage:photos.water, description:'A relationship is a beginning, too. We stay involved as plans take shape, combining commercial perspective with technical understanding and practical support for the people representing your technology.', summary:'From the first conversation to the work that follows, Nordiska helps sustainable innovation take its next step into the world.', panelHeading:'Give your ambition the support to become practical progress.', tag:'PRACTICAL PROGRESS', ...storyAction},
-];
 await customElements.whenDefined('orbit-explorer');
 const explorer = /** @type {any} */ (document.querySelector('orbit-explorer'));
 explorer.configure({brand:'Nordiska Solutions', collection:'NORDIC CLEANTECH / INTERNATIONAL GROWTH', kind:'Chapter', cta:'Discover our approach', explore:'Follow the story', word:'FORWARD', meta:'Strategy / Partnership / Progress', type:'International growth', items});
@@ -98,6 +88,7 @@ const clamp=v=>Math.max(0,Math.min(1,v));
 const mix=(a,b,t)=>a+(b-a)*t;
 explorer.render=function(now){
  this.frame=0;
+ if(matchMedia('(max-width:760px)').matches)return;
  const w=this.stage.clientWidth,h=this.stage.clientHeight,mobile=w<=700;
  const stickyTop=parseFloat(getComputedStyle(this.stage).top)||0;
  const travel=Math.max(1,this.track.offsetHeight-h),p=clamp((stickyTop-this.track.getBoundingClientRect().top)/travel);

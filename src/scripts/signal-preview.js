@@ -1,17 +1,10 @@
+import { serviceExplorer as items } from '../data/serviceExplorer';
 import { withBase } from '../utils/paths';
 import services from '../data/services.json';
 import { servicePhotos } from '../data/servicePhotos';
 import photos from '../data/photos.json';
 import { arrowLinkMarkup } from '../components/links/arrowLink';
 import arrowLinkStyles from '../styles/arrow-link.css?inline';
-const image = n => withBase(`/vendor/signal-orbit/assets/signal-0${n}.jpg`);
-const items = [
-  {name:'Market entry', category:'Strategy & opportunity', headline:'Your next market.\nA clear way in.', editorialImage:image(1), description:'Growth starts with knowing where to go—and who to know. We evaluate your opportunity, shape your entry strategy and connect your technology with the people who can move it forward.', cta:'Explore market entry', url:withBase('/services/market-entry-strategy/'), tag:'MARKET ENTRY'},
-  {name:'Partnerships', category:'The right connections', headline:'Close to the people\nwho matter.', editorialImage:image(2), description:'Every market has its own conversations, expectations and ways of doing business. We identify and evaluate customers, distributors and strategic partners, then help you build relationships with room to grow.', cta:'Find the right connections', url:withBase('/services/partner-search/'), tag:'PARTNERSHIPS'},
-  {name:'Sales development', category:'Visibility & opportunity', headline:'From visibility\nto opportunity.', editorialImage:image(3), description:'A strong product needs a compelling position and the right conversations. We support your sales development, market communication and lead development to build commercial momentum.', cta:'Explore sales support', url:withBase('/services/market-activation/'), tag:'SALES DEVELOPMENT'},
-  {name:'Local execution', category:'From strategy to action', headline:'A local presence.\nA lasting advantage.', editorialImage:'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=2000&q=88', description:'International growth takes practical follow-through. We work alongside your team to develop opportunities, strengthen sales channels and build partnerships with local market knowledge.', cta:'Build your market presence', url:withBase('/services/channel-sales-support/'), tag:'LOCAL EXECUTION'},
-  {name:'Cleantech', category:'Innovation & impact', headline:'Good ideas deserve\nto go further.', editorialImage:'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=2000&q=88', description:'From water and waste to clean energy, we connect technology providers with commercial opportunities. Technical understanding helps align your solution with project requirements and the right stakeholders.', cta:'Discover our industries', url:withBase('/industries/'), tag:'CLEANTECH'}
-];
 await customElements.whenDefined('orbit-explorer');
 const explorer = /** @type {any} */ (document.querySelector('orbit-explorer'));
 explorer.configure({brand:'Nordiska Solutions', collection:'EXPERTISE IN MOTION', kind:'Service', cta:'Explore the service', explore:'Explore our expertise', word:'FORWARD', meta:'Strategy / Partnership / Progress', type:'International growth', items});
@@ -88,6 +81,7 @@ const clamp=v=>Math.max(0,Math.min(1,v));
 const mix=(a,b,t)=>a+(b-a)*t;
 explorer.render=function(now){
  this.frame=0;
+ if(matchMedia('(max-width:760px)').matches)return;
  const w=this.stage.clientWidth,h=this.stage.clientHeight,mobile=w<=700;
  const stickyTop=parseFloat(getComputedStyle(this.stage).top)||0;
  const travel=Math.max(1,this.track.offsetHeight-h),p=clamp((stickyTop-this.track.getBoundingClientRect().top)/travel);

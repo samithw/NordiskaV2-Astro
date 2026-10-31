@@ -1,4 +1,6 @@
 ---
+import MobileHeroCarousel from '../../components/main/MobileHeroCarousel.astro';
+import { mobileHeroSlides } from '../../data/mobileHeroSlides';
 import { homeConcepts } from '../../data/homeConcepts';
 import type { HomeConcept } from '../../data/homeConcepts';
 import Layout from '../../layouts/ConceptLayout.astro';
@@ -16,6 +18,7 @@ const traditional = ['original','photography','signal'].includes(concept.hero);
 ---
 <Layout title={`${concept.name} — Homepage concept`} photography={concept.hero==='photography'} imageOverlay={['story','photography'].includes(concept.hero)}>
  <main id="top">
+  <MobileHeroCarousel slides={mobileHeroSlides(concept.hero)}/>
   {concept.hero==='original' ? <OriginalHero/> : concept.hero==='photography' ? <PhotographyHero/> : <OrbitHero variant={concept.hero}/>}
   <div id="our-approach" class="concept-advantage">{traditional ? <OriginalAdvantage/> : <CurrentAdvantage/>}</div>
   <HomeContent/>

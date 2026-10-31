@@ -1,14 +1,7 @@
+import { cleantechHighlights as items } from '../data/cleantechHighlights';
 import { withBase } from '../utils/paths';
-import photos from '../data/photos.json';
 import { arrowLinkMarkup } from '../components/links/arrowLink';
 import arrowLinkStyles from '../styles/arrow-link.css?inline';
-const image = n => withBase(`/vendor/signal-orbit/assets/signal-0${n}.jpg`);
-const items = [
- {name:'Markets', category:'Market insight & entry strategy', headline:'Turning cleantech\ninnovation into\ninternational growth.', editorialImage:withBase('/images/cleantech-growth-nordiska-jackets-v1.png'), imageAlt:'Two technical specialists in Nordiska-branded jackets discussing a bioprocessing system in an industrial facility', description:'Assess customer demand, competitors and routes to market. We shape an entry roadmap around your technology, resources and growth ambitions.', summary:'Helping cleantech companies reach new markets and build the right partnerships.', panelHeading:'Your next market. An informed first step.', cta:'Explore market entry strategy', url:withBase('/services/market-entry-strategy/'), tag:'MARKETS'},
- {name:'Partnerships', category:'Channel development & partner search', headline:'The right partners.\nA stronger way forward.', editorialImage:image(2), description:'Identify and assess distributors, agents and EPC partners for capability, market reach and long-term fit. We support introductions and the next steps towards an active commercial relationship.', summary:'Find qualified partners with the capabilities and market reach your technology needs.', panelHeading:'Connect with partners who fit your ambitions.', cta:'Explore partner search', url:withBase('/services/partner-search/'), tag:'PARTNERSHIPS'},
- {name:'Commercial growth', category:'Channel sales & market activation', headline:'From market plans\nto market traction.', editorialImage:photos.city, description:'Align your local partners around a practical sales plan. We support sales readiness, opportunity development and performance follow-up, keeping your team and channels working together.', summary:'Activate your sales channels and keep local teams focused on practical commercial progress.', panelHeading:'Turn partnerships into active sales channels.', cta:'Explore channel sales support', url:withBase('/services/channel-sales-support/'), tag:'COMMERCIAL GROWTH'},
- {name:'Technical expertise', category:'Application understanding & technical fit', headline:'Understand the technology.\nFind the right fit.', editorialImage:photos.water, description:'Bring water, wastewater and process knowledge to project discussions. Working with your specialists, we review application requirements and connect technical decisions with commercial priorities.', summary:'Match your technology to real application needs, with technical and commercial understanding.', panelHeading:'Connect your solution with real project needs.', cta:'Explore application consultancy', url:withBase('/services/application-consultancy/'), tag:'TECHNICAL EXPERTISE'},
-];
 await customElements.whenDefined('orbit-explorer');
 const explorer = /** @type {any} */ (document.querySelector('orbit-explorer'));
 explorer.configure({brand:'Nordiska Solutions', collection:'NORDIC CLEANTECH / INTERNATIONAL GROWTH', kind:'Highlight', cta:'Explore the service', explore:'Explore how we help', word:'FORWARD', meta:'Strategy / Partnership / Progress', type:'International growth', items});
@@ -106,6 +99,7 @@ const clamp=v=>Math.max(0,Math.min(1,v));
 const mix=(a,b,t)=>a+(b-a)*t;
 explorer.render=function(now){
  this.frame=0;
+ if(matchMedia('(max-width:760px)').matches)return;
  const w=this.stage.clientWidth,h=this.stage.clientHeight,mobile=w<=700;
  const stickyTop=parseFloat(getComputedStyle(this.stage).top)||0;
  const travel=Math.max(1,this.track.offsetHeight-h),p=clamp((stickyTop-this.track.getBoundingClientRect().top)/travel);

@@ -1,5 +1,7 @@
 ---
 import Base from '../layouts/MainHomeLayout.astro';
+import MobileHeroCarousel from '../components/main/MobileHeroCarousel.astro';
+import { mobileHeroSlides } from '../data/mobileHeroSlides';
 import HomeContent from '../components/main/HomeContent.astro';
 import { withBase } from '../utils/paths';
 import BrandPositioning from '../components/main/signal-story/Advantage.astro';
@@ -8,6 +10,7 @@ import '../styles/main/signal-content.css';
 <Base title="Turning cleantech innovation into international growth">
   <main id="top">
     <h1 class="signal-sr">Nordiska Solutions: turning innovation into international growth</h1>
+    <MobileHeroCarousel slides={mobileHeroSlides('focused')}/>
     <orbit-explorer theme="signal" aria-label="Explore Nordiska Solutions"></orbit-explorer>
     <noscript><div class="wrap"><h2>Turning cleantech innovation into international growth.</h2><p>Nordiska Solutions connects Nordic cleantech innovators with international markets, partners and customers.</p><a href={withBase('/services/')}>Explore our services ↗</a></div></noscript>
     <BrandPositioning />

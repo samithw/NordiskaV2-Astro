@@ -1,3 +1,4 @@
+import { expertiseInMotion as items } from '../../data/expertiseInMotion';
 import { withBase } from '../../utils/paths';
 import { syncImageHeader } from '../concepts/image-header';
 import services from '../../data/services.json';
@@ -5,14 +6,6 @@ import { servicePhotos } from '../../data/servicePhotos';
 import photos from '../../data/photos.json';
 import { arrowLinkMarkup } from '../../components/main/links/arrowLink';
 import arrowLinkStyles from '../../styles/main/arrow-link.css?inline';
-const image = n => withBase(`/vendor/signal-orbit/assets/signal-0${n}.jpg`);
-const items = [
-  {name:'Market entry', category:'Strategy & opportunity', headline:'Your next market.\nA clear way in.', editorialImage:image(1), description:'We assess demand, competition and routes to market, then shape an entry plan with the positioning and priorities your technology needs to get started.', cta:'Explore market entry', url:withBase('/services/market-entry-strategy/'), tag:'MARKET ENTRY'},
-  {name:'Partnerships', category:'The right connections', headline:'Close to the people\nwho matter.', editorialImage:image(2), description:'We identify and evaluate customers, distributors and strategic partners, helping you build relationships with the people who can represent your technology in a new market.', cta:'Find the right connections', url:withBase('/services/partner-search/'), tag:'PARTNERSHIPS'},
-  {name:'Sales development', category:'Visibility & opportunity', headline:'From visibility\nto opportunity.', editorialImage:image(3), description:'We support your market communication, lead development and sales channels, helping your team reach potential buyers and develop promising conversations into commercial opportunities.', cta:'Explore sales support', url:withBase('/services/market-activation/'), tag:'SALES DEVELOPMENT'},
-  {name:'Local execution', category:'From strategy to action', headline:'A local presence.\nA lasting advantage.', editorialImage:'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=2000&q=88', description:'We help partners and customers work confidently with your technology through application consultancy, on-site training and aftersales support, with practical guidance beyond the first sale.', cta:'Build your market presence', url:withBase('/services/channel-sales-support/'), tag:'LOCAL EXECUTION'},
-  {name:'Cleantech', category:'Innovation & impact', headline:'Good ideas deserve\nto go further.', editorialImage:'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=2000&q=88', description:'Explore applications in water, wastewater, solid waste and clean energy, and see how our technical understanding connects your solution with customer needs and project requirements.', cta:'Discover our industries', url:withBase('/industries/'), tag:'CLEANTECH'}
-];
 const needHeadings = [
  ['Find the right approach', 'to entering a new market.'],
  ['Build a network of partners', 'suited to your business.'],
@@ -104,6 +97,7 @@ const clamp=v=>Math.max(0,Math.min(1,v));
 const mix=(a,b,t)=>a+(b-a)*t;
 explorer.render=function(now){
  this.frame=0;
+ if(matchMedia('(max-width:760px)').matches)return;
  const w=this.stage.clientWidth,h=this.stage.clientHeight,mobile=w<=700;
  const stickyTop=parseFloat(getComputedStyle(this.stage).top)||0;
  const travel=Math.max(1,this.track.offsetHeight-h),p=clamp((stickyTop-this.track.getBoundingClientRect().top)/travel);
