@@ -1,8 +1,20 @@
 ---
 import { withBase } from '../../utils/paths';
 ---
-<header><div class="wrap header-inner"><div class="utility"><a href={withBase('/contact/')}>Contact us</a><a href={withBase('/locations/')}>Our global presence</a><span>Global / EN</span></div><a class="brand" href={withBase('/')} aria-label="Nordiska Solutions home"><img src={withBase('/nordiska-logo.png')} alt="Nordiska Solutions"></a><nav class="nav" aria-label="Main navigation"><a class="nav-home" href={withBase('/')} aria-current={Astro.url.pathname === withBase('/') ? 'page' : undefined}>Home</a><button data-menu="about" aria-expanded="false">Who We Are</button><button data-menu="services" aria-expanded="false">What We Do</button><button data-menu="industries" aria-expanded="false">Industries We Serve</button><button data-menu="locations" aria-expanded="false">Our Locations</button><a class="nav-home" href={withBase('/contact/')} aria-current={Astro.url.pathname === withBase('/contact/') ? 'page' : undefined}>Contact us</a></nav><button class="mobile-menu" data-menu="mobile" aria-expanded="false">Menu ☰</button></div></header>
+<header><div class="wrap header-inner"><a class="brand" href={withBase('/')} aria-label="Nordiska Solutions home"><img src={withBase('/nordiska-logo.png')} alt="Nordiska Solutions"></a><nav class="nav" aria-label="Main navigation"><a class="nav-home" href={withBase('/')} aria-current={Astro.url.pathname === withBase('/') ? 'page' : undefined}>Home</a><button data-menu="about" aria-expanded="false">Who We Are</button><button data-menu="services" aria-expanded="false">What We Do</button><button data-menu="industries" aria-expanded="false">Industries We Serve</button><button data-menu="locations" aria-expanded="false">Our Locations</button><a class="nav-home nav-contact" href={withBase('/contact/')} aria-current={Astro.url.pathname === withBase('/contact/') ? 'page' : undefined}>Contact us</a></nav><button class="mobile-menu" data-menu="mobile" aria-expanded="false">Menu ☰</button></div></header>
 <style>
+  header { height:96px; }
+  .header-inner { justify-content:center; padding-top:0; }
+  .brand { top:14px; }
+  .nav { padding-top:6px; }
+  .nav-contact { margin-left:clamp(8px,1.5vw,24px); }
+  @media(max-width:960px) {
+    header { height:80px; }
+    .nav { display:none; }
+    .brand { top:10px; left:var(--pad); right:auto; width:103px; height:55px; }
+    .mobile-menu { display:block; align-self:end; font-size:14px; font-weight:800; }
+  }
+
   .nav-home { display:block; padding:18px 0; border-bottom:4px solid transparent; font-size:14px; font-weight:800; white-space:nowrap; color:inherit; text-decoration:none; }
   .nav-home:hover { color:var(--brand); }
   :global(body.menu-open) .nav-home:hover { color:var(--accent); }
