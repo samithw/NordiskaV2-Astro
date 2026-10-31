@@ -1,7 +1,6 @@
 ---
 import Base from '../../layouts/MainLayout.astro';
 import PageHero from '../../components/main/PageHero.astro';
-import SignalContact from '../../components/main/signal-story/Contact.astro';
 import SignalLink from '../../components/main/signal/SignalLink.astro';
 import industries from '../../data/industries.json';
 import services from '../../data/services.json';
@@ -17,7 +16,7 @@ const summaries: Record<string, string> = {
  'solar-energy': 'Connect your solar technology with suitable customers and commercial channels. We support positioning, partner search and channel development around your target markets.',
 };
 ---
-<Base title="Industries we serve">
+<Base footerInvitation={{title:'Your technology.',accent:'The right connections.',copy:'Working across sectors or unsure where your solution fits? Tell us about your technology and the markets you want to reach.'}} title="Industries we serve">
  <main id="top" class="industries-explorer-preview">
   <PageHero eyebrow="Industries we serve" title="Specialized expertise for a sustainable future." copy="We partner with innovative SMEs and established global leaders to build direct, high-value relationships across the cleantech ecosystem. Every technology and market is unique. Our approach is tailored to yours." photo="water" action="Find your industry" href="#sector-explorer" />
   <nav class="explorer-jump" aria-label="Jump to an industry"><div class="wrap">{industries.map((industry, index) => <a href={`#${industry.slug}`}><span>0{index + 1}</span>{industry.name}<span aria-hidden="true">↘</span></a>)}</div></nav>
@@ -36,7 +35,7 @@ const summaries: Record<string, string> = {
      </div>
    </div>
   </section>
-  <div class="signal-preview"><SignalContact title="Your technology." accent="The right connections." copy="Working across sectors or unsure where your solution fits? Tell us about your technology and the markets you want to reach." /></div>
+
  </main>
 
 </Base>

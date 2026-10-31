@@ -1,7 +1,6 @@
 ---
 import Base from '../../layouts/MainLayout.astro';
 import PageHero from '../../components/main/PageHero.astro';
-import SignalContact from '../../components/main/signal-story/Contact.astro';
 import services from '../../data/services.json';
 import JourneyServiceCard from '../../components/main/JourneyServiceCard.astro';
 import '../../styles/main/services-journey.css';
@@ -23,7 +22,7 @@ const stages = [
  ]},
 ];
 ---
-<Base title="What we do">
+<Base footerInvitation={{title:'Not sure',accent:'where to start?',copy:'Tell us about your technology, your target market and where you need support. We can explore the right starting point together.',action:'Find your starting point'}} title="What we do">
  <main id="top" class="services-journey-preview">
   <PageHero eyebrow="What we do" title="Expertise for your next stage of growth." copy="We help ambitious companies expand internationally with clarity and confidence. From research-driven market entry strategies to hands-on go-to-market execution, we turn global ambitions into actionable growth plans." photo="sales" action="Explore the journey" href="#journey" />
   <nav class="journey-nav" aria-label="Explore the stages of international growth"><div class="wrap">
@@ -44,7 +43,7 @@ const stages = [
    </section>)}
    <div class="journey-end"><span aria-hidden="true">↗</span><p>Your next step starts with your priorities.</p></div>
   </div>
-  <div class="signal-preview"><SignalContact title="Not sure" accent="where to start?" copy="Tell us about your technology, your target market and where you need support. We can explore the right starting point together." action="Find your starting point" /></div>
+
  </main>
 
  <script>import '../../scripts/main/services-journey.js';</script>

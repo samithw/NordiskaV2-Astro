@@ -1,7 +1,7 @@
 ---
-const { compact = false, showCompany = true } = Astro.props;
+const { compact = false, showCompany = true, variant = 'default' } = Astro.props;
 ---
-<address class:list={['global-contact', {'global-contact-compact': compact}]} aria-label="Nordiska Solutions global contact">
+<address class:list={['global-contact', {'global-contact-compact': compact, 'global-contact-footer': variant === 'footer'}]} aria-label="Nordiska Solutions global contact">
  <p class="global-contact-label">Global contact</p>
  {showCompany && <p class="global-contact-name">Nordiska Solutions</p>}
  <a href="tel:+358414400345">+358 41 440 0345</a>
@@ -17,4 +17,9 @@ const { compact = false, showCompany = true } = Astro.props;
  .global-contact-compact{margin-top:25px;padding-top:20px}
  .global-contact-compact a{font-size:14px;margin:4px 0}
  @media(max-width:760px){.global-contact a{font-size:16px}.global-contact-compact a{font-size:14px}}
+ .global-contact-footer{margin:0;padding:0;border:0;color:#f5f8fc}
+ .global-contact-footer .global-contact-label{font:500 9px/1.5 'IBM Plex Mono',monospace;letter-spacing:.07em;color:#aebfd7;margin-bottom:14px}
+ .global-contact-footer a{font-size:17px;line-height:1.5;margin:0 0 9px;color:#f5f8fc}
+ .global-contact-footer a[href^="mailto:"]{font-size:clamp(17px,1.6vw,22px);letter-spacing:-.025em}
+ @media(max-width:760px){.global-contact-footer .global-contact-label{margin-bottom:12px}.global-contact-footer a{font-size:16px;margin-bottom:8px}.global-contact-footer a[href^="mailto:"]{font-size:19px}}
 </style>

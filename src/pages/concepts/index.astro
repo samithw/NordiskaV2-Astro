@@ -3,7 +3,7 @@ import Layout from '../../layouts/MainLayout.astro';
 import { visibleHomeConcepts } from '../../data/homeConcepts';
 import { withBase } from '../../utils/paths';
 ---
-<Layout noindex title="Homepage concepts">
+<Layout footerInvitation={false} noindex title="Homepage concepts">
  <main id="top" class="concept-gallery"><div class="wrap">
   <div class="gallery-intro"><div><div class="eyebrow">Nordiska Solutions / Design exploration</div><h1>One company.<br /><span>Different first impressions.</span></h1></div><div><p class="gallery-lead">Explore {visibleHomeConcepts.length} homepage concepts.</p><p>Compare the opening experience and the Nordiska Advantage. Services, industries, company information and global presence stay consistent across every concept.</p><a href={withBase('/')}>View the current website <span aria-hidden="true">↗</span></a></div></div>
   <div class="gallery-grid">{visibleHomeConcepts.map((concept,index)=><a class="gallery-card" href={withBase(`/concepts/${concept.slug}/`)}><div class="gallery-image"><img src={withBase(`/concepts/${concept.slug}.jpg`)} alt={`${concept.name} homepage opening`} width="1440" height="950" loading={index<2?'eager':'lazy'}/><span class="gallery-number">0{index+1}</span></div><div class="gallery-card-copy"><div class="gallery-card-heading"><h2>{concept.name}</h2></div><p>{concept.description}</p><span class="gallery-action">View concept <span aria-hidden="true">↗</span></span></div></a>)}</div>

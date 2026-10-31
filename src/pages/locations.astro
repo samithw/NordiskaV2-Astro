@@ -1,7 +1,6 @@
 ---
 import Base from '../layouts/MainLayout.astro';
 import PresenceMap from '../components/main/PresenceMap.astro';
-import SignalContact from '../components/main/signal-story/Contact.astro';
 import SignalLink from '../components/main/signal/SignalLink.astro';
 import { locationPreview } from '../data/locationPreview';
 import { withBase } from '../utils/paths';
@@ -9,7 +8,7 @@ import '../styles/main/signal-content.css';
 import '../styles/main/locations-network.css';
 
 ---
-<Base title="Our global presence">
+<Base footerInvitation={{title:'Where do you',accent:'want to grow?',copy:'Tell us about your technology, your target market and your ambitions. We can explore the right connections and support together.'}} title="Our global presence">
  <main id="top" class="locations-network-preview">
   <section class="presence-hero" aria-labelledby="presence-title"><div class="wrap">
    <nav class="breadcrumb" aria-label="Breadcrumb"><a href={withBase('/')}>Home</a><span>/</span><span>Our global presence</span></nav>
@@ -25,7 +24,7 @@ import '../styles/main/locations-network.css';
     <div class="presence-country-copy"><div class="eyebrow">Nordiska {country.name}</div><h3>{country.title}</h3>{country.paragraphs.map(paragraph=><p>{paragraph}</p>)}<div class="presence-focus"><h4>Where the conversation can start</h4><ul>{country.focus.map(item=><li>{item}</li>)}</ul></div><div class="presence-country-actions signal-preview"><SignalLink href={withBase(`/contact/?location=${country.name}`)} label={`Discuss ${country.name}`} /><a class="presence-back" href="#presence-title">Back to the map ↑</a></div></div>
    </article>)}
   </div></section>
-  <div class="signal-preview"><SignalContact title="Where do you" accent="want to grow?" copy="Tell us about your technology, your target market and your ambitions. We can explore the right connections and support together."/></div>
+
  </main>
 
 </Base>

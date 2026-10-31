@@ -10,6 +10,7 @@ const next = visibleHomeConcepts[index < 0 ? 0 : (index+1)%visibleHomeConcepts.l
 <nav class="concept-navigation" aria-label="Compare homepage concepts">
  <span class="concept-current"><span>{index < 0 ? 'Internal concept' : String(index+1).padStart(2,'0')}</span>{current.name}</span>
  <a href={withBase('/concepts/')}>All concepts</a>
+ <a href={withBase('/classic/')}>Classic site</a>
  <a href={withBase(`/concepts/${previous.slug}/`)} aria-label={`Previous concept: ${previous.name}`}>← <span>Previous</span></a>
  <a href={withBase(`/concepts/${next.slug}/`)} aria-label={`Next concept: ${next.name}`}><span>Next</span> →</a>
 </nav>
