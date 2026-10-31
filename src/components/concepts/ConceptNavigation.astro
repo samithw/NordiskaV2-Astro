@@ -1,14 +1,14 @@
 ---
-import { homeConcepts } from '../../data/homeConcepts';
+import { homeConcepts, visibleHomeConcepts } from '../../data/homeConcepts';
 import { withBase } from '../../utils/paths';
 const { slug } = Astro.props;
-const index = homeConcepts.findIndex(concept=>concept.slug===slug);
-const current = homeConcepts[index];
-const previous = homeConcepts[(index+homeConcepts.length-1)%homeConcepts.length];
-const next = homeConcepts[(index+1)%homeConcepts.length];
+const current = homeConcepts.find(concept=>concept.slug===slug)!;
+const index = visibleHomeConcepts.findIndex(concept=>concept.slug===slug);
+const previous = visibleHomeConcepts[index < 0 ? visibleHomeConcepts.length-1 : (index+visibleHomeConcepts.length-1)%visibleHomeConcepts.length];
+const next = visibleHomeConcepts[index < 0 ? 0 : (index+1)%visibleHomeConcepts.length];
 ---
 <nav class="concept-navigation" aria-label="Compare homepage concepts">
- <span class="concept-current"><span>{String(index+1).padStart(2,'0')}</span>{current.name}</span>
+ <span class="concept-current"><span>{index < 0 ? 'Internal concept' : String(index+1).padStart(2,'0')}</span>{current.name}</span>
  <a href={withBase('/concepts/')}>All concepts</a>
  <a href={withBase(`/concepts/${previous.slug}/`)} aria-label={`Previous concept: ${previous.name}`}>← <span>Previous</span></a>
  <a href={withBase(`/concepts/${next.slug}/`)} aria-label={`Next concept: ${next.name}`}><span>Next</span> →</a>

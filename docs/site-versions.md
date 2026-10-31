@@ -31,7 +31,7 @@ Main navigation and content links stay on main routes. Classic uses `src/utils/c
 
 ## Promoted designs
 
-The main homepage comes from Signal Story, Services from Services Journey, Industries from the expanded Industries Explorer and Locations from Locations Network. Contact retains the approved welcoming global-contact section above the form. About, Privacy and detail-page content carry forward with the main typography and contact treatment, ready for subsequent refinement.
+The main homepage now comes from Cleantech Growth (including the edited Nordiska jacket photograph), Services from Services Journey, Industries from the expanded Industries Explorer and Locations from Locations Network. Contact retains the approved welcoming global-contact section above the form. About, Privacy and detail-page content carry forward with the main typography and contact treatment, ready for subsequent refinement.
 
 Promoted pages have no preview comparison bars or preview noindex flag. Classic pages remain available for comparison and carry noindex metadata.
 
@@ -43,11 +43,13 @@ Keep the two URL helpers separate: main and preview code use `paths.ts`; Classic
 
 Classic is frozen: modify its pages, components, scripts, styles or layout only when the user explicitly requests a Classic change.
 
-Main service cards share `components/main/JourneyServiceCard.astro`, `styles/main/journey-service-card.css` and `data/main/serviceJourney.ts` across the Services overview and related-service sections. The main homepage's shadow-root header binds to the main navigation controller; its category buttons open the same full-screen menu as other main pages.
+Main service cards share `components/main/JourneyServiceCard.astro`, `styles/main/journey-service-card.css` and `data/main/serviceJourney.ts` across the Services overview and related-service sections. The main homepage uses the shared main Header and full-screen navigation controller. Its orbit behaviour is isolated in `scripts/main/cleantech-home.js`.
 
 ## Homepage concepts
 
 The concept catalogue is `src/data/homeConcepts.ts`. Client-facing names and URLs are:
+
+The client gallery and Previous/Next navigation show only Original Design, Immersive Photography, The Nordiska Story and Cleantech Growth, numbered 01–04. Visibility is controlled by each catalogue entry's `visible` flag. Service Explorer, Expertise in Motion and Brand Highlights remain available by direct URL for internal reference.
 
 | Name | URL | Former URL |
 | --- | --- | --- |
