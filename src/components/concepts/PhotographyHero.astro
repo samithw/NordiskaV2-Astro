@@ -1,0 +1,14 @@
+---
+import HeroServices from '../HeroServices.astro';
+import '../../styles/hero-preview.css';
+---
+<div class="hero-track" id="hero-track" data-concept-legacy="photography"><section class="hero" aria-label="International growth">
+<div class="hero-images" aria-hidden="true"><img class="active" src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=2000&q=88" alt=""></div>
+<div class="hero-fullscreen-copy"><h1 id="hero-headline">Your next market. A clear way in.</h1><p id="hero-description">Growth starts with knowing where to go—and who to know. We evaluate your opportunity, shape your entry strategy and connect your technology with the people who can move it forward.</p><span class="preview-scroll-hint">Scroll to explore ↓</span></div>
+<div class="hero-deck" aria-label="Choose a landscape and explore Nordiska">
+<HeroServices />
+<div class="deck-story"><h2 id="deck-title">Market entry</h2><p id="deck-description">We connect ambitious technology companies with the markets, partners and customers that move their business forward.</p><div class="deck-pagination" aria-label="Choose a story"></div></div>
+
+<div class="deck-cards"></div></div>
+</section></div>
+<script>if(document.querySelector('[data-concept-legacy=photography]')) await import('../../scripts/concepts/photography-hero');</script>

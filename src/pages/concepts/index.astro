@@ -1,0 +1,41 @@
+---
+import Layout from '../../layouts/MainLayout.astro';
+import { homeConcepts } from '../../data/homeConcepts';
+import { withBase } from '../../utils/paths';
+---
+<Layout noindex title="Homepage concepts">
+ <main id="top" class="concept-gallery"><div class="wrap">
+  <div class="gallery-intro"><div><div class="eyebrow">Nordiska Solutions / Design exploration</div><h1>One company.<br /><span>Different first impressions.</span></h1></div><div><p class="gallery-lead">Explore seven homepage concepts.</p><p>Compare the opening experience and the Nordiska Advantage. Services, industries, company information and global presence stay consistent across every concept.</p><a href={withBase('/')}>View the current website <span aria-hidden="true">↗</span></a></div></div>
+  <div class="gallery-grid">{homeConcepts.map((concept,index)=><a class:list={['gallery-card',{'gallery-card-current':concept.slug==='expertise-in-motion'}]} href={withBase(`/concepts/${concept.slug}/`)}><div class="gallery-image"><img src={withBase(`/concepts/${concept.slug}.jpg`)} alt={`${concept.name} homepage opening`} width="1440" height="950" loading={index<2?'eager':'lazy'}/><span class="gallery-number">0{index+1}</span></div><div class="gallery-card-copy"><div class="gallery-card-heading"><h2>{concept.name}</h2>{concept.slug==='expertise-in-motion'&&<span class="gallery-current">Current direction</span>}</div><p>{concept.description}</p><span class="gallery-action">View concept <span aria-hidden="true">↗</span></span></div></a>)}</div>
+  <div class="gallery-footer"><p>Looking for the complete original website?</p><a href={withBase('/classic/')}>Explore the Classic site <span aria-hidden="true">↗</span></a></div>
+ </div></main>
+</Layout>
+<style>
+ .concept-gallery{padding:75px 0 85px;background:#f3f7fb;color:#17385d}
+ .gallery-intro{display:grid;grid-template-columns:1.3fr 1fr;gap:10%;align-items:end;margin-bottom:65px}
+ .gallery-intro .eyebrow{font-size:10px;font-weight:600;letter-spacing:.09em;color:var(--brand);margin-bottom:26px}
+ .gallery-intro h1{font-size:clamp(42px,5vw,74px);font-weight:500;line-height:1.08;letter-spacing:-.06em;margin:0}
+ .gallery-intro h1 span{color:var(--brand)}
+ .gallery-intro p{font-size:14px;line-height:1.85;color:#58708c;margin:0 0 18px;max-width:430px}
+ .gallery-intro .gallery-lead{font-size:23px;line-height:1.4;color:#17385d;letter-spacing:-.025em}
+ .gallery-intro a,.gallery-footer a{display:inline-flex;gap:25px;align-items:center;font-size:12px;font-weight:600;color:var(--brand);border-bottom:1px solid #aac4de;padding-bottom:9px}
+ .gallery-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}
+ .gallery-card{display:flex;flex-direction:column;min-width:0;background:#fff;border:1px solid #d5e1ed;transition:transform .2s,border-color .2s}
+ .gallery-card:hover{transform:translateY(-4px);border-color:#7ca4cc}
+ .gallery-card-current{border-color:#87acd2}
+ .gallery-image{position:relative;aspect-ratio:1440/950;overflow:hidden;background:#dce7f1}
+ .gallery-image img{display:block;width:100%;height:100%;object-fit:cover}
+ .gallery-number{position:absolute;top:16px;left:16px;display:grid;place-items:center;width:35px;height:35px;background:#fbfcfef2;border:1px solid #c5d7e9;color:var(--brand);font-size:11px}
+ .gallery-card-copy{display:flex;flex-direction:column;flex:1;padding:28px}
+ .gallery-card-heading{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;margin-bottom:18px}
+ .gallery-card h2{font-size:clamp(25px,2.4vw,33px);line-height:1.2;font-weight:500;letter-spacing:-.045em;margin:0}
+ .gallery-current{font-size:9px;line-height:1.5;padding:6px 9px;background:#e8f0fa;color:var(--brand)}
+ .gallery-card p{font-size:14px;line-height:1.85;color:#58708c;max-width:500px;margin:0 0 26px}
+ .gallery-action{display:flex;justify-content:space-between;align-items:center;gap:20px;border-top:1px solid #d5e1ed;padding-top:18px;margin-top:auto;font-size:12px;font-weight:600;color:var(--brand)}
+ .gallery-action>span{font-size:24px;font-weight:400}
+ .gallery-footer{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;border-top:1px solid #c8d8e8;margin-top:55px;padding-top:28px}
+ .gallery-footer p{font-size:14px;color:#58708c;margin:0}
+ .concept-gallery a:focus-visible{outline:2px solid var(--brand);outline-offset:5px}
+ @media(max-width:760px){.concept-gallery{padding:50px 0 60px}.gallery-intro{grid-template-columns:1fr;gap:28px;margin-bottom:38px}.gallery-grid{grid-template-columns:1fr;gap:24px}.gallery-card-copy{padding:24px}.gallery-intro h1{font-size:43px}}
+ @media(prefers-reduced-motion:reduce){.gallery-card{transition:none}.gallery-card:hover{transform:none}}
+</style>

@@ -1,0 +1,26 @@
+---
+import { homeConcepts } from '../../data/homeConcepts';
+import type { HomeConcept } from '../../data/homeConcepts';
+import Layout from '../../layouts/ConceptLayout.astro';
+import HomeContent from '../../components/main/HomeContent.astro';
+import OriginalAdvantage from '../../components/BrandPositioning.astro';
+import CurrentAdvantage from '../../components/main/signal-story/Advantage.astro';
+import OriginalHero from '../../components/concepts/OriginalHero.astro';
+import PhotographyHero from '../../components/concepts/PhotographyHero.astro';
+import OrbitHero from '../../components/concepts/OrbitHero.astro';
+import ConceptNavigation from '../../components/concepts/ConceptNavigation.astro';
+export function getStaticPaths(){return homeConcepts.map(concept=>({params:{slug:concept.slug},props:{concept}}));}
+interface Props { concept: HomeConcept; }
+const { concept } = Astro.props;
+const traditional = ['original','photography','signal'].includes(concept.hero);
+const showHeader = !['signal','story'].includes(concept.hero);
+---
+<Layout title={`${concept.name} — Homepage concept`} {showHeader} photography={concept.hero==='photography'}>
+ <main id="top">
+  {concept.hero==='original' ? <OriginalHero/> : concept.hero==='photography' ? <PhotographyHero/> : <OrbitHero variant={concept.hero}/>}
+  <div id="our-approach" class="concept-advantage">{traditional ? <OriginalAdvantage/> : <CurrentAdvantage/>}</div>
+  <HomeContent/>
+ </main>
+ <ConceptNavigation slug={concept.slug}/>
+ <script>import '../../scripts/main/navigation';</script>
+</Layout>

@@ -1,13 +1,9 @@
 ---
 import Base from '../layouts/MainHomeLayout.astro';
+import HomeContent from '../components/main/HomeContent.astro';
 import { withBase } from '../utils/paths';
 import BrandPositioning from '../components/main/signal-story/Advantage.astro';
-import IndustryGallery from '../components/main/signal-story/Industries.astro';
-import SignalServices from '../components/main/signal-story/Services.astro';
-import SignalAbout from '../components/main/signal-story/About.astro';
-import SignalContact from '../components/main/signal-story/Contact.astro';
 import '../styles/main/signal-content.css';
-import LocationsNetworkTeaser from '../components/main/LocationsNetworkTeaser.astro';
 ---
 <Base title="Turning innovation into international growth">
   <main id="top">
@@ -15,11 +11,7 @@ import LocationsNetworkTeaser from '../components/main/LocationsNetworkTeaser.as
     <orbit-explorer theme="signal" aria-label="Explore Nordiska Solutions"></orbit-explorer>
     <noscript><div class="wrap"><h2>Your next market. A clear way in.</h2><p>Nordiska Solutions connects Nordic cleantech innovators with international markets, partners and customers.</p><a href={withBase('/services/')}>Explore our services ↗</a></div></noscript>
     <BrandPositioning />
-    <SignalServices />
-    <IndustryGallery />
-    <SignalAbout />
-    <LocationsNetworkTeaser />
-    <SignalContact />
+    <HomeContent />
   </main>
 
   <script is:inline src={withBase('/vendor/signal-orbit/orbit-explorer.js')}></script>

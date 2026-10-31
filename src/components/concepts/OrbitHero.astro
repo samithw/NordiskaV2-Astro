@@ -1,0 +1,18 @@
+---
+import { withBase } from '../../utils/paths';
+const { variant } = Astro.props;
+---
+<h1 class="concept-sr">Nordiska Solutions: turning innovation into international growth</h1>
+<orbit-explorer theme="signal" data-concept-hero={variant} aria-label="Explore Nordiska Solutions"></orbit-explorer>
+<noscript><div class="wrap"><h2>Your next market. A clear way in.</h2><p>Nordiska Solutions connects Nordic cleantech innovators with international markets, partners and customers.</p><a href={withBase('/services/')}>Explore our services ↗</a></div></noscript>
+<script is:inline src={withBase('/vendor/signal-orbit/orbit-explorer.js')}></script>
+<script>
+ const hero = document.querySelector('orbit-explorer[data-concept-hero]');
+ switch(hero?.getAttribute('data-concept-hero')) {
+  case 'signal': await import('../../scripts/signal-preview'); break;
+  case 'story': await import('../../scripts/main/signal-story-preview'); break;
+  case 'highlights': await import('../../scripts/signal-highlights-preview'); break;
+  case 'narrative': await import('../../scripts/signal-narrative-preview'); break;
+  case 'focused': await import('../../scripts/signal-focused-preview'); break;
+ }
+</script>

@@ -2,6 +2,8 @@
 
 A static, multipage Astro site with the redesigned main version at `/`, the previous full site at `/classic/`, and retained design experiments at `/preview/`.
 
+The client-facing homepage comparison gallery is at `/concepts/`. Its seven named concepts share the current homepage below the hero and Nordiska Advantage sections. Previous hero-preview URLs redirect to their corresponding concept pages.
+
 ## Run
 
 ```sh

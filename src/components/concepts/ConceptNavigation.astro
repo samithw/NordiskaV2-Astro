@@ -1,0 +1,15 @@
+---
+import { homeConcepts } from '../../data/homeConcepts';
+import { withBase } from '../../utils/paths';
+const { slug } = Astro.props;
+const index = homeConcepts.findIndex(concept=>concept.slug===slug);
+const current = homeConcepts[index];
+const previous = homeConcepts[(index+homeConcepts.length-1)%homeConcepts.length];
+const next = homeConcepts[(index+1)%homeConcepts.length];
+---
+<nav class="concept-navigation" aria-label="Compare homepage concepts">
+ <span class="concept-current"><span>{String(index+1).padStart(2,'0')}</span>{current.name}</span>
+ <a href={withBase('/concepts/')}>All concepts</a>
+ <a href={withBase(`/concepts/${previous.slug}/`)} aria-label={`Previous concept: ${previous.name}`}>← <span>Previous</span></a>
+ <a href={withBase(`/concepts/${next.slug}/`)} aria-label={`Next concept: ${next.name}`}><span>Next</span> →</a>
+</nav>

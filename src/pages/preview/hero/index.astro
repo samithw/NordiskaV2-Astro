@@ -1,4 +1,4 @@
 ---
-import HeroPreviewHomePage from '../../../components/HeroPreviewHomePage.astro';
+import { withBase } from '../../../utils/paths';
+return Astro.redirect(withBase('/concepts/immersive-photography/'));
 ---
-<HeroPreviewHomePage />
