@@ -172,7 +172,7 @@ function renderOrbit(now){
   b.style.visibility=visible?'visible':'hidden';b.style.pointerEvents=visible?'auto':'none';
   b.tabIndex=visible&&(zoom>.85||selected)?0:-1;
  });
- syncImageHeader(orbitCards[slide]);
+ syncImageHeader(orbitCards[slide], zoom);
  if(Math.abs(targetPosition-orbitPosition)>.0005||Math.abs(targetZoom-zoom)>.0005||opening)requestOrbit();
 }
 addEventListener('scroll',requestOrbit,{passive:true});addEventListener('resize',requestOrbit);

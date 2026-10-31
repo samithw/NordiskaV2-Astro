@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap');
 .home-concept{background:#eaf0f7}
-.concept-image-overlay>header{position:fixed;inset:0 0 auto;width:100%;transition:background-color .2s,border-color .2s}
-.concept-image-overlay[data-image-cover]:not(.menu-open)>header{background:linear-gradient(180deg,#071d3670,transparent);border-color:transparent;color:white}
-.concept-image-overlay[data-image-cover]:not(.menu-open)>header :is(.nav,.nav a,.nav button,.utility,.utility a,.utility span,.mobile-menu){color:white}
-.concept-image-overlay[data-image-cover]:not(.menu-open)>header .brand img{filter:brightness(0) invert(1);opacity:1}
+.concept-image-overlay>header{position:fixed;inset:0 0 auto;width:100%}
+.concept-image-overlay:not(.menu-open)>header{background:color-mix(in srgb,transparent,var(--paper) var(--image-header-progress,0%));border-color:color-mix(in srgb,transparent,var(--line) var(--image-header-progress,0%));color:color-mix(in srgb,white,var(--brand) var(--image-header-colour,0%))}
+.concept-image-overlay>header::before{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,#071d3670,transparent);opacity:var(--image-header-shade,1)}
+.concept-image-overlay.menu-open>header::before{opacity:0}
+.concept-image-overlay:not(.menu-open)>header :is(.nav,.nav a,.nav button,.mobile-menu){color:inherit}
+.concept-image-overlay:not(.menu-open)>header .brand img{filter:url(#concept-brand);opacity:1}
 .concept-image-overlay.menu-open .concept-navigation{visibility:hidden}
 .concept-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
 .concept-advantage{scroll-margin-top:116px}

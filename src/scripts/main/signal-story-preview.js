@@ -161,7 +161,7 @@ explorer.render=function(now){
   }
   const visible=Math.abs(d)<2.2&&(!mobile||selected||zoom<.4);card.style.visibility=visible?'visible':'hidden';card.tabIndex=visible&&selected?0:-1;
  });
- syncImageHeader(this.cards[nearest]);
+ syncImageHeader(this.cards[nearest], zoom);
  if(this.position!==target||this.zoom!==z)this.request();
 };
 const refinements=document.createElement('style');
