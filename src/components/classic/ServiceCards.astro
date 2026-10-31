@@ -1,0 +1,7 @@
+---
+import ServiceCard from './ServiceCard.astro';
+import services from '../../data/services.json';
+const { slugs } = Astro.props;
+const selected = slugs ? slugs.map((slug: string) => services.find(s => s.slug === slug)).filter(Boolean) : services;
+---
+<div class="related-grid">{selected.map((service: typeof services[number]) => <ServiceCard service={service} />)}</div>

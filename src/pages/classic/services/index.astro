@@ -1,0 +1,19 @@
+---
+import { withBase } from '../../../utils/classicPaths';
+import Base from '../../../layouts/ClassicLayout.astro';
+import PageHero from '../../../components/classic/PageHero.astro';
+import ServiceCards from '../../../components/classic/ServiceCards.astro';
+import CTA from '../../../components/classic/CTA.astro';
+import { serviceThemes } from '../../../data/serviceThemes';
+---
+<Base title="What we do"><main id="top"><PageHero eyebrow="What we do" title="Expertise for your next stage of growth." copy="We help ambitious companies expand internationally with clarity and confidence. From research-driven market entry strategies to hands-on go-to-market execution, we turn global ambitions into actionable growth plans." photo="strategy" action="Talk to our team" href={withBase('/contact/')}/>
+<section class="content"><div class="wrap editorial-grid"><div><div class="eyebrow">Our approach</div><h2>Turn customer strategy into measurable growth.</h2><div class="rule"></div></div><div class="editorial-copy"><p>Sustainable growth starts with a deep understanding of your customer. We connect strategic goals with tangible business outcomes, combining market insight, value-based positioning and a clear understanding of willingness to pay.</p><p>Business development connects every part of our offer. From planning your entry to building relationships and supporting local teams, we bring strategy and execution together around your next step.</p></div></div></section>
+<section class="content section-soft"><div class="wrap">{serviceThemes.map((theme, index) => <article class="service-overview-group"><div class="overview-heading"><div><div class="eyebrow">0{index + 1} / {theme.step}</div><h3>{theme.title}</h3></div><p>{theme.detail}</p></div><ServiceCards slugs={theme.slugs}/></article>)}</div></section><CTA/></main></Base>
+
+<style>
+  .overview-heading { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; margin-bottom:30px; }
+  .overview-heading .eyebrow { color:var(--brand); margin-bottom:15px; }
+  .overview-heading h3 { font-size:clamp(28px,3vw,40px); line-height:1.15; letter-spacing:-.045em; margin:0; max-width:440px; }
+  .overview-heading p { font-size:15px; line-height:1.85; color:var(--muted); margin:0; max-width:540px; }
+  @media(max-width:760px) { .overview-heading { grid-template-columns:1fr; gap:20px; } }
+</style>

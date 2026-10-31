@@ -1,8 +1,8 @@
 ---
 import { withBase } from '../utils/paths';
-import Base from '../layouts/Base.astro';
-import PageHero from '../components/PageHero.astro';
-import CTA from '../components/CTA.astro';
+import Base from '../layouts/MainLayout.astro';
+import PageHero from '../components/main/PageHero.astro';
+import CTA from '../components/main/CTA.astro';
 import about from '../data/about.json';
 ---
 <Base title="Who we are"><main id="top"><PageHero eyebrow="Who we are" title="We take Nordic cleantech global." copy="Nordiska Solutions is a strategic growth partner dedicated to accelerating the global expansion of Nordic cleantech enterprises. We turn regional innovation into international success." photo="people" action="Explore our expertise" href={withBase('/services/')}/>

@@ -1,0 +1,44 @@
+.locations-network-preview{background:#f8fafd;color:#17385d}
+.locations-network-preview .eyebrow{font-size:10px;font-weight:600;letter-spacing:.09em;color:var(--brand)}
+.presence-hero{padding:156px 0 45px;background:#eaf0f7}
+.presence-hero .breadcrumb{margin-bottom:34px}
+.presence-heading{display:grid;grid-template-columns:1.5fr 1fr;gap:9%;align-items:end;margin-bottom:42px}
+.presence-heading h1{font-size:clamp(44px,5vw,76px);font-weight:500;letter-spacing:-.06em;line-height:1.08;margin:24px 0 0}
+.presence-heading h1 span{color:var(--brand)}
+.presence-heading>p{max-width:390px;font-size:15px;line-height:1.85;color:#58708c;margin:0 0 5px}
+.presence-countries{padding:90px 0 100px}
+.presence-intro{display:grid;grid-template-columns:1.3fr 1fr;gap:12%;align-items:end;margin-bottom:70px}
+.presence-intro h2{font-size:clamp(36px,4vw,58px);font-weight:500;line-height:1.1;letter-spacing:-.055em;margin:24px 0 0}
+.presence-intro h2 span{color:var(--brand)}
+.presence-intro>p{max-width:400px;font-size:15px;line-height:1.85;color:#58708c;margin:0}
+.presence-country{display:grid;grid-template-columns:1fr 1fr;gap:8%;align-items:start;padding:65px 0 80px;border-top:1px solid #bdcee2;scroll-margin-top:145px}
+.presence-country:focus{outline:none}
+.presence-country:target .presence-country-heading h2{color:var(--brand)}
+.presence-country:last-child{padding-bottom:0}
+.presence-country-reverse .presence-country-visual{grid-column:2;grid-row:1}
+.presence-country-reverse .presence-country-copy{grid-column:1;grid-row:1}
+.presence-country-visual{min-width:0;position:sticky;top:145px}
+.presence-country-heading{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:28px}
+.presence-country-heading h2{font-size:clamp(38px,4vw,58px);font-weight:500;letter-spacing:-.055em;line-height:1.1;margin:18px 0 0}
+.presence-country-heading .presence-flag{width:60px;height:40px;object-fit:contain;filter:none;box-shadow:0 0 0 1px #17385d12}
+.presence-country figure{margin:0}
+.presence-country figure>img{display:block;width:100%;height:370px;object-fit:cover;filter:saturate(.7)}
+.presence-country figcaption{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:13px;font-size:9px;line-height:1.6;color:#58708c}
+.presence-country figcaption a{text-decoration:underline;text-underline-offset:3px}
+.presence-country-copy{padding-top:5px;min-width:0}
+.presence-country-copy h3{font-size:clamp(29px,3vw,43px);font-weight:500;letter-spacing:-.05em;line-height:1.15;margin:20px 0 25px}
+.presence-country-copy>p{font-size:15px;line-height:1.9;color:#58708c;margin:0 0 18px}
+.presence-focus{border-top:1px solid #d9e3ed;padding-top:25px;margin-top:28px}
+.presence-focus h4{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--brand);margin:0 0 12px}
+.presence-focus ul{list-style:none;padding:0;margin:0}
+.presence-focus li{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid #e1e8f0;font-size:13px;line-height:1.6;color:#37597c}
+.presence-focus li:before{content:'↗';color:var(--brand)}
+.presence-country-actions{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;margin-top:30px}
+.presence-back{font-size:11px;color:#58708c}
+.presence-back:hover{text-decoration:underline;text-underline-offset:4px}
+.presence-country a:focus-visible{outline:2px solid var(--brand);outline-offset:4px}
+#presence-title{scroll-margin-top:145px}
+.presence-compare{display:flex;justify-content:center;align-items:center;gap:24px;padding:20px 22px;background:#eaf0f7;font-size:11px;color:var(--brand)}
+.presence-compare>span{color:#58708c}
+@media(max-width:1000px){.presence-country{gap:5%}.presence-country figure>img{height:320px}.presence-country-heading .presence-flag{width:48px;height:32px}}
+@media(max-width:760px){.presence-hero{padding:110px 0 30px}.presence-heading{grid-template-columns:1fr;gap:24px;margin-bottom:32px}.presence-heading>p{max-width:none;font-size:14px}.presence-countries{padding:55px 0 65px}.presence-intro{grid-template-columns:1fr;gap:24px;margin-bottom:35px}.presence-intro>p{font-size:14px}.presence-country{grid-template-columns:1fr;gap:30px;padding:38px 0 50px;scroll-margin-top:105px}.presence-country-visual{position:static}.presence-country-reverse .presence-country-visual,.presence-country-reverse .presence-country-copy{grid-column:auto;grid-row:auto}.presence-country-heading h2{font-size:39px}.presence-country-heading{margin-bottom:24px}.presence-country figure>img{height:260px}.presence-country-copy h3{font-size:32px}.presence-country-copy>p{font-size:14px}.presence-country-actions{gap:20px}.presence-compare{gap:14px;font-size:10px;flex-wrap:wrap}#presence-title{scroll-margin-top:105px}}

@@ -1,8 +1,31 @@
 ---
+import Base from '../layouts/MainLayout.astro';
+import PresenceMap from '../components/main/PresenceMap.astro';
+import SignalContact from '../components/main/signal-story/Contact.astro';
+import SignalLink from '../components/main/signal/SignalLink.astro';
+import { locationPreview } from '../data/locationPreview';
 import { withBase } from '../utils/paths';
-import Base from '../layouts/Base.astro';
-import LocationMap from '../components/LocationMap.astro';
-import CTA from '../components/CTA.astro';
-const locations=[['Finland','Europe','Nordic expertise, international perspective.','Our Finnish base connects cleantech expertise with international business development and market strategy.'],['Malaysia','Southeast Asia','A bridge to growing markets.','Our first overseas office was established in Malaysia in 2017, strengthening our connection to Asia-Pacific markets and commercial opportunities.'],['India','South Asia','Connect expertise with opportunity.','Discuss market entry, customer development and potential commercial partners for your technology in India.'],['Vietnam','Southeast Asia','Local understanding. Shared ambition.','Explore partner development and opportunities for sustainable technologies in Vietnam.'],['Philippines','Southeast Asia','Relationships that help you grow.','Discuss customer needs, channel opportunities and practical market support for your technology in the Philippines.'],['UAE','Middle East','Your bridge to the region.','Explore opportunities to connect your technology with customers, partners and project stakeholders in the Middle East.']];
+import '../styles/main/signal-content.css';
+import '../styles/main/locations-network.css';
+
 ---
-<Base title="Our global presence"><main id="top"><LocationMap/><section class="content"><div class="wrap"><div class="section-head"><div class="eyebrow">Explore our network</div><h2>Closer to your next opportunity.</h2><p>Tell us where you want to grow. We will discuss the relevant connections and support for your technology, market and commercial priorities.</p></div><div class="location-sections">{locations.map(([name,region,title,copy])=><article class="location-section" id={name.toLowerCase()}><div class="eyebrow">{region} / Nordiska {name}</div><h3>{title}</h3><p>{copy}</p><a class="link" href={withBase(`/contact/?location=${name}`)}>Discuss {name}<span>→</span></a></article>)}</div><div class="section-links"><a class="link" href={withBase('/services/')}>Explore our services<span>↗</span></a><a class="link" href={withBase('/industries/')}>Discover our industries<span>↗</span></a></div></div></section><CTA/></main></Base>
+<Base title="Our global presence">
+ <main id="top" class="locations-network-preview">
+  <section class="presence-hero" aria-labelledby="presence-title"><div class="wrap">
+   <nav class="breadcrumb" aria-label="Breadcrumb"><a href={withBase('/')}>Home</a><span>/</span><span>Our global presence</span></nav>
+   <div class="presence-heading"><div><div class="eyebrow">Our global presence</div><h1 id="presence-title">International perspective.<br /><span>Local connections.</span></h1></div><p>Our presence across Europe, Asia and the Middle East brings you closer to the people, partners and opportunities in your next market.</p></div>
+   <PresenceMap />
+  </div></section>
+  <section class="presence-countries" aria-labelledby="countries-title"><div class="wrap">
+   <div class="presence-intro"><div><div class="eyebrow">Explore our network</div><h2 id="countries-title">Closer to your<br /><span>next opportunity.</span></h2></div><p>Different markets. A connected approach. Explore how our Nordic roots and international relationships can support your next step.</p></div>
+   {locationPreview.map((country,index) => <article id={country.slug} tabindex="-1" aria-labelledby={`title-${country.slug}`} class:list={['presence-country', {'presence-country-reverse':index%2===1}]}>
+    <div class="presence-country-visual"><div class="presence-country-heading"><div><div class="eyebrow">0{index+1} / {country.region}</div><h2 id={`title-${country.slug}`}>{country.name}</h2></div><img class="presence-flag" src={`https://flagcdn.com/${country.code}.svg`} width="64" height="44" alt={`Flag of ${country.name}`} loading="lazy"/></div>
+     <figure><img src={`https://images.unsplash.com/${country.photo}?auto=format&fit=crop&w=1200&q=85`} alt={country.alt} width="1200" height="900" loading="lazy"/><figcaption><span>{country.caption}</span><a href={country.source} target="_blank" rel="noreferrer">{country.photographer} / Unsplash ↗</a></figcaption></figure>
+    </div>
+    <div class="presence-country-copy"><div class="eyebrow">Nordiska {country.name}</div><h3>{country.title}</h3>{country.paragraphs.map(paragraph=><p>{paragraph}</p>)}<div class="presence-focus"><h4>Where the conversation can start</h4><ul>{country.focus.map(item=><li>{item}</li>)}</ul></div><div class="presence-country-actions signal-preview"><SignalLink href={withBase(`/contact/?location=${country.name}`)} label={`Discuss ${country.name}`} /><a class="presence-back" href="#presence-title">Back to the map ↑</a></div></div>
+   </article>)}
+  </div></section>
+  <div class="signal-preview"><SignalContact title="Where do you" accent="want to grow?" copy="Tell us about your technology, your target market and your ambitions. We can explore the right connections and support together."/></div>
+ </main>
+
+</Base>

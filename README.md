@@ -1,6 +1,6 @@
 # Nordiska Solutions — Astro
 
-A static, multipage Astro implementation of the approved `nordiska-concept-03.html` design.
+A static, multipage Astro site with the redesigned main version at `/`, the previous full site at `/classic/`, and retained design experiments at `/preview/`.
 
 ## Run
 
@@ -19,17 +19,18 @@ The production site is generated in `dist/` and can be served by any static host
 
 ## Structure
 
-- 20 pages: Home, About, Services, 8 service details, Industries, 5 industry details, Locations, Contact, Privacy.
-- `src/styles/approved.css` preserves the mockup's complete original stylesheet, including its responsive and reduced-motion rules.
-- `src/styles/pages.css` extends those tokens and patterns for the new pages.
-- `src/scripts/home.js` retains the original orbit hero and expanding industry gallery logic.
+- Two complete sets of 20 pages: Home, About, Services, 8 service details, Industries, 5 industry details, Locations, Contact, Privacy.
+- Main and Classic have isolated components, layouts, scripts and styles, with shared company data and public assets. See `docs/site-versions.md` for ownership and URL mapping.
+- `src/styles/main/` and `src/scripts/main/` support the promoted preview designs.
+- `src/styles/classic/` and `src/scripts/classic/` preserve the original design and interactions.
+- Unversioned components, styles and scripts support the retained experimental previews.
 - `src/data/` holds editable service, industry, about, and image content.
 - Images and fonts retain direct external URLs. The supplied embedded logo is extracted losslessly to `public/nordiska-logo.png`.
 - Site menus and detail cards use page links instead of mockup dialogs. Contact links carry service, industry and location context in query parameters.
 
 ## Contact
 
-No recipient or form service was supplied. The contact form validates the enquiry and downloads a text copy; it explicitly states that nothing has been sent. It does not store personal information. Connect an approved submission endpoint and replace the interim privacy wording before enabling online enquiries.
+The Contact page provides the supplied global telephone number and email address. The form validates the enquiry and downloads a text copy; it explicitly states that nothing has been sent. It does not store personal information. Connect an approved submission endpoint and replace the interim privacy wording before enabling online enquiries.
 
 See `docs/content-review.md` for the source mapping and remaining client content decisions.
 

@@ -1,0 +1,20 @@
+---
+import { withBase } from '../../utils/classicPaths';
+const { current } = Astro.props;
+---
+<nav class="preview-switcher" aria-label="Compare services designs">
+  <span class="preview-label">Services preview</span>
+  <a href={withBase('/preview/services-a/#services')} aria-current={current === 'a' ? 'page' : undefined}><b>A</b> Editorial</a>
+  <a href={withBase('/preview/services-b/#services')} aria-current={current === 'b' ? 'page' : undefined}><b>B</b> Service cards</a>
+</nav>
+<style>
+  .preview-switcher { position:fixed; z-index:50; bottom:20px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:5px; padding:7px; background:var(--paper); border:1px solid var(--line); border-radius:50px; box-shadow:0 8px 35px #17346220; white-space:nowrap; }
+  .preview-label { font-size:10px; font-weight:700; color:var(--muted); padding:0 12px; }
+  .preview-switcher a { display:flex; align-items:center; gap:7px; padding:10px 15px; border-radius:30px; font-size:11px; font-weight:700; color:var(--brand); text-decoration:none; }
+  .preview-switcher a[aria-current=page] { background:var(--brand); color:white; }
+  .preview-switcher a:hover { background:var(--ice); color:var(--brand); }
+  .preview-switcher a:focus-visible { outline:2px solid var(--brand); outline-offset:2px; }
+  .preview-switcher b { font-size:10px; }
+  :global(body:has(.preview-switcher) footer) { padding-bottom:100px; }
+  @media(max-width:640px) { .preview-label { display:none; } .preview-switcher { bottom:12px; } }
+</style>

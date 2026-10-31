@@ -1,0 +1,75 @@
+---
+import { locationPreview } from '../../data/locationPreview';
+import { withBase } from '../../utils/paths';
+import '../../styles/main/presence-map.css';
+interface Props { targetPath?: string; compact?: boolean; }
+const { targetPath = '', compact = false } = Astro.props;
+const positions = [
+ {slug:'finland',lon:26,lat:64,dx:22,dy:-24,anchor:'start'},
+ {slug:'malaysia',lon:102,lat:4,dx:-22,dy:-24,anchor:'end'},
+ {slug:'india',lon:79,lat:21,dx:-22,dy:-24,anchor:'end'},
+ {slug:'vietnam',lon:108,lat:16,dx:-22,dy:-24,anchor:'end'},
+ {slug:'philippines',lon:122,lat:12,dx:22,dy:-24,anchor:'start'},
+ {slug:'uae',lon:54,lat:24,dx:-22,dy:-24,anchor:'end'},
+];
+const places = positions.map(place => ({...place, ...locationPreview.find(country=>country.slug===place.slug)!, px:(place.lon+180)*1200/360, py:(90-place.lat)*600/180}));
+const origin = places[0];
+const mapImage = withBase('/maps/nordiska-eastern-land.svg');
+---
+   {!compact && <div class="presence-map-heading"><span>One network. Six connections.</span><span>Select a country to explore <span aria-hidden="true">↘</span></span></div>}
+   <div class:list={['presence-map-frame', {'presence-map-frame-compact': compact}]}>
+    <svg class="presence-map" viewBox="510 5 710 470" role="group" aria-labelledby="presence-map-title presence-map-description">
+     <title id="presence-map-title">Explore Nordiska’s international network</title><desc id="presence-map-description">Follow a flag or country name to explore Nordiska’s presence in Finland, Malaysia, India, Vietnam, the Philippines and UAE.</desc>
+     <defs>
+      {places.map(place=><clipPath id={`flag-clip-${place.slug}`}><circle cx="0" cy="-22" r="9.5"/></clipPath>)}
+      <filter id="presence-soft-edge" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="10"/></filter>
+      <mask id="presence-organic-mask" maskUnits="userSpaceOnUse" x="620" y="0" width="560" height="370"><path d="M660 80 Q650 15 725 30 C840 5 1040 10 1110 45 Q1150 100 1110 170 Q1140 270 1070 315 Q950 345 810 310 Q700 285 670 210 Z" fill="white" filter="url(#presence-soft-edge)"/></mask>
+     </defs>
+     <image href={mapImage} width="1200" height="600" class="presence-geography"/>
+     <g class="presence-routes" aria-hidden="true">{places.slice(1).map(place => <path d={`M${origin.px},${origin.py} Q${(origin.px+place.px)/2},${origin.py-12} ${place.px},${place.py}`}/>)}</g>
+     {places.map(place => <a href={withBase(`${targetPath}#${place.slug}`)} aria-label={`Explore Nordiska ${place.name}`} class="presence-marker">
+      <g transform={`translate(${place.px},${place.py})`}>
+       <g class="presence-pin-art">
+       <ellipse class="presence-pin-shadow" cx="0" cy="3" rx="8" ry="2.5"/>
+       <path class="presence-pin" d="M0 0C-4-6-13-13-13-22a13 13 0 1 1 26 0C13-13 4-6 0 0Z"/>
+       <circle class="presence-pin-ring" cx="0" cy="-22" r="11"/>
+       <image class="presence-pin-flag" href={`https://flagcdn.com/${place.code}.svg`} x="-10" y="-32" width="20" height="20" preserveAspectRatio="xMidYMid slice" clip-path={`url(#flag-clip-${place.slug})`}/>
+       </g>
+       <circle class="presence-anchor-dot" cx="0" cy="0" r="1.6"/>
+       <rect class="presence-label-hit" x={place.anchor==='end' ? place.dx-place.name.length*10-8 : place.dx-8} y={place.dy-18} width={place.name.length*10+16} height="32"/>
+       <text x={place.dx} y={place.dy} dominant-baseline="middle" text-anchor={place.anchor}>{place.name}</text>
+      </g>
+     </a>)}
+    </svg>
+   </div>
+   {!compact && <div class="presence-map-caption"><span>Country-level connections · Select a flag or country name to explore.</span><a href="https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/" target="_blank" rel="noreferrer">Map data: Natural Earth · Public domain</a></div>}
+<script>
+ const map = document.querySelector('.presence-map');
+ if (map) {
+  const mobile = matchMedia('(max-width:760px)');
+  const frameMap = () => {
+   map.setAttribute('viewBox', mobile.matches ? '645 15 510 330' : '510 5 710 470');
+   const geography = map.querySelector('.presence-geography');
+   if (mobile.matches) geography?.setAttribute('mask', 'url(#presence-organic-mask)');
+   else geography?.removeAttribute('mask');
+   map.querySelectorAll<SVGAElement>('.presence-marker').forEach(marker => {
+    const country = marker.getAttribute('href')?.split('#')[1];
+    const text = marker.querySelector('text')!;
+    const hit = marker.querySelector('.presence-label-hit')!;
+    let x = ['finland','philippines'].includes(country!) ? 22 : -22;
+    let y = mobile.matches ? -31 : -24;
+    if (mobile.matches && country === 'india') x = 22;
+    if (mobile.matches && country === 'vietnam') { x = 22; y = -53; }
+    text.setAttribute('x', String(x)); text.setAttribute('y', String(y));
+    text.setAttribute('text-anchor', x > 0 ? 'start' : 'end');
+    const width = text.getComputedTextLength();
+    hit.setAttribute('x', String(x > 0 ? x - 6 : x - width - 6));
+    hit.setAttribute('y', String(y - 14));
+    hit.setAttribute('width', String(width + 12));
+   });
+  };
+  frameMap();
+  document.fonts.ready.then(frameMap);
+  mobile.addEventListener('change', frameMap);
+ }
+</script>

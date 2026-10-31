@@ -1,0 +1,6 @@
+---
+import { withBase } from '../../utils/paths';
+import photos from '../../data/photos.json';
+const { eyebrow, title, copy, photo, parent, action, href } = Astro.props;
+---
+<section class="page-hero"><div class="wrap"><nav class="breadcrumb" aria-label="Breadcrumb"><a href={withBase('/')}>Home</a><span>/</span>{parent && <><a href={withBase(parent.href)}>{parent.label}</a><span>/</span></>}<span>{eyebrow}</span></nav><div class="page-hero-grid"><div><div class="eyebrow">{eyebrow}</div><h1>{title}</h1><p>{copy}</p>{href && <a class="btn" href={withBase(href)}>{action}<span class="arrow">→</span></a>}</div><div class="page-hero-image"><img src={photos[photo as keyof typeof photos]} alt="" fetchpriority="high"/></div></div></div></section>

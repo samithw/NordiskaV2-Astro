@@ -1,0 +1,80 @@
+---
+import { withBase } from '../../utils/classicPaths';
+import { mapPlaces } from '../../data/locations';
+const places = mapPlaces.map(place => ({ ...place, px: place.x * 12.8, py: place.y * 6.02 }));
+const origin = places[0];
+const mapImage = 'https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6b/Blank_Map_of_The_World_Equirectangular_Projection.png/1280px-Blank_Map_of_The_World_Equirectangular_Projection.png';
+---
+<section class="locations-teaser" id="locations" aria-labelledby="network-title">
+  <div class="wrap network-layout">
+    <div class="network-intro">
+      <div class="eyebrow">Our global presence</div>
+      <h2 id="network-title">Nordic roots.<br /><span>Local connections.</span></h2>
+      <p>Across Europe, Asia and the Middle East, we bring you closer to the people and opportunities in your next market.</p>
+    </div>
+    <div class="network-visual">
+      <svg class="network-map" viewBox="520 15 650 330" role="img" aria-labelledby="network-map-title network-map-description">
+        <title id="network-map-title">Nordiska’s network across Europe, Asia and the Middle East</title>
+        <desc id="network-map-description">Finland connected with UAE, India, Vietnam, Malaysia and the Philippines. Markers show country-level presence.</desc>
+        <defs>
+          <radialGradient id="network-map-fade"><stop offset="55%" stop-color="white" /><stop offset="100%" stop-color="black" /></radialGradient>
+          <mask id="network-map-mask"><rect x="520" y="15" width="650" height="330" fill="url(#network-map-fade)" /></mask>
+        </defs>
+        <image href={mapImage} width="1280" height="602" class="network-geography" mask="url(#network-map-mask)" />
+        <g class="network-connections" aria-hidden="true">
+          {places.slice(1).map(place => <path d={`M${origin.px},${origin.py} Q${(origin.px + place.px) / 2},${origin.py - 12} ${place.px},${place.py}`} />)}
+        </g>
+        {places.map(place => (
+          <g class="network-location" aria-hidden="true">
+            <circle class="network-halo" cx={place.px} cy={place.py} r="9" />
+            <circle class="network-dot" cx={place.px} cy={place.py} r="3.5" />
+            <text x={place.px + place.dx} y={place.py + place.dy} text-anchor={place.anchor}>{place.name}</text>
+          </g>
+        ))}
+      </svg>
+      <small class="network-credit">Map: FelixCountryBalls163 / Wikimedia Commons · CC BY 4.0</small>
+    </div>
+    <a class="network-link" href={withBase('/locations/')}>Explore our global presence <span aria-hidden="true">↗</span></a>
+  </div>
+</section>
+<style>
+  .locations-teaser { background:#edf2f9; padding:70px 0 55px; overflow:hidden; }
+  .network-layout { display:grid; grid-template-columns:.85fr 1.65fr; column-gap:4%; align-items:center; }
+  .network-intro .eyebrow { color:var(--brand); margin-bottom:24px; }
+  .network-intro h2 { font-size:clamp(34px,3.5vw,50px); line-height:1.13; letter-spacing:-.05em; margin:0 0 24px; }
+  .network-intro h2 span { color:var(--brand); }
+  .network-intro p { font-size:14px; line-height:1.85; color:var(--muted); margin:0; max-width:320px; }
+  .network-visual { grid-column:2; grid-row:1 / span 2; min-width:0; }
+  .network-map { width:100%; height:auto; display:block; overflow:visible; }
+  .network-geography { filter:grayscale(1); opacity:.38; }
+  .network-connections path { fill:none; stroke:var(--brand); stroke-width:1.2; stroke-dasharray:4 5; opacity:.42; }
+  .network-halo { fill:#edf2f9; stroke:#83bce5; stroke-width:1; }
+  .network-dot { fill:var(--brand); }
+  .network-location text { font-family:inherit; font-size:12px; font-weight:800; fill:var(--ink); paint-order:stroke; stroke:#edf2f9; stroke-width:5px; stroke-linejoin:round; }
+  .network-credit { display:block; text-align:right; font-size:8px; color:var(--muted); opacity:.75; margin-top:5px; }
+  .network-link { display:inline-flex; align-items:center; justify-self:start; gap:22px; margin-top:28px; color:var(--brand); font-size:12px; font-weight:800; text-decoration:none; }
+  .network-link span { display:grid; place-items:center; width:40px; height:40px; border:1px solid #adc8e0; border-radius:50%; font-size:22px; transition:background .2s,color .2s; }
+  .network-link:hover span { background:var(--brand); color:white; }
+  .network-link:focus-visible { outline:2px solid var(--brand); outline-offset:7px; }
+  @media(max-width:760px) {
+    .locations-teaser { padding:55px 0 40px; }
+    .network-layout { display:block; }
+    .network-intro h2 { font-size:38px; margin-bottom:20px; }
+    .network-intro p { max-width:450px; }
+    .network-visual { margin:28px -12px 0; }
+    .network-map { aspect-ratio:480 / 330; }
+    .network-credit { text-align:left; padding:0 12px; font-size:8px; }
+    .network-location text { font-size:16px; }
+    .network-link { margin-top:25px; }
+  }
+  @media(prefers-reduced-motion:reduce) { .network-link span { transition:none; } }
+</style>
+<script>
+  const map = document.querySelector('.network-map');
+  if (map) {
+    const mobile = matchMedia('(max-width:760px)');
+    const frameMap = () => map.setAttribute('viewBox', mobile.matches ? '680 15 480 330' : '520 15 650 330');
+    frameMap();
+    mobile.addEventListener('change', frameMap);
+  }
+</script>

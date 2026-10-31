@@ -1,0 +1,73 @@
+---
+import { withBase } from '../../utils/classicPaths';
+import services from '../../data/services.json';
+import { serviceThemes as themes } from '../../data/serviceThemes';
+import ServiceCard from './ServiceCard.astro';
+
+---
+<section class="services-cards-teaser" id="services" aria-labelledby="services-title">
+  <div class="wrap">
+    <div class="cards-intro">
+      <div><div class="eyebrow">What we do</div><h2 id="services-title">Your ambition.<br /><span>Our expertise in motion.</span></h2></div>
+      <p>Every next step needs the right support. From finding your market to making it work, explore how we help your technology go further.</p>
+    </div>
+    <div class="service-process">
+      {themes.map((theme, index) => (
+        <article class="process-chapter" aria-labelledby={`process-title-${index}`}>
+          <div class="process-heading">
+            <span class="process-number" aria-hidden="true">0{index + 1}</span>
+            <div><span class="process-label">{theme.step}</span><h3 id={`process-title-${index}`}>{theme.title}</h3></div>
+            <p>{theme.copy}</p>
+          </div>
+          <div class="process-cards">
+            {theme.slugs.map(slug => {
+              const service = services.find(s => s.slug === slug)!;
+              return <ServiceCard service={service} heading="h4" />;
+            })}
+          </div>
+        </article>
+      ))}
+    </div>
+    <div class="cards-footer"><p>A clear way in. A partner for what comes next.</p><a href={withBase('/services/')}>Explore all services <span aria-hidden="true">→</span></a></div>
+  </div>
+</section>
+<style>
+  .services-cards-teaser { padding:90px 0 100px; background:var(--paper); scroll-margin-top:130px; }
+  .cards-intro { display:grid; grid-template-columns:1.4fr 1fr; gap:10%; align-items:end; margin-bottom:70px; }
+  .cards-intro .eyebrow { color:var(--brand); margin-bottom:25px; }
+  .cards-intro h2 { font-size:clamp(36px,4.1vw,60px); line-height:1.1; margin:0; letter-spacing:-.05em; }
+  .cards-intro h2 span { color:var(--brand); }
+  .cards-intro > p { font-size:16px; line-height:1.85; color:var(--muted); margin:0 0 4px; max-width:380px; }
+  .process-chapter { position:relative; padding:30px 0 55px; border-top:1px solid var(--line); }
+  .process-heading { display:grid; grid-template-columns:48px 1fr 1.15fr; gap:25px; align-items:start; margin-bottom:28px; }
+  .process-number { display:grid; place-items:center; width:46px; height:46px; border:1px solid #adc8e0; border-radius:50%; color:var(--brand); font-size:14px; font-weight:800; letter-spacing:-.03em; line-height:1; }
+  .process-label { display:block; font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--brand); margin-bottom:12px; }
+  .process-heading h3 { font-size:clamp(25px,2.6vw,36px); letter-spacing:-.045em; line-height:1.12; margin:0; max-width:410px; }
+  .process-heading > p { color:var(--muted); font-size:14px; line-height:1.85; margin:0; max-width:480px; padding-top:3px; }
+  .process-cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px; margin-left:73px; }
+  .cards-footer { display:flex; align-items:center; justify-content:space-between; gap:24px; border-top:1px solid var(--line); padding-top:30px; }
+  .cards-footer p { margin:0; font-size:14px; color:var(--muted); }
+  .cards-footer a { display:flex; align-items:center; gap:38px; color:var(--brand); font-size:14px; font-weight:800; text-decoration:none; }
+  .cards-footer a span { display:grid; place-items:center; width:45px; height:45px; border:1px solid #adc8e0; border-radius:50%; font-size:22px; }
+  .cards-footer a:hover span { background:var(--brand); color:white; }
+  @media(max-width:900px) {
+    .process-heading { grid-template-columns:40px 1fr 1.1fr; gap:18px; }
+    .process-number { width:38px; height:38px; }
+    .process-cards { grid-template-columns:repeat(2,minmax(0,1fr)); margin-left:58px; }
+  }
+  @media(max-width:640px) {
+    .services-cards-teaser { padding:60px 0; scroll-margin-top:95px; }
+    .cards-intro { display:block; margin-bottom:40px; }
+    .cards-intro > p { margin-top:22px; font-size:15px; }
+    .cards-intro .eyebrow { margin-bottom:20px; }
+    .process-chapter { padding:25px 0 35px; }
+    .process-heading { grid-template-columns:36px 1fr; gap:15px; margin-bottom:23px; }
+    .process-number { width:34px; height:34px; font-size:12px; }
+    .process-label { font-size:9px; line-height:1.6; margin-bottom:9px; }
+    .process-heading h3 { font-size:28px; }
+    .process-heading > p { grid-column:2; padding:0; font-size:14px; }
+    .process-cards { grid-template-columns:minmax(0,1fr); gap:22px; margin-left:51px; }
+    .cards-footer { flex-direction:column; align-items:start; gap:20px; }
+    .cards-footer a { width:100%; justify-content:space-between; }
+  }
+</style>

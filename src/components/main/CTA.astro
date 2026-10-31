@@ -1,0 +1,7 @@
+---
+import SignalContact from './signal-story/Contact.astro';
+import '../../styles/main/signal-content.css';
+const { title = 'Your next market starts', copy = 'Share your technology, your ambition and the opportunity ahead. Let’s explore how we can help you grow.', href = '/contact/', action = 'Talk to our team' } = Astro.props;
+const accent = Astro.props.title ? '' : 'with a conversation.';
+---
+<div class="signal-preview"><SignalContact {title} {accent} {copy} {href} {action} /></div>

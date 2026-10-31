@@ -1,9 +1,9 @@
 ---
 import { withBase } from '../../utils/paths';
-import Base from '../../layouts/Base.astro';
-import PageHero from '../../components/PageHero.astro';
-import CTA from '../../components/CTA.astro';
-import ServiceCards from '../../components/ServiceCards.astro';
+import Base from '../../layouts/MainLayout.astro';
+import PageHero from '../../components/main/PageHero.astro';
+import CTA from '../../components/main/CTA.astro';
+import ServiceCards from '../../components/main/ServiceCards.astro';
 import services from '../../data/services.json';
 import industries from '../../data/industries.json';
 export function getStaticPaths(){return services.map(service=>({params:{slug:service.slug},props:{service}}))}

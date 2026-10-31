@@ -1,0 +1,20 @@
+---
+const { compact = false, showCompany = true } = Astro.props;
+---
+<address class:list={['global-contact', {'global-contact-compact': compact}]} aria-label="Nordiska Solutions global contact">
+ <p class="global-contact-label">Global contact</p>
+ {showCompany && <p class="global-contact-name">Nordiska Solutions</p>}
+ <a href="tel:+358414400345">+358 41 440 0345</a>
+ <a href="mailto:info@nordiskasolutions.com">info@nordiskasolutions.com</a>
+</address>
+<style>
+ .global-contact{font-style:normal;margin-top:32px;padding-top:25px;border-top:1px solid var(--line);color:var(--brand)}
+ .global-contact-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.09em;line-height:1.5;margin:0 0 14px;color:var(--muted)}
+ .global-contact-name{font-size:18px;font-weight:500;line-height:1.5;margin:0 0 12px;color:var(--ink)}
+ .global-contact a{display:block;width:fit-content;max-width:100%;font-size:18px;line-height:1.7;overflow-wrap:anywhere;margin:6px 0}
+ .global-contact a:hover{text-decoration:underline;text-underline-offset:4px}
+ .global-contact a:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+ .global-contact-compact{margin-top:25px;padding-top:20px}
+ .global-contact-compact a{font-size:14px;margin:4px 0}
+ @media(max-width:760px){.global-contact a{font-size:16px}.global-contact-compact a{font-size:14px}}
+</style>

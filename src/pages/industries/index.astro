@@ -1,8 +1,42 @@
 ---
+import Base from '../../layouts/MainLayout.astro';
+import PageHero from '../../components/main/PageHero.astro';
+import SignalContact from '../../components/main/signal-story/Contact.astro';
+import SignalLink from '../../components/main/signal/SignalLink.astro';
+import industries from '../../data/industries.json';
+import services from '../../data/services.json';
+import photos from '../../data/photos.json';
 import { withBase } from '../../utils/paths';
-import Base from '../../layouts/Base.astro';
-import PageHero from '../../components/PageHero.astro';
-import IndustryGallery from '../../components/IndustryGallery.astro';
-import CTA from '../../components/CTA.astro';
+import '../../styles/main/signal-content.css';
+import '../../styles/main/industries-explorer.css';
+const summaries: Record<string, string> = {
+ 'water-wastewater': 'Connect water technology with the people specifying, building and operating treatment projects. We help align technical requirements with the right solutions and partners.',
+ 'solid-waste': 'Find the right route for recycling, sorting and material recovery technologies. We connect solution providers with project partners and operators around the needs of each waste stream.',
+ 'bioenergy': 'Bring biomass and biogas technologies closer to relevant demand. We combine market understanding, partner development and practical support for international growth.',
+ 'green-hydrogen': 'Understand where your technology fits in an evolving value chain. We help assess market readiness, explore application needs and connect with relevant project stakeholders.',
+ 'solar-energy': 'Connect your solar technology with suitable customers and commercial channels. We support positioning, partner search and channel development around your target markets.',
+};
 ---
-<Base title="Industries we serve"><main id="top"><PageHero eyebrow="Industries we serve" title="Specialized expertise for a sustainable future." copy="We partner with innovative SMEs and established global leaders to build direct, high-value relationships across the cleantech ecosystem. Every technology and market is unique. Our approach is tailored to yours." photo="water" action="Discuss your technology" href={withBase('/contact/')}/><IndustryGallery/><CTA/></main></Base>
+<Base title="Industries we serve">
+ <main id="top" class="industries-explorer-preview">
+  <PageHero eyebrow="Industries we serve" title="Specialized expertise for a sustainable future." copy="We partner with innovative SMEs and established global leaders to build direct, high-value relationships across the cleantech ecosystem. Every technology and market is unique. Our approach is tailored to yours." photo="water" action="Find your industry" href="#sector-explorer" />
+  <nav class="explorer-jump" aria-label="Jump to an industry"><div class="wrap">{industries.map((industry, index) => <a href={`#${industry.slug}`}><span>0{index + 1}</span>{industry.name}<span aria-hidden="true">↘</span></a>)}</div></nav>
+  <section id="sector-explorer" class="sector-explorer" aria-labelledby="explorer-title">
+   <div class="wrap">
+    <div class="explorer-intro"><div><div class="eyebrow">Industries we serve</div><h2 id="explorer-title">Different technologies.<br /><span>Shared ambition.</span></h2></div><p>Find your sector. Explore the applications, the people involved and the support that connects your technology with its next opportunity.</p></div>
+     <div class="explorer-panels">
+      {industries.map((industry, index) => <article id={industry.slug} aria-labelledby={`heading-${industry.slug}`} class:list={['explorer-panel', {'explorer-panel-reverse': index % 2 === 1}]}>
+       <div class="explorer-visual"><div class="eyebrow">0{index + 1} / Industry expertise</div><h2 id={`heading-${industry.slug}`}>{industry.name}</h2><figure class="explorer-photo"><img src={photos[industry.photo as keyof typeof photos]} alt="" loading="lazy" width="1200" height="800" /><figcaption><span>Technology. People. Opportunity.</span></figcaption><span class="explorer-photo-number" aria-hidden="true">0{index + 1}</span></figure></div>
+       <div class="explorer-panel-copy"><div class="eyebrow">The opportunity</div><h3>{industry.benefit}</h3><p class="explorer-summary">{summaries[industry.slug]}</p>
+        <div class="explorer-details"><div><h4>Technology & applications</h4><ul class="explorer-applications">{industry.applications.map(application => <li>{application}</li>)}</ul></div><div><h4>The people we connect</h4><ul class="explorer-buyers">{industry.buyers.map(buyer => <li>{buyer}</li>)}</ul></div></div>
+        <div class="explorer-support"><h4>How we can help</h4><ul>{industry.related.map(slug => <li><a href={withBase(`/services/${slug}/`)}>{services.find(service => service.slug === slug)!.name}<span aria-hidden="true">↗</span></a></li>)}</ul></div>
+        <div class="explorer-panel-bottom signal-preview"><SignalLink href={withBase(`/industries/${industry.slug}/`)} label={`Explore ${industry.name.toLowerCase()}`} /><a class="explorer-discuss" href={withBase(`/contact/?industry=${industry.slug}`)}>Discuss your technology ↗</a></div>
+       </div>
+      </article>)}
+     </div>
+   </div>
+  </section>
+  <div class="signal-preview"><SignalContact title="Your technology." accent="The right connections." copy="Working across sectors or unsure where your solution fits? Tell us about your technology and the markets you want to reach." /></div>
+ </main>
+
+</Base>

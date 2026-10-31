@@ -1,0 +1,19 @@
+---
+import { withBase } from '../../../utils/paths';
+import SignalLink from '../signal/SignalLink.astro';
+const strengths = [
+ ['Integrity', 'Honest advice and a commitment to our principles.'],
+ ['Collaboration', 'Working closely with clients and partners, with room for every voice.'],
+ ['Innovation', 'Customer-focused solutions shaped by evolving needs.'],
+];
+---
+<section class="signal-about signal-section" id="about" aria-labelledby="signal-about-title"><div class="wrap">
+ <div class="signal-section-intro"><div><div class="eyebrow">Who we are</div><h2 id="signal-about-title">Built on experience.<br /><span>Guided by our values.</span></h2></div></div>
+ <div class="signal-about-layout">
+  <figure class="signal-about-photo"><img class="signal-photo" src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=85" alt="Colleagues sharing ideas during a working meeting" loading="lazy" width="1200" height="900" /></figure>
+  <div class="signal-about-copy"><p class="signal-about-lead">Over 25 years of<br />industry experience.</p><p>Nordiska Solutions supports Nordic and global cleantech companies in their international expansion. Our background spans water, wastewater and process technologies, alongside international business.</p>
+   <dl class="signal-strengths">{strengths.map(([title,copy]) => <div><dt>{title}</dt><dd>{copy}</dd></div>)}</dl>
+   <SignalLink href={withBase('/about/')} label="Get to know Nordiska" />
+  </div>
+ </div>
+</div></section>
