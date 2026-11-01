@@ -15,7 +15,7 @@ const prompt = {
  ...(invitation || {}),
 };
 const columns = [
- { title:'Expertise', links:services.map(({name,slug}) => [name, `/services/${slug}/`]) },
+ { title:'Expertise', links:services.map(({name,slug}) => [name.replace('ramp-up', 'ramp‑up'), `/services/${slug}/`]) },
  { title:'Industries', links:industries.map(({name,slug}) => [name, `/industries/${slug}/`]) },
  { title:'Nordiska', links:[['Who we are','/about/'],['Our locations','/locations/'],['Contact us','/contact/']] },
 ];
@@ -48,7 +48,7 @@ const columns = [
  .footer-contact-link{display:inline-flex;align-items:center;justify-content:space-between;gap:38px;font-size:13px;font-weight:600;background:#e7f1fc;color:#173462;padding:14px 20px;min-height:48px;transition:background .2s}
  .footer-contact-link span{font-size:23px;line-height:1;font-weight:400}
  .footer-contact-link:hover{background:white}
- .footer-directory{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,2fr) minmax(0,.85fr) max-content;align-items:start;gap:40px;padding:52px 0 56px;border-top:1px solid #cfdef033}
+ .footer-directory{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(0,1.85fr) minmax(0,.75fr) max-content;align-items:start;gap:24px;padding:52px 0 56px;border-top:1px solid #cfdef033}
  .site-footer:not(.footer-with-invitation) .footer-directory{border-top:0;padding-top:0}
  .footer-brand{display:block;width:126px}
  .footer-brand img{display:block;width:100%;height:auto;filter:brightness(0) invert(1)}
@@ -59,7 +59,8 @@ const columns = [
  .footer-identity :global(.global-contact-footer svg){width:15px;height:15px}
  .footer-navigation h2{font:500 11px/1.6 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#aebfd7;margin:5px 0 24px}
  .footer-navigation ul{list-style:none;padding:0;margin:0;display:grid;gap:16px}
- .footer-expertise ul{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(5,auto);grid-auto-flow:column;column-gap:28px}
+ .footer-expertise{padding-left:48px}
+ .footer-expertise ul{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(5,auto);grid-auto-flow:column;column-gap:20px}
  .footer-expertise li{align-self:start}
  .footer-expertise a{display:inline-block;max-width:175px;vertical-align:top;text-wrap:pretty}
  .footer-navigation li{font-size:13px;line-height:1.6}
@@ -71,7 +72,7 @@ const columns = [
  .footer-top-link span{font-size:16px}
  .site-footer a:focus-visible{outline:2px solid #a8d0ff;outline-offset:6px}
  :global(.home-concept) .site-footer{padding-bottom:92px}
- @media(max-width:1050px){.footer-directory{gap:32px;grid-template-columns:1.3fr 2fr}.footer-navigation:last-child{justify-self:start}.footer-invitation{gap:48px}}
+ @media(max-width:1050px){.footer-expertise{padding-left:0}.footer-directory{gap:32px;grid-template-columns:1.3fr 2fr}.footer-navigation:last-child{justify-self:start}.footer-invitation{gap:48px}}
  @media(max-width:760px){
   .site-footer{padding:40px 0 20px}
   :global(.home-concept) .site-footer{padding-bottom:20px}
