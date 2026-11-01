@@ -1,0 +1,56 @@
+---
+import Base from '../../../layouts/MainLayout.astro';
+import JourneyServiceCard from '../../../components/main/JourneyServiceCard.astro';
+import services from '../../../data/services.json';
+import { withBase } from '../../../utils/paths';
+const stages = [
+ {name:'Find your direction', question:'Exploring a new market', title:'Make your next move an informed one.', copy:'Understand the opportunity and build a practical route into your next market.', outcome:'A clear direction. A practical entry plan.', slugs:['market-entry-strategy','go-to-market-strategy']},
+ {name:'Build your presence', question:'Ready to connect & grow', title:'Turn opportunity into relationships.', copy:'Find the right partners, reach your audience and support the people taking your technology to market.', outcome:'The right connections. Commercial momentum.', slugs:['partner-search','market-activation','channel-sales-support']},
+ {name:'Support your growth', question:'Delivering on the ground', title:'Keep progress moving beyond the sale.', copy:'Connect technical expertise, local teams and customer support as your market presence grows.', outcome:'Confident teams. Connected customer support.', slugs:['application-consultancy','on-site-training','aftersales-services']}
+];
+---
+<Base noindex title="Homepage services — scroll journey preview">
+ <main id="top">
+  <div class="preview-note wrap"><span>HOMEPAGE / SECTION PREVIEW</span><a href={withBase('/#services')}>View current homepage ↗</a></div>
+  <section class="home-path" aria-labelledby="path-title">
+   <div class="wrap">
+    <div class="path-intro"><p class="path-label">WHAT WE DO</p><h1 id="path-title">From the first move.<br/><span>To what comes next.</span></h1><div class="intro-bottom"><p>Enter new markets. Build the right relationships.<br/>Keep growing with support on the ground.</p><span class="scroll-cue">FOLLOW THE JOURNEY <span aria-hidden="true">↓</span></span></div></div>
+    <div class="journey-track">
+     <div class="track-line" aria-hidden="true"><span></span></div>
+     {stages.map((stage,i)=><section class="path-stage" aria-labelledby={`stage-title-${i}`}>
+      <div class="stage-marker" aria-hidden="true">0{i+1}</div>
+      <div class="stage-content">
+       <div class="stage-heading"><div><p class="path-label">{i===0?'FIRST, FIND THE OPPORTUNITY':i===1?'THEN, MAKE THE CONNECTIONS':'AND KEEP MOVING FORWARD'}</p><h2 id={`stage-title-${i}`}>{stage.name}.</h2></div><p>{stage.copy}</p></div>
+       <div class="path-cards">{stage.slugs.map((slug,j)=><div class="card-reveal" style={`--delay:${j*100}ms`}><JourneyServiceCard service={services.find(s=>s.slug===slug)!} /></div>)}</div>
+       <div class="stage-outcome"><span aria-hidden="true">↳</span>{stage.outcome}</div>
+      </div>
+     </section>)}
+    </div>
+    <div class="path-close"><div><p class="path-label">YOUR NEXT STEP</p><h2>Start where you need us.</h2><p>One service or support across the journey.</p></div><a href={withBase('/services/')}>Explore all services <span aria-hidden="true">↗</span></a></div>
+   </div>
+  </section>
+ </main>
+</Base>
+<script>
+ const track = document.querySelector<HTMLElement>('.journey-track');
+ const stages = document.querySelectorAll<HTMLElement>('.path-stage');
+ if (track && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+   if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}
+  }), {threshold:0.08});
+  stages.forEach(stage=>{stage.classList.add('will-reveal');observer.observe(stage);});
+  let scheduled=false;
+  const update=()=>{const rect=track.getBoundingClientRect();track.style.setProperty('--progress',String(Math.max(0,Math.min(1,(window.innerHeight*.65-rect.top)/rect.height))));scheduled=false;};
+  window.addEventListener('scroll',()=>{if(!scheduled){scheduled=true;requestAnimationFrame(update);}},{passive:true});
+  window.addEventListener('resize',update);update();
+ }
+</script>
+<style>
+.preview-note{display:flex;justify-content:space-between;gap:20px;padding-block:24px;font-size:10px;letter-spacing:.08em;color:#58708c;background:#f8fafd}.preview-note a{letter-spacing:0;color:#2856a3}
+.home-path{--journey-blue:#2856a3;--journey-muted:#58708c;background:#edf2f7;color:#17385d;padding:75px 0 65px}.path-label{font-size:10px;font-weight:600;letter-spacing:.12em;color:#2856a3;margin:0 0 22px}.path-intro{padding-bottom:65px}.path-intro h1{font-size:clamp(44px,6.2vw,88px);line-height:1.03;letter-spacing:-.06em;font-weight:500;margin:0}.path-intro h1 span{color:#2856a3}.intro-bottom{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-top:28px}.intro-bottom p{font-size:15px;line-height:1.8;color:#58708c;margin:0}.scroll-cue{display:flex;align-items:center;gap:24px;font-size:9px;letter-spacing:.1em;color:#2856a3}.scroll-cue>span{font-size:32px;font-weight:400}
+.journey-track{position:relative;--progress:0}.track-line{position:absolute;left:26px;top:26px;bottom:0;width:1px;background:#c6d6e6;overflow:hidden}.track-line>span{display:block;background:#2856a3;height:100%;transform:scaleY(var(--progress));transform-origin:top}.path-stage{position:relative;display:grid;grid-template-columns:85px minmax(0,1fr);padding-bottom:65px}.stage-marker{position:relative;z-index:1;display:grid;place-items:center;width:53px;height:53px;border:1px solid #acc3db;border-radius:50%;background:#edf2f7;color:#2856a3;font-size:13px;transition:background .6s,color .6s,box-shadow .6s}.is-visible .stage-marker{background:#2856a3;color:white;box-shadow:0 0 0 7px #edf2f7}.stage-heading{border-top:1px solid #c6d6e6;padding-top:24px;display:grid;grid-template-columns:1.15fr 1fr;gap:45px;align-items:end;margin-bottom:30px}.stage-heading .path-label{font-size:9px;margin-bottom:12px}.stage-heading h2{font-size:clamp(30px,3.5vw,48px);font-weight:500;letter-spacing:-.05em;line-height:1.1;margin:0}.stage-heading>p{font-size:13px;line-height:1.8;color:#58708c;margin:0;max-width:360px;justify-self:end}.path-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.path-cards:has(> :nth-child(2):last-child){grid-template-columns:repeat(2,minmax(0,1fr))}.card-reveal{min-width:0}.path-cards :global(.journey-service-card){height:100%;display:flex;flex-direction:column}.path-cards :global(.journey-service-copy){padding:22px;display:flex;flex:1;flex-direction:column}.path-cards :global(.journey-service-copy h3){font-size:23px;margin:0 0 12px}.path-cards :global(.journey-service-when){display:none}.path-cards :global(.journey-service-more){margin-top:auto}.path-cards :global(figure){height:180px}.path-cards:has(> :nth-child(2):last-child) :global(figure){height:205px}.stage-outcome{display:flex;align-items:center;gap:12px;margin-top:20px;color:#58708c;font-size:12px}.stage-outcome>span{font-size:24px;color:#2856a3}.path-close{margin-left:85px;border-top:1px solid #b8cbdf;padding-top:35px;display:flex;justify-content:space-between;align-items:center;gap:25px}.path-close h2{font-size:clamp(26px,3vw,40px);font-weight:500;letter-spacing:-.045em;margin:0 0 12px}.path-close .path-label{margin-bottom:15px}.path-close p:last-child{font-size:13px;color:#58708c}.path-close a{display:flex;justify-content:space-between;align-items:center;gap:32px;padding:18px 22px;background:#2856a3;color:white;font-size:12px}.path-close a span{font-size:24px}.home-path a:focus-visible{outline:3px solid #17385d;outline-offset:4px}.will-reveal .card-reveal{opacity:.12;transform:translateY(32px);transition:opacity .75s ease,transform .75s cubic-bezier(.2,.65,.25,1);transition-delay:var(--delay)}.will-reveal.is-visible .card-reveal,.will-reveal:focus-within .card-reveal{opacity:1;transform:none}
+@media(min-width:1200px){.path-cards{gap:26px}.path-stage{grid-template-columns:110px minmax(0,1fr)}.path-close{margin-left:110px}}
+@media(max-width:800px){.path-stage{grid-template-columns:65px minmax(0,1fr)}.stage-heading{grid-template-columns:1fr;gap:15px}.stage-heading>p{justify-self:start;max-width:520px}.path-cards{gap:12px}.path-cards :global(.journey-service-copy){padding:16px}.path-cards :global(.journey-service-copy h3){font-size:20px}.path-cards :global(figure){height:145px}.path-close{margin-left:65px}}
+@media(max-width:600px){.preview-note{font-size:8px}.home-path{padding:40px 0}.path-intro{padding-bottom:40px}.path-intro h1{font-size:43px}.intro-bottom{display:block}.intro-bottom p{font-size:13px}.scroll-cue{margin-top:22px}.path-stage{grid-template-columns:38px minmax(0,1fr);padding-bottom:40px}.stage-marker{width:27px;height:27px;font-size:9px}.track-line{left:13px;top:14px}.is-visible .stage-marker{box-shadow:0 0 0 4px #edf2f7}.stage-heading{padding-top:14px;gap:14px;margin-bottom:20px}.stage-heading h2{font-size:29px}.stage-heading .path-label{font-size:8px}.stage-heading>p{font-size:12px}.path-cards,.path-cards:has(> :nth-child(2):last-child){grid-template-columns:1fr;gap:18px}.path-cards :global(figure),.path-cards:has(> :nth-child(2):last-child) :global(figure){height:160px}.path-cards :global(.journey-service-copy){padding:20px}.stage-outcome{font-size:11px;align-items:start}.path-close{margin-left:38px;flex-direction:column;align-items:start}.path-close a{width:100%}.will-reveal .card-reveal{transition-delay:0ms}}
+@media(prefers-reduced-motion:reduce){.stage-marker{transition:none}.will-reveal .card-reveal{opacity:1;transform:none;transition:none}}
+</style>

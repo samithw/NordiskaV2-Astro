@@ -1,0 +1,47 @@
+---
+import services from '../../data/services.json';
+import JourneyServiceCard from './JourneyServiceCard.astro';
+import SignalLink from './signal/SignalLink.astro';
+import { withBase } from '../../utils/paths';
+import '../../styles/main/services-journey.css';
+const stages = [
+ { id:'plan', name:'Find your route', phase:'Market insight & strategy', title:'Start with a clearer direction.', copy:'Before you commit to a new market, understand the opportunity. We help you assess where your technology fits and build a practical plan for taking it there.', outcome:'A clearer market choice and an actionable entry plan.', services:[
+  'market-entry-strategy',
+  'go-to-market-strategy',
+ ]},
+ { id:'grow', name:'Build your presence', phase:'Partners, visibility & sales', title:'Put the right relationships in motion.', copy:'A plan becomes useful when people act on it. Find suitable partners, build credibility with buyers and help local channels develop real commercial opportunities.', outcome:'A connected market presence with coordinated commercial activity.', services:[
+  'partner-search',
+  'market-activation',
+  'channel-sales-support',
+ ]},
+ { id:'support', name:'Support delivery', phase:'Applications, people & continuity', title:'Stay connected beyond the first opportunity.', copy:'Commercial progress needs practical follow-through. Connect your technology with application needs, prepare the people representing it and maintain communication after the sale.', outcome:'Better-prepared teams and continuity across customer relationships.', services:[
+  'application-consultancy',
+  'on-site-training',
+  'aftersales-services',
+ ]},
+];
+---
+<section class="services-journey-preview home-services-journey" id="services" aria-labelledby="home-services-title">
+ <div class="wrap home-journey-heading"><div class="eyebrow">What we do</div><h2 id="home-services-title">From your first decision<br/><span>to ongoing support.</span></h2></div>
+  <div class="journey-route wrap">
+   <svg class="journey-path" aria-hidden="true" preserveAspectRatio="none"><path class="journey-path-base"/><path class="journey-path-progress"/></svg>
+   {stages.map((stage,i)=><section id={stage.id} class:list={['journey-stage',{'journey-stage-reverse':i===1}]} aria-labelledby={`${stage.id}-title`}>
+    <div class="journey-stop" aria-hidden="true"><span>0{i+1}</span></div>
+    <div class="journey-stage-intro"><div class="eyebrow">0{i+1} / {stage.name}</div><h2 id={`${stage.id}-title`}>{stage.title}</h2><p>{stage.copy}</p><div class="journey-outcome"><span class="eyebrow">What we work towards</span><p>{stage.outcome}</p></div><span class="journey-phase">{stage.phase}</span></div>
+    <div class:list={['journey-service-grid',{'journey-service-grid-three':stage.services.length===3}]}>
+     {stage.services.map((slug,j)=>{const service=services.find(s=>s.slug===slug)!;return <JourneyServiceCard {service} number={`0${i+1}.${j+1}`} />})}
+    </div>
+   </section>)}
+   <div class="journey-end"><span aria-hidden="true">↗</span><p>Your next step starts with your priorities.</p></div>
+  </div>
+ <div class="wrap home-journey-close"><SignalLink href={withBase('/services/')} label="Explore all services"/></div>
+</section>
+<script>import '../../scripts/main/services-journey.js';</script>
+<style>
+ .home-services-journey{padding:90px 0 65px;scroll-margin-top:100px}
+ .home-journey-heading>.eyebrow{margin-bottom:24px}
+ .home-journey-heading h2{font-size:clamp(40px,4.6vw,66px);font-weight:500;letter-spacing:-.055em;line-height:1.08;margin:0 0 20px}
+ .home-journey-heading h2 span{color:var(--journey-blue)}
+ .home-journey-close{display:flex;justify-content:flex-end;padding-top:24px}
+ @media(max-width:760px){.home-services-journey{padding:64px 0 45px;scroll-margin-top:80px}.home-journey-heading h2{font-size:clamp(34px,8.8vw,48px)}}
+</style>

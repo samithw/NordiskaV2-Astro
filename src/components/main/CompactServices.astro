@@ -1,0 +1,44 @@
+---
+import services from '../../data/services.json';
+import { servicePhotos } from '../../data/servicePhotos';
+import { serviceJourneyCopy } from '../../data/main/serviceJourney';
+import { serviceThemes } from '../../data/serviceThemes';
+import { withBase } from '../../utils/paths';
+import SignalLink from './signal/SignalLink.astro';
+const ordered = serviceThemes.flatMap(theme => theme.slugs.map(slug => ({service:services.find(service => service.slug === slug)!, category:theme.step})));
+---
+<section class="compact-services signal-section" id="services" aria-labelledby="compact-services-title">
+ <div class="wrap">
+  <div class="signal-section-intro"><div><div class="eyebrow">What we do</div><h2 id="compact-services-title">From your first decision<br/><span>to ongoing support.</span></h2></div><p>Choose individual services or work with us across your growth journey.</p></div>
+  <div class="compact-service-grid">
+   {ordered.map(({service,category},index) => <a class="compact-service-card" href={withBase(`/services/${service.slug}/`)}>
+    <div class="compact-service-image"><img src={servicePhotos[service.slug]} alt="" loading="lazy" width="600" height="300"/><span class="compact-service-index">0{index+1}</span><span class="compact-service-arrow" aria-hidden="true">↗</span></div>
+    <div class="compact-service-body"><span class="compact-service-category">{category}</span><h3>{service.name}</h3><p>{serviceJourneyCopy[service.slug].copy}</p></div>
+   </a>)}
+  </div>
+  <div class="compact-service-close"><p>Explore the right support for your next move.</p><SignalLink href={withBase('/services/')} label="Explore all services"/></div>
+ </div>
+</section>
+<style>
+ .compact-services{background:var(--paper)}
+ .compact-service-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+ .compact-service-card{display:flex;flex-direction:column;background:#fff;border:1px solid #d5e1ed;color:var(--ink);text-decoration:none;transition:border-color .2s,box-shadow .2s}
+ .compact-service-image{position:relative;height:110px;overflow:hidden;background:#dce7f0}
+ .compact-service-image img{width:100%;height:100%;object-fit:cover;filter:saturate(.55);transition:transform .3s}
+ .compact-service-image:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,#102d5030,transparent 65%)}
+ .compact-service-index{position:absolute;z-index:1;left:14px;top:12px;color:white;font:500 10px/1.5 'IBM Plex Mono',monospace;text-shadow:0 1px 6px #173462}
+ .compact-service-arrow{position:absolute;z-index:1;right:12px;bottom:10px;display:grid;place-items:center;width:30px;height:30px;border:1px solid #ffffffa0;border-radius:50%;background:#17346260;color:white;font-size:22px;line-height:1}
+ .compact-service-body{padding:20px;flex:1}
+ .compact-service-category{display:block;font:500 9px/1.6 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.07em;color:var(--brand);margin-bottom:12px}
+ :global(.signal-preview) .compact-service-card h3{font-size:20px;line-height:1.25;letter-spacing:-.035em;font-weight:600;margin:0 0 12px;color:#17385d}
+ .compact-service-body p{font-size:12px;line-height:1.75;color:var(--muted);margin:0}
+ .compact-service-card:hover{border-color:#83a7cb;box-shadow:0 5px 18px #1734620d}
+ .compact-service-card:hover img{transform:scale(1.035)}
+ .compact-service-card:hover h3{color:var(--brand)}
+ .compact-service-card:focus-visible{outline:2px solid var(--brand);outline-offset:4px}
+ .compact-service-close{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-top:32px;padding-top:26px;border-top:1px solid var(--line)}
+ .compact-service-close p{font-size:14px;color:var(--muted);margin:0}
+ @media(max-width:1050px){.compact-service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.compact-service-image{height:120px}}
+ @media(max-width:600px){.compact-service-grid{grid-template-columns:1fr;gap:14px}.compact-service-card{display:grid;grid-template-columns:100px 1fr}.compact-service-image{height:100%;min-height:155px}.compact-service-body{padding:18px}.compact-service-category{font-size:8px;margin-bottom:9px}:global(.signal-preview) .compact-service-card h3{font-size:18px;margin-bottom:9px}.compact-service-close{align-items:start;flex-direction:column}}
+ @media(prefers-reduced-motion:reduce){.compact-service-card,.compact-service-image img{transition:none}}
+</style>
