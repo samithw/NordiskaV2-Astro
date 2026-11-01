@@ -1,3 +1,4 @@
+import shortScreenStyles from '../styles/main/orbit-short-screen.css?inline';
 import { brandHighlights as items } from '../data/brandHighlights';
 import { arrowLinkMarkup } from '../components/links/arrowLink';
 import arrowLinkStyles from '../styles/arrow-link.css?inline';
@@ -201,4 +202,7 @@ refinements.textContent=arrowLinkStyles+`
 
 `;
 shadow.append(refinements);
+const shortScreenAdaptation=document.createElement('style');
+shortScreenAdaptation.textContent=shortScreenStyles;
+shadow.append(shortScreenAdaptation);
 explorer.request();

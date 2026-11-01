@@ -1,3 +1,4 @@
+import shortScreenStyles from '../styles/main/orbit-short-screen.css?inline';
 import { cleantechHighlights as items } from '../data/cleantechHighlights';
 import { withBase } from '../utils/paths';
 import { arrowLinkMarkup } from '../components/links/arrowLink';
@@ -218,4 +219,7 @@ refinements.textContent=arrowLinkStyles+`
 
 `;
 shadow.append(refinements);
+const shortScreenAdaptation=document.createElement('style');
+shortScreenAdaptation.textContent=shortScreenStyles;
+shadow.append(shortScreenAdaptation);
 explorer.request();

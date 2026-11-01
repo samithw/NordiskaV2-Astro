@@ -1,3 +1,4 @@
+import shortScreenStyles from '../../styles/main/orbit-short-screen.css?inline';
 import { expertiseInMotion as items } from '../../data/expertiseInMotion';
 import { withBase } from '../../utils/paths';
 import { syncImageHeader } from '../concepts/image-header';
@@ -187,4 +188,7 @@ refinements.textContent=arrowLinkStyles+`
 @media(prefers-reduced-motion:reduce){.context-card,.context-caption,.context-photo img,.context-caption>span{transition:none}}
 `;
 shadow.append(refinements);
+const shortScreenAdaptation=document.createElement('style');
+shortScreenAdaptation.textContent=shortScreenStyles;
+shadow.append(shortScreenAdaptation);
 explorer.request();

@@ -1,0 +1,25 @@
+/* Desktop browser windows with limited vertical space (including laptop toolbars). */
+@media (min-width: 761px) and (max-height: 800px) {
+ :host .left{top:48%!important;transform:translateY(-50%)!important}
+ :host .panel-signal .panel-label{font-size:10px!important;margin-bottom:12px!important}
+ :host .panel-signal .panel-title{font-size:clamp(26px,2.4vw,34px)!important;line-height:1.1!important}
+ :host .panel-signal .panel-copy{font-size:14px!important;line-height:1.55!important;margin:14px 0!important}
+ :host .panel-signal .nordiska-arrow-link{font-size:13px;margin-top:0;gap:14px}
+ :host .panel-signal .nordiska-arrow-circle{width:34px;height:34px}
+ :host .panel-signal .nordiska-arrow-circle svg{width:22px;height:22px}
+ :host .nav{bottom:4%!important;row-gap:8px!important}
+ :host .highlight-note{width:27%;max-width:320px;padding:18px 20px;bottom:15%}
+ :host .highlight-note-label{font-size:8px;margin-bottom:10px}
+ :host .highlight-note-copy{font-size:18px;line-height:1.4;margin-bottom:14px}
+ :host .highlight-note .nordiska-arrow-link{font-size:11px;gap:12px}
+ :host .highlight-note .nordiska-arrow-circle{width:30px;height:30px}
+ :host .hero-sectors{margin-top:14px;padding-top:10px;gap:5px 12px}
+ :host .hero-sectors span{font-size:8px;margin:0}
+ :host .hero-sectors a{font-size:10px}
+}
+@media (min-width: 761px) and (max-height: 650px) {
+ :host .panel-signal .panel-title{font-size:26px!important}
+ :host .panel-signal .panel-copy{font-size:13px!important;line-height:1.5!important;margin:12px 0!important}
+ :host .highlight-note{padding:15px 18px;max-width:300px}
+ :host .highlight-note-copy{font-size:17px;margin-bottom:12px}
+}

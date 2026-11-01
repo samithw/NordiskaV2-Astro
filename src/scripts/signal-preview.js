@@ -1,3 +1,4 @@
+import shortScreenStyles from '../styles/main/orbit-short-screen.css?inline';
 import { serviceExplorer as items } from '../data/serviceExplorer';
 import { withBase } from '../utils/paths';
 import services from '../data/services.json';
@@ -173,4 +174,7 @@ refinements.textContent=arrowLinkStyles+`
 @media(prefers-reduced-motion:reduce){.context-card,.context-caption,.context-photo img,.context-caption>span{transition:none}}
 `;
 shadow.append(refinements);
+const shortScreenAdaptation=document.createElement('style');
+shortScreenAdaptation.textContent=shortScreenStyles;
+shadow.append(shortScreenAdaptation);
 explorer.request();

@@ -29,7 +29,7 @@ const stages = [
     <div class="journey-stop" aria-hidden="true"><span>0{i+1}</span></div>
     <div class="journey-stage-intro"><div class="eyebrow">0{i+1} / {stage.name}</div><h2 id={`${stage.id}-title`}>{stage.title}</h2><p>{stage.copy}</p><div class="journey-outcome"><span class="eyebrow">What we work towards</span><p>{stage.outcome}</p></div><span class="journey-phase">{stage.phase}</span></div>
     <div class:list={['journey-service-grid',{'journey-service-grid-three':stage.services.length===3}]}>
-     {stage.services.map((slug,j)=>{const service=services.find(s=>s.slug===slug)!;return <JourneyServiceCard {service} number={`0${i+1}.${j+1}`} />})}
+     {stage.services.map((slug,j)=>{const service=services.find(s=>s.slug===slug)!;return <JourneyServiceCard {service} variant="compact" number={`0${i+1}.${j+1}`} />})}
     </div>
    </section>)}
    <div class="journey-end"><span aria-hidden="true">↗</span><p>Your next step starts with your priorities.</p></div>

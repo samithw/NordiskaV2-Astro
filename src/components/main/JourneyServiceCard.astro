@@ -11,10 +11,11 @@ interface Props {
  number?: string;
  loading?: 'lazy' | 'eager';
  heading?: 'h3' | 'h4';
+ variant?: 'default' | 'compact';
 }
-const { service, when = serviceJourneyCopy[service.slug].when, copy = serviceJourneyCopy[service.slug].copy, number, loading = 'lazy', heading: Heading = 'h3' } = Astro.props;
+const { service, when = serviceJourneyCopy[service.slug].when, copy = serviceJourneyCopy[service.slug].copy, number, loading = 'lazy', heading: Heading = 'h3', variant = 'default' } = Astro.props;
 ---
-<a class="journey-service-card" href={withBase(`/services/${service.slug}/`)}>
+<a class:list={["journey-service-card", {"journey-service-card-compact": variant === "compact"}]} href={withBase(`/services/${service.slug}/`)}>
  <figure><img src={servicePhotos[service.slug]} alt="" loading={loading} width="650" height="450"/>{number && <span class="journey-service-number">{number}</span>}<span class="journey-service-arrow" aria-hidden="true">↗</span></figure>
- <div class="journey-service-copy"><Heading>{service.name}</Heading><p class="journey-service-when">{when}</p><p>{copy}</p><span class="journey-service-more">Explore this service <span aria-hidden="true">↗</span></span></div>
+ <div class="journey-service-copy"><Heading>{service.name}</Heading>{variant !== "compact" && <p class="journey-service-when">{when}</p>}<p>{copy}</p><span class="journey-service-more">Explore this service <span aria-hidden="true">↗</span></span></div>
 </a>
